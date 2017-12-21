@@ -737,6 +737,7 @@ namespace Kenos.Win
                 Log("Grabación de audio");
             }
 
+            _estado = CaptureState.Started;
             lnkResume.Visible = false;
             lnkPausar.Visible = true;
 
@@ -992,8 +993,11 @@ namespace Kenos.Win
                 pnlAlerta.Visible = true;
 
 
-                Log("Pausando grabación luego de aleta");
-                Pausar();
+                if (_estado == CaptureState.Started)
+                {
+                    Log("Pausando grabación por aleta. " + lblAlerta.Text);
+                    Pausar();
+                }
             }
             else
             {
