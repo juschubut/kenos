@@ -1,0 +1,50 @@
+[2.1.1.1000]
+- Soporte de multiples camaras. Configuraciones para 1, 4 y 6 camaras
+- Soporte camaras IP
+- Soporte Streaming para publicacion de la grabación en otras salas de audiencia. 
+- Movimiento durante grabación para camaras ONVIF.
+- Definicion de posicion inicial para camaras ONVIF.
+
+
+[1.0.0.18000]
+- Mejoras en registros logs
+
+
+[1.0.0.17004]
+- Fix, boton de reanudar luego de una pausa quedaba oculto
+
+
+[1.0.0.17000]
+- Cambio de Look%Feel
+- Generacion de Hash
+- Nuevo Conectar ExpedienteSimple para reemplazar a Familia con posibilidad de realizar copia de seguridad.
+
+
+[1.0.0.16002]
+- Fix en control de posicion de archivo cuando se reproduce prueba de grabación
+
+
+[1.0.0.16001]
+- Marcas de tiempo en inicio, pausa, continuación y finalizacion de grabación
+- Validación para impedir dos instancias activas. 
+
+
+[1.0.0.16000]
+- Manejo de pausas por medio de la aplicacion en lugar de ser realizada por el componente. 
+- Con cada pausa se genera un archivo nuevo, y luego de finalizada la grabación se unen generando un nuevo archivo con el total.
+
+
+[1.0.0.15000]
+- Arreglo de errores menores.
+
+
+[1.0.0.14000]
+- Incorporacion de marcas de tiempo dentro de archivos (.mp3, .wmv)
+- Player
+- Kenos.TagLib - Componente para poder extraer y guardar las marcas de tiempo en los archivos .mp3 y .wmv
+
+
+[1.0.0.13000]
+- Impide que se pueda cerrar el sistema sin confirmar o cancelar.
+- Impide que se pueda realizar una prueba de grabación luego de una grabacion terminada (stop).
+- Confirmacion automatica de grabacion luego de terminarla (stop). Esta opción se puede deshabilitar por config.

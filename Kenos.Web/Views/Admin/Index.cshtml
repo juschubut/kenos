@@ -1,0 +1,107 @@
+﻿@{
+    Layout = "~/Views/_Main.cshtml";
+}
+
+@section Head
+{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/admin-index.js")"></script>
+    <script type="text/javascript">
+        var URLs =
+        {
+            ver: '@Url.Action("Ver", "Admin")',
+            verXml: '@Url.Action("VerXml", "Admin")?nombreInstancia=[nombreInstancia]',
+            ping: '@Url.Action("Ping", "Admin")?nombreInstancia=[nombreInstancia]',
+            leerConfig: '@Url.Action("LeerConfig", "Admin")',
+            tabUpdate: '@Url.Action("TabUpdate", "Admin")',
+            listarArchivos: '@Url.Action("ListarArchivos", "Admin")',
+            listarArchivosDestino: '@Url.Action("ListarArchivosDestino", "Admin")',            
+            actualizar: '@Url.Action("Actualizar", "Admin")',
+            isRunning: '@Url.Action("IsRunning", "Admin")',
+            listInstancias: '@Url.Action("ListInstancias", "Admin")'
+        };
+
+        $(document).ready(function () {
+            attachAdminIndexEvents();
+        });
+    </script>
+}
+<div class="row">
+
+    <div id="divInstancias" class="col-sm-3">
+
+        
+
+    </div>
+    <div class="col-sm-9">
+
+        <div id="divDetalle">
+            <h2 class="nombre-instancia"></h2>
+            <hr />
+            <div class="form-inline" style="margin: 0px 10px 10px 10px">
+                <div class="form-group">
+                    <label>Dominio:</label>
+                    <input type="text" class="form-control" id="txtDominio" placeholder="Dominio" value="SUPTRIB" />
+                </div>
+                <div class="form-group">
+                    <label>Usuario:</label>
+                    <input type="text" class="form-control" id="txtUsuario" value="" />
+                </div>
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input type="password" class="form-control" id="txtPassword" />
+                </div>
+
+            </div>
+            <hr />
+            <!-- Nav tabs -->
+            <ul id="divOpciones" class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a id="tabVersionActualSelector" href="#tabVersionActual" role="tab" data-toggle="tab">Version Actual</a></li>
+                <li role="presentation"><a href="#tabConfig" role="tab" data-toggle="tab">Configuración</a></li>
+                <li role="presentation"><a href="#tabUpdate" role="tab" data-toggle="tab">Actualizar</a></li>
+                <li role="presentation"><a href="#tabXml" aria-controls="messages" role="tab" data-toggle="tab">Registros Anteriores</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="tabVersionActual">
+
+                    <dl class="dl-horizontal">
+                        <dt>Version:</dt>
+                        <dd class="version"></dd>
+
+                        <dt>Assembly:</dt>
+                        <dd class="assembly"></dd>
+
+                        <dt>Ip:</dt>
+                        <dd class="ip"></dd>
+
+                        <dt>Fecha:</dt>
+                        <dd class="fecha"></dd>
+
+                        <dt>Path:</dt>
+                        <dd class="path"></dd>
+
+                        <dt>
+                            <button class="btn btn-xs btn-default btn-status">Host Prendido?</button></dt>
+                        <dd class="status"></dd>
+                        <dt>
+                            <button class="btn btn-xs btn-default btn-isrunning">En ejecución?</button></dt>
+                        <dd class="isrunning"></dd>
+                    </dl>
+
+                </div>
+                <div role="tabpanel" class="tab-pane" id="tabConfig">
+                    <pre id="appConfig" lang="xml"></pre>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="tabUpdate">
+                </div>
+                <div role="tabpanel" class="tab-pane" id="tabXml">
+                    <button id="btnXml" class="btn btn-default">Ver todos los registros</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

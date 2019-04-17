@@ -1,0 +1,14 @@
+﻿body {
+}
+
+dl dt, 
+dl dd
+{
+    margin-top:3px;
+    margin-bottom:3px;
+
+}
+
+#tabUpdate label {
+    font-weight:normal;
+}
