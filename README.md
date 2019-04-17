@@ -1,4 +1,4 @@
-# kenos
+# Kenos
 Sistema de Grabación de Audiencias
 
 ## Setup
