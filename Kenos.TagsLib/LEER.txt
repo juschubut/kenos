@@ -1,0 +1,4 @@
+﻿Componente encargado de leer y guardar marcas de tiempo en archivos .WMV y .MP3. 
+
+Este componente esta basado en /packages/taglib-sharp-taglib-sharp-2.1.0.0.zip, Se modifico y cambio para compilarlo en .NET20 
+y agregar la lógica propia de como guardar estos datos en los archivos. 

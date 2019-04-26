@@ -1,0 +1,98 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Kenos.Win.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DatasteadLicenseKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">--- datastead-license-key ---</Value>
+    </Setting>
+    <Setting Name="DatasteadLicenseKeyRTSP" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">--- datastead-license-key-rtsp ---</Value>
+    </Setting>
+    <Setting Name="PathGrabacion" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Temp\</Value>
+    </Setting>
+    <Setting Name="CasosPrueba" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;Juez, beep.wav&lt;/string&gt;
+  &lt;string&gt;Fiscal, beep.wav&lt;/string&gt;
+  &lt;string&gt;Imputado, beep.wav&lt;/string&gt;
+  &lt;string&gt;Defensor, beep.wav&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="PruebaGrabacionIntervalo" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="WmvProfileVersion" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">8</Value>
+    </Setting>
+    <Setting Name="AlertaEspacioLibre" Type="System.Double" Scope="Application">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="TextoVideoHabilitado" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="TextoVideoTemplate" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">%sys_time[dd/mm/yyyy hh:nn]% - {0}</Value>
+    </Setting>
+    <Setting Name="FrameRatePredeterminado" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">25</Value>
+    </Setting>
+    <Setting Name="TextoVideoFontSize" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="PruebaGrabacionObligatoria" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="WmvVideoBitRates" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">600000</Value>
+    </Setting>
+    <Setting Name="WmvVideoQuality" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="AudioCompressor" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">LAME Audio Encoder</Value>
+    </Setting>
+    <Setting Name="RegistracionHabilitada" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="RegistracionUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://apprw/kenos/registrar</Value>
+    </Setting>
+    <Setting Name="ConfirmacionAutomatica" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="TextoEnPausa" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Pausa - {0:HH:mm}hs.</Value>
+    </Setting>
+    <Setting Name="TextoEnInicio" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Inicio - {0:dd/MM/yyyy HH:mm}hs.</Value>
+    </Setting>
+    <Setting Name="TextoEnFin" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Fin - {0:dd/MM/yyyy HH:mm}hs.</Value>
+    </Setting>
+    <Setting Name="TextEnReanudar" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Continuación - {0:HH:mm}hs.</Value>
+    </Setting>
+    <Setting Name="ModoGrabacionPredeterminado" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">video</Value>
+    </Setting>
+    <Setting Name="Administradores" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;Usuarios&lt;/string&gt;
+  &lt;string&gt;SUPTRIB\mbogliacino&lt;/string&gt;
+  &lt;string&gt;SUPTRIB\abiaggio&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="StreamingDefaultPort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">5000</Value>
+    </Setting>
+    <Setting Name="Connectors" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;Kenos.ExpedienteSecretaria.Connector,Kenos.ExpedienteSecretaria&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
