@@ -29,6 +29,9 @@ namespace Kenos.Win.ConfigControls
             }
             set
             {
+
+
+
                 if (value == VidGrab.TVideoSource.vs_IPCamera)
                     cboTipo.SelectedIndex = 1;
                 else
@@ -73,6 +76,10 @@ namespace Kenos.Win.ConfigControls
                 WinHelper.LoadComboBoxFromDelimitedText(cbVideoSubtype, this.VideoGrabber.VideoSubtypes);
 
                 WinHelper.LoadComboBoxFromDelimitedText(cbNorma, this.VideoGrabber.AnalogVideoStandards);
+
+                WinHelper.LoadComboBoxFromDelimitedText(cbVideoFormat, this.VideoGrabber.VideoFormats);
+                WinHelper.LoadComboBoxFromDelimitedText(cbVideoInput, this.VideoGrabber.VideoInputs);
+                
             }
         }
 
@@ -196,6 +203,11 @@ namespace Kenos.Win.ConfigControls
                 WinHelper.ComboBoxSelectByText(cbVideoSize, setting.VideoSize);
                 WinHelper.ComboBoxSelectByText(cbVideoSubtype, setting.VideoFormatSubType);
                 WinHelper.ComboBoxSelectByText(cbNorma, setting.VideoNorma);
+                WinHelper.ComboBoxSelectByText(cbFormat, setting.FormatOutput);
+                WinHelper.ComboBoxSelectByText(cbCodec, setting.VideoCompressors);
+                WinHelper.ComboBoxSelectByText(cbVideoFormat, setting.VideoFormat);
+                WinHelper.ComboBoxSelectByText(cbVideoInput, setting.VideoInput);
+
 
                 habilitada = !string.IsNullOrEmpty(setting.VideoDevice);
             }
@@ -215,6 +227,15 @@ namespace Kenos.Win.ConfigControls
                     setting.VideoSource = VideoSources.IpCamera;
                 else
                     setting.VideoSource = VideoSources.VideoCapture;
+
+                if (this.cbFormat.SelectedItem != null) {
+                    setting.FormatOutput = this.cbFormat.SelectedItem.ToString();
+                }
+
+                if (this.cbCodec.SelectedItem != null)
+                {
+                    setting.VideoCompressors = this.cbCodec.SelectedItem.ToString();
+                }
 
                 if (VideoSource == VidGrab.TVideoSource.vs_IPCamera)
                 {
@@ -246,6 +267,15 @@ namespace Kenos.Win.ConfigControls
                 }
                 else
                 {
+                    if (cbVideoInput.SelectedItem != null)
+                        setting.VideoInput = cbVideoInput.SelectedItem.ToString();
+
+                    if (cbVideoFormat.SelectedItem != null)
+                        setting.VideoFormat = cbVideoFormat.SelectedItem.ToString();
+
+                    if (cbVideoDevice.SelectedItem != null)
+                        setting.VideoDevice = cbVideoDevice.SelectedItem.ToString();
+
                     if (cbVideoDevice.SelectedItem != null)
                         setting.VideoDevice = cbVideoDevice.SelectedItem.ToString();
 
@@ -506,5 +536,23 @@ namespace Kenos.Win.ConfigControls
         {
             this.OnvifDevice.AbsoluteMove(0, 0);
         }
+
+        private void changeFormatOutput(object sender, EventArgs e)
+        {
+            if (cbFormat.SelectedItem.ToString() == "mp4")
+            {
+                WinHelper.LoadComboBoxFromDelimitedText(cbCodec, this.VideoGrabber.VideoCompressors);
+                cbCodec.Enabled = true;
+            }
+            else {
+                cbCodec.Enabled = false;
+                cbCodec.SelectedIndex = -1;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.VideoGrabber.ShowDialog(VidGrab.TDialog.dlg_VideoDevice);
+        }        
     }
 }

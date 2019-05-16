@@ -66,8 +66,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="VideoGrabberNET4.5">
-      <HintPath>..\ExternalLibrary\TVideoGrabber\VideoGrabberNET4.5.dll</HintPath>
+    <Reference Include="VideoGrabberNET4.5, Version=10.8.6929.34458, Culture=neutral, PublicKeyToken=59cad8a1775e0cbd, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\VideoGrabber\v10.8.4.6\vidgrab_10.8.4.6\CSharp_VB.NET\VideoGrabberNET4.5.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

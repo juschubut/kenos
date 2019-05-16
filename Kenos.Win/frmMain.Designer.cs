@@ -77,6 +77,8 @@
             this.lnkMoveLeft = new System.Windows.Forms.LinkLabel();
             this.lblGrabando = new System.Windows.Forms.Label();
             this.pnlInfo = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.lblArchivo = new System.Windows.Forms.Label();
             this.LabelArchivo = new System.Windows.Forms.Label();
             this.LabelTamanio = new System.Windows.Forms.Label();
@@ -114,7 +116,7 @@
             this.panel1.Controls.Add(this.lblDescripcion);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(892, 75);
+            this.panel1.Size = new System.Drawing.Size(1130, 75);
             this.panel1.TabIndex = 0;
             // 
             // chkStreaming
@@ -126,7 +128,7 @@
             this.chkStreaming.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkStreaming.ForeColor = System.Drawing.Color.White;
             this.chkStreaming.Image = global::Kenos.Win.Properties.Resources.streaming;
-            this.chkStreaming.Location = new System.Drawing.Point(563, 0);
+            this.chkStreaming.Location = new System.Drawing.Point(801, 0);
             this.chkStreaming.Name = "chkStreaming";
             this.chkStreaming.Size = new System.Drawing.Size(73, 72);
             this.chkStreaming.TabIndex = 24;
@@ -145,7 +147,7 @@
             this.rdVideo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdVideo.ForeColor = System.Drawing.Color.White;
             this.rdVideo.Image = global::Kenos.Win.Properties.Resources.icon_video;
-            this.rdVideo.Location = new System.Drawing.Point(700, 0);
+            this.rdVideo.Location = new System.Drawing.Point(938, 0);
             this.rdVideo.Name = "rdVideo";
             this.rdVideo.Size = new System.Drawing.Size(64, 72);
             this.rdVideo.TabIndex = 23;
@@ -167,7 +169,7 @@
             this.rdAudio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdAudio.ForeColor = System.Drawing.Color.White;
             this.rdAudio.Image = global::Kenos.Win.Properties.Resources.icon_audio;
-            this.rdAudio.Location = new System.Drawing.Point(636, 0);
+            this.rdAudio.Location = new System.Drawing.Point(874, 0);
             this.rdAudio.Name = "rdAudio";
             this.rdAudio.Size = new System.Drawing.Size(64, 72);
             this.rdAudio.TabIndex = 23;
@@ -185,7 +187,7 @@
             this.lnkConfigurar.BackColor = System.Drawing.Color.Transparent;
             this.lnkConfigurar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lnkConfigurar.Image = global::Kenos.Win.Properties.Resources.icon_config;
-            this.lnkConfigurar.Location = new System.Drawing.Point(831, 12);
+            this.lnkConfigurar.Location = new System.Drawing.Point(1069, 12);
             this.lnkConfigurar.Name = "lnkConfigurar";
             this.lnkConfigurar.Size = new System.Drawing.Size(51, 51);
             this.lnkConfigurar.TabIndex = 6;
@@ -198,7 +200,7 @@
             this.lnkTest.BackColor = System.Drawing.Color.Transparent;
             this.lnkTest.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lnkTest.Image = global::Kenos.Win.Properties.Resources.icon_prueba;
-            this.lnkTest.Location = new System.Drawing.Point(769, 12);
+            this.lnkTest.Location = new System.Drawing.Point(1007, 12);
             this.lnkTest.Name = "lnkTest";
             this.lnkTest.Size = new System.Drawing.Size(51, 51);
             this.lnkTest.TabIndex = 6;
@@ -258,7 +260,7 @@
             this.pictureBox1.Image = global::Kenos.Win.Properties.Resources.logo;
             this.pictureBox1.Location = new System.Drawing.Point(193, 9);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(364, 26);
+            this.pictureBox1.Size = new System.Drawing.Size(602, 26);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
@@ -272,7 +274,7 @@
             this.lblDescripcion.ForeColor = System.Drawing.Color.White;
             this.lblDescripcion.Location = new System.Drawing.Point(193, 38);
             this.lblDescripcion.Name = "lblDescripcion";
-            this.lblDescripcion.Size = new System.Drawing.Size(364, 31);
+            this.lblDescripcion.Size = new System.Drawing.Size(602, 31);
             this.lblDescripcion.TabIndex = 2;
             this.lblDescripcion.Text = "-";
             this.lblDescripcion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -283,9 +285,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDescripcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescripcion.Location = new System.Drawing.Point(498, 104);
+            this.txtDescripcion.Location = new System.Drawing.Point(683, 104);
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(350, 26);
+            this.txtDescripcion.Size = new System.Drawing.Size(403, 26);
             this.txtDescripcion.TabIndex = 5;
             this.toolTip.SetToolTip(this.txtDescripcion, resources.GetString("txtDescripcion.ToolTip"));
             this.txtDescripcion.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDescripcion_KeyDown);
@@ -295,7 +297,7 @@
             this.LabelDescripcion.AutoSize = true;
             this.LabelDescripcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelDescripcion.ForeColor = System.Drawing.Color.Black;
-            this.LabelDescripcion.Location = new System.Drawing.Point(496, 81);
+            this.LabelDescripcion.Location = new System.Drawing.Point(679, 82);
             this.LabelDescripcion.Name = "LabelDescripcion";
             this.LabelDescripcion.Size = new System.Drawing.Size(220, 20);
             this.LabelDescripcion.TabIndex = 4;
@@ -325,7 +327,7 @@
             this.gvMarcas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Tiemp,
             this.Descripcion});
-            this.gvMarcas.Location = new System.Drawing.Point(498, 136);
+            this.gvMarcas.Location = new System.Drawing.Point(683, 136);
             this.gvMarcas.Name = "gvMarcas";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.LightSlateGray;
@@ -335,7 +337,7 @@
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.gvMarcas.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.gvMarcas.Size = new System.Drawing.Size(384, 568);
+            this.gvMarcas.Size = new System.Drawing.Size(437, 590);
             this.gvMarcas.TabIndex = 8;
             this.gvMarcas.SelectionChanged += new System.EventHandler(this.gvMarcas_SelectionChanged);
             this.gvMarcas.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gvMarcas_UserDeletingRow);
@@ -366,9 +368,9 @@
             this.pnlAlerta.BackColor = System.Drawing.Color.Red;
             this.pnlAlerta.Controls.Add(this.btnCerrarAlerta);
             this.pnlAlerta.Controls.Add(this.lblAlerta);
-            this.pnlAlerta.Location = new System.Drawing.Point(63, 295);
+            this.pnlAlerta.Location = new System.Drawing.Point(63, 306);
             this.pnlAlerta.Name = "pnlAlerta";
-            this.pnlAlerta.Size = new System.Drawing.Size(776, 96);
+            this.pnlAlerta.Size = new System.Drawing.Size(1014, 96);
             this.pnlAlerta.TabIndex = 9;
             this.pnlAlerta.Visible = false;
             // 
@@ -378,7 +380,7 @@
             this.btnCerrarAlerta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCerrarAlerta.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCerrarAlerta.ForeColor = System.Drawing.Color.White;
-            this.btnCerrarAlerta.Location = new System.Drawing.Point(684, 69);
+            this.btnCerrarAlerta.Location = new System.Drawing.Point(922, 69);
             this.btnCerrarAlerta.Name = "btnCerrarAlerta";
             this.btnCerrarAlerta.Size = new System.Drawing.Size(87, 23);
             this.btnCerrarAlerta.TabIndex = 22;
@@ -394,7 +396,7 @@
             this.lblAlerta.ForeColor = System.Drawing.Color.White;
             this.lblAlerta.Location = new System.Drawing.Point(19, 0);
             this.lblAlerta.Name = "lblAlerta";
-            this.lblAlerta.Size = new System.Drawing.Size(740, 92);
+            this.lblAlerta.Size = new System.Drawing.Size(978, 92);
             this.lblAlerta.TabIndex = 0;
             this.lblAlerta.Text = "Alerta: Existen problemas con la grabación de la audiencia";
             this.lblAlerta.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -402,9 +404,9 @@
             // pnlVUMeter
             // 
             this.pnlVUMeter.BackColor = System.Drawing.Color.Black;
-            this.pnlVUMeter.Location = new System.Drawing.Point(458, 81);
+            this.pnlVUMeter.Location = new System.Drawing.Point(667, 81);
             this.pnlVUMeter.Name = "pnlVUMeter";
-            this.pnlVUMeter.Size = new System.Drawing.Size(9, 394);
+            this.pnlVUMeter.Size = new System.Drawing.Size(10, 394);
             this.pnlVUMeter.TabIndex = 11;
             // 
             // toolTip
@@ -419,7 +421,7 @@
             this.btnAgregarMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregarMarca.ForeColor = System.Drawing.Color.White;
             this.btnAgregarMarca.Image = global::Kenos.Win.Properties.Resources.agregar1;
-            this.btnAgregarMarca.Location = new System.Drawing.Point(850, 104);
+            this.btnAgregarMarca.Location = new System.Drawing.Point(1088, 104);
             this.btnAgregarMarca.Name = "btnAgregarMarca";
             this.btnAgregarMarca.Size = new System.Drawing.Size(30, 26);
             this.btnAgregarMarca.TabIndex = 0;
@@ -458,6 +460,7 @@
             // 
             this.lnkPausar.BackColor = System.Drawing.Color.Transparent;
             this.lnkPausar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lnkPausar.Enabled = false;
             this.lnkPausar.Image = global::Kenos.Win.Properties.Resources.icon_pausa;
             this.lnkPausar.Location = new System.Drawing.Point(218, 13);
             this.lnkPausar.Name = "lnkPausar";
@@ -520,7 +523,7 @@
             this.pnlSoloAudio.Controls.Add(this.label6);
             this.pnlSoloAudio.Location = new System.Drawing.Point(6, 187);
             this.pnlSoloAudio.Name = "pnlSoloAudio";
-            this.pnlSoloAudio.Size = new System.Drawing.Size(368, 287);
+            this.pnlSoloAudio.Size = new System.Drawing.Size(667, 287);
             this.pnlSoloAudio.TabIndex = 13;
             // 
             // label6
@@ -531,7 +534,7 @@
             this.label6.ForeColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(6, 192);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(359, 52);
+            this.label6.Size = new System.Drawing.Size(658, 52);
             this.label6.TabIndex = 0;
             this.label6.Text = "Grabación solo de audio";
             this.label6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -546,9 +549,9 @@
             this.pnlBotonera.Controls.Add(this.lnkResume);
             this.pnlBotonera.Controls.Add(this.lnkPlay);
             this.pnlBotonera.Controls.Add(this.lblGrabando);
-            this.pnlBotonera.Location = new System.Drawing.Point(7, 6);
+            this.pnlBotonera.Location = new System.Drawing.Point(0, 3);
             this.pnlBotonera.Name = "pnlBotonera";
-            this.pnlBotonera.Size = new System.Drawing.Size(448, 66);
+            this.pnlBotonera.Size = new System.Drawing.Size(671, 75);
             this.pnlBotonera.TabIndex = 18;
             // 
             // pnlOnvifMove
@@ -647,6 +650,8 @@
             // 
             this.pnlInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.pnlInfo.Controls.Add(this.button2);
+            this.pnlInfo.Controls.Add(this.button1);
             this.pnlInfo.Controls.Add(this.lblArchivo);
             this.pnlInfo.Controls.Add(this.LabelArchivo);
             this.pnlInfo.Controls.Add(this.LabelTamanio);
@@ -655,8 +660,28 @@
             this.pnlInfo.Controls.Add(this.lblDuracion);
             this.pnlInfo.Location = new System.Drawing.Point(6, 559);
             this.pnlInfo.Name = "pnlInfo";
-            this.pnlInfo.Size = new System.Drawing.Size(462, 145);
+            this.pnlInfo.Size = new System.Drawing.Size(671, 167);
             this.pnlInfo.TabIndex = 21;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(326, 131);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 12;
+            this.button2.Text = "Stop view";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(245, 131);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Start view";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // lblArchivo
             // 
@@ -666,7 +691,7 @@
             this.lblArchivo.ForeColor = System.Drawing.Color.Black;
             this.lblArchivo.Location = new System.Drawing.Point(101, 91);
             this.lblArchivo.Name = "lblArchivo";
-            this.lblArchivo.Size = new System.Drawing.Size(359, 51);
+            this.lblArchivo.Size = new System.Drawing.Size(359, 73);
             this.lblArchivo.TabIndex = 5;
             this.lblArchivo.Text = "-";
             // 
@@ -735,7 +760,7 @@
             this.panel2.Controls.Add(this.pnlBotonera);
             this.panel2.Location = new System.Drawing.Point(6, 475);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(461, 78);
+            this.panel2.Size = new System.Drawing.Size(671, 78);
             this.panel2.TabIndex = 18;
             // 
             // videoGrabber
@@ -826,7 +851,7 @@
             this.videoGrabber.Display_Embedded = true;
             this.videoGrabber.Display_Embedded_FitParent = false;
             this.videoGrabber.Display_FullScreen = false;
-            this.videoGrabber.Display_Height = 240;
+            this.videoGrabber.Display_Height = 382;
             this.videoGrabber.Display_Left = 10;
             this.videoGrabber.Display_Monitor = 0;
             this.videoGrabber.Display_MouseMovesWindow = true;
@@ -843,12 +868,12 @@
             this.videoGrabber.DualDisplay_Active = false;
             this.videoGrabber.DualDisplay_AlphaBlendEnabled = false;
             this.videoGrabber.DualDisplay_AlphaBlendValue = 180;
-            this.videoGrabber.DualDisplay_AspectRatio = VidGrab.TAspectRatio.ar_Stretch;
+            this.videoGrabber.DualDisplay_AspectRatio = VidGrab.TAspectRatio.ar_Box;
             this.videoGrabber.DualDisplay_AutoSize = false;
             this.videoGrabber.DualDisplay_Embedded = false;
             this.videoGrabber.DualDisplay_Embedded_FitParent = false;
             this.videoGrabber.DualDisplay_FullScreen = false;
-            this.videoGrabber.DualDisplay_Height = 240;
+            this.videoGrabber.DualDisplay_Height = 382;
             this.videoGrabber.DualDisplay_Left = 20;
             this.videoGrabber.DualDisplay_Monitor = 0;
             this.videoGrabber.DualDisplay_MouseMovesWindow = true;
@@ -951,6 +976,7 @@
             this.videoGrabber.PlayerFileName = "";
             this.videoGrabber.PlayerForcedCodec = "";
             this.videoGrabber.PlayerFramePosition = ((long)(1));
+            this.videoGrabber.PlayerHwAccel = VidGrab.THwAccel.hw_None;
             this.videoGrabber.PlayerRefreshPausedDisplay = false;
             this.videoGrabber.PlayerRefreshPausedDisplayFrameRate = 0D;
             this.videoGrabber.PlayerSpeedRatio = 1D;
@@ -1001,7 +1027,7 @@
             this.videoGrabber.ScreenRecordingThroughClipboard = false;
             this.videoGrabber.ScreenRecordingWithCursor = true;
             this.videoGrabber.SendToDV_DeviceIndex = -1;
-            this.videoGrabber.Size = new System.Drawing.Size(452, 394);
+            this.videoGrabber.Size = new System.Drawing.Size(667, 394);
             this.videoGrabber.SpeakerBalance = 0;
             this.videoGrabber.SpeakerControl = false;
             this.videoGrabber.SpeakerVolume = 65535;
@@ -1017,7 +1043,7 @@
             this.videoGrabber.TextOverlay_AlphaBlendValue = 180;
             this.videoGrabber.TextOverlay_BkColor = 16777215;
             this.videoGrabber.TextOverlay_Enabled = false;
-// TODO: Code generation for '' failed because of Exception 'Invalid Primitive Type: System.IntPtr. Consider using CodeObjectCreateExpression.'.
+// TODO: Error de generación de código de '' por la excepción 'Tipo primitivo no válido: System.IntPtr. Utilice CodeObjectCreateExpression.'.
             this.videoGrabber.TextOverlay_FontColor = 16776960;
             this.videoGrabber.TextOverlay_FontSize = 12;
             this.videoGrabber.TextOverlay_GradientColor = 8388608;
@@ -1047,7 +1073,7 @@
             this.videoGrabber.TVUseFrequencyOverrides = false;
             this.videoGrabber.UseClock = true;
             this.videoGrabber.VCRHorizontalLocking = false;
-            this.videoGrabber.Version = "v10.8.2.4 (build 3174.180524) - Copyright ©2018 Datastead";
+            this.videoGrabber.Version = "v10.8.4.6 (build 3406.181221) - Copyright (c)2018 Datastead";
             this.videoGrabber.VideoCompression_DataRate = -1;
             this.videoGrabber.VideoCompression_KeyFrameRate = 15;
             this.videoGrabber.VideoCompression_PFramesPerKeyFrame = 0;
@@ -1107,7 +1133,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(892, 716);
+            this.ClientSize = new System.Drawing.Size(1130, 738);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.pnlInfo);
             this.Controls.Add(this.pnlProbando);
@@ -1198,6 +1224,8 @@
         private System.Windows.Forms.LinkLabel lnkMoveLeft;
         private System.Windows.Forms.LinkLabel lnkSeleccionCamara;
         private System.Windows.Forms.Button btnCerrarAlerta;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
     }
 }
 
