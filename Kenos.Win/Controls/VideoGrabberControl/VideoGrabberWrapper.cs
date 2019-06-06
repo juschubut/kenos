@@ -380,7 +380,7 @@ namespace Kenos.Win.Controls.VideoGrabberControl
             {
                 isValid = this.ConfigureToVideo(extraConfig);
 
-                this.RecordingFileName = string.Format("{0}\\{1}.wmv", pathRoot, fileName);
+                this.RecordingFileName = string.Format("{0}\\{1}." + config.VideoSettings[0].FormatOutput, pathRoot, fileName);
 
                 if (!isValid)
                     return false;
@@ -459,7 +459,7 @@ namespace Kenos.Win.Controls.VideoGrabberControl
             this.CurrentOnvifIndex = 0;
             _mixerSources = new List<VideoGrabberBaseWrapper>();
 
-            bool isValid = ConfigureVideoMixer(config);
+            // bool isValid = ConfigureVideoMixer(config);
             
             /*bool isValid = true;
             config.VideoSettings.FirstOrDefault().Apply(this);
@@ -467,15 +467,36 @@ namespace Kenos.Win.Controls.VideoGrabberControl
 
             //this.UseNearestVideoSize(640, 480, true);
 
-            if (!isValid)
+            //if (!isValid)
+            //    return false;
+            if(!this.ConfigureVideoGrabberToVideo(config.VideoSettings[0]))
                 return false;
 
             this.FrameRate = config.OutputSetting.FramesRate;
-            this.RecordingMethod = VidGrab.TRecordingMethod.rm_ASF;
-            this.ASFVideoFrameRate = config.OutputSetting.FramesRate;
-            this.ASFVideoBitRate = config.OutputSetting.VideoBitRate;
-            this.ASFVideoQuality = config.OutputSetting.VideoQuality;
+            //this.RecordingMethod = VidGrab.TRecordingMethod.rm_ASF;
+            //this.ASFVideoFrameRate = config.OutputSetting.FramesRate;
+            //this.ASFVideoBitRate = config.OutputSetting.VideoBitRate;
+            //this.ASFVideoQuality = config.OutputSetting.VideoQuality;
+            this.DVTimeCodeEnabled = false;
             this.VideoRenderer = VidGrab.TVideoRenderer.vr_AutoSelect;
+            this.UseNearestVideoSize(0,0,false);
+            //this.AutoRefreshPreview = true;
+
+            if (config.VideoSettings[0].FormatOutput == "mp4")
+            {
+                this.RecordingInNativeFormat = false;
+                this.RecordingMethod = VidGrab.TRecordingMethod.rm_MP4;
+                this.VideoCompressor = this.VideoCompressorIndex(config.VideoSettings[0].VideoCompressors);
+                this.CompressionMode = VidGrab.TCompressionMode.cm_CompressOnTheFly;
+                this.AudioRecording = true;
+            }
+            else {
+                this.RecordingInNativeFormat = true;
+                this.RecordingMethod = VidGrab.TRecordingMethod.rm_ASF;
+                this.ASFVideoFrameRate = config.OutputSetting.FramesRate;
+                this.ASFVideoBitRate = config.OutputSetting.VideoBitRate;
+                this.ASFVideoQuality = config.OutputSetting.VideoQuality;
+            }
 
             if (Properties.Settings.Default.WmvProfileVersion == 8)
             {
@@ -512,7 +533,7 @@ namespace Kenos.Win.Controls.VideoGrabberControl
 
                 this.SetTextOverlay_Enabled(target, true);
 
-                this.FrameGrabber = VidGrab.TFrameGrabber.fg_CaptureStream;
+                this.FrameGrabber = VidGrab.TFrameGrabber.fg_BothStreams;
             }
             else
             {

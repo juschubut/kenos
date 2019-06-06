@@ -10,6 +10,15 @@ namespace Kenos.Win
     [Serializable]
     public class VideoSetting
     {
+
+        public string VideoFormat { get; set; }
+
+        public string VideoInput { get; set; }
+
+        public string VideoCompressors { get; set; }
+
+        public string FormatOutput { get; set; }
+
         public string VideoSource { get; set; }
 
         public bool IsEnabled { get; set; }
@@ -116,6 +125,8 @@ namespace Kenos.Win
 
                 capture.VideoSize = capture.FindIndexInListByName(capture.VideoSizes, this.VideoSize, false, true);
                 capture.VideoSubtype = capture.FindIndexInListByName(capture.VideoSubtypes, this.VideoFormatSubType, false, true);
+                capture.VideoFormat = capture.VideoFormatIndex(this.VideoFormat);
+                capture.VideoInput = capture.VideoFormatIndex(this.VideoInput);
 
                 if (!string.IsNullOrEmpty(this.VideoNorma))
                     capture.AnalogVideoStandard = capture.FindIndexInListByName(capture.AnalogVideoStandards, this.VideoNorma, false, true);

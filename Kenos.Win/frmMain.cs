@@ -198,7 +198,7 @@ namespace Kenos.Win
         }
 
         private void lnkParar_MouseClick(object sender, MouseEventArgs e)
-        {
+        {            
             if (videoGrabber.CurrentState == TCurrentState.cs_Recording || _estado == CaptureState.Paused)
             {
                 DialogResult result = MessageBox.Show(this, "¿Está seguro que desea parar la grabación?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
@@ -337,7 +337,9 @@ namespace Kenos.Win
 
                 if (extraConfig.Video)
                 {
+                    //videoGrabber.StartPreview();
                     videoGrabber.StartRecording();
+                    //return true;
                 }
                 else
                 {
@@ -420,8 +422,14 @@ namespace Kenos.Win
                     rdVideo.Enabled = false;
                 }
 
-                string extension = rdVideo.Checked ? "wmv" : "mp3";
+                //string extension = rdVideo.Checked ? "wmv" : "mp3";
+                string extension =  "mp3";
 
+                if(rdVideo.Checked){
+                    Config config = Config.Current;
+                    extension = config.VideoSettings[0].FormatOutput;
+                }
+                
                 lnkTest.Enabled = true;
 
                 metadata.FullFileName = string.Format("{0}{1}.{2}", Properties.Settings.Default.PathGrabacion, Guid.NewGuid(), extension);
@@ -452,7 +460,7 @@ namespace Kenos.Win
 
                 HabilitarForm();
 
-                if (Path.GetExtension(_metadata.FullFileName).Equals(".wmv", StringComparison.InvariantCultureIgnoreCase))
+                if (Path.GetExtension(_metadata.FullFileName).Equals(".wmv", StringComparison.InvariantCultureIgnoreCase) || Path.GetExtension(_metadata.FullFileName).Equals(".mp4", StringComparison.InvariantCultureIgnoreCase))
                     rdVideo.Checked = true;
                 else
                     rdAudio.Checked = true;
@@ -827,7 +835,8 @@ namespace Kenos.Win
 
             if (modoPrueba && _metadata == null)
             {
-                extraConfig.FileName = string.Format("{0}{1}.wmv", Properties.Settings.Default.PathGrabacion, Guid.NewGuid());
+                 Config config = Config.Current;
+                extraConfig.FileName = string.Format("{0}{1}."+config.VideoSettings[0].FormatOutput, Properties.Settings.Default.PathGrabacion, Guid.NewGuid());
                 extraConfig.Etiqueta = "[Prueba]";
             }
             else
@@ -886,7 +895,7 @@ namespace Kenos.Win
 
             lnkNueva.Enabled = _estado == CaptureState.Initialized || _estado == CaptureState.NoSet;
             lnkGrabar.Enabled = _estado == CaptureState.Initialized && _pruebaGrabacion.Realizada;
-            lnkPausar.Enabled = _estado == CaptureState.Started && videoGrabber.RecordingMode == RecordingModes.Standard;
+            //lnkPausar.Enabled = _estado == CaptureState.Started && videoGrabber.RecordingMode == RecordingModes.Standard;
             lnkParar.Enabled = (_estado == CaptureState.Started && videoGrabber.RecordingMode == RecordingModes.Standard) || videoGrabber.CurrentState == TCurrentState.cs_Playback;
             lnkPlay.Enabled = _estado == CaptureState.Completed;
             lnkFinalizar.Enabled = _estado == CaptureState.Completed;
@@ -1280,7 +1289,20 @@ namespace Kenos.Win
                     h = frameInfo.dVTimeCode_Hour;
                     m = frameInfo.dVTimeCode_Min;
                     s = frameInfo.dVTimeCode_Sec;
-                }
+                }else
+                    if (frameInfo.dVDateTime_IsAvailable > 0) // if available
+                    {
+                        h = frameInfo.dVDateTime_Hour;
+                        m = frameInfo.dVDateTime_Min;
+                        s = frameInfo.dVDateTime_Sec;
+                    }
+                    else {
+                        h = frameInfo.frameTime_Hour;
+                        m = frameInfo.frameTime_Min;
+                        s = frameInfo.frameTime_Sec;
+                    }
+                                
+                
 
                 TimeSpan ts = new TimeSpan(h, m, s).Add(_marcaTiempoInicial);
 
@@ -1384,7 +1406,7 @@ namespace Kenos.Win
                 if (count > 10)
                 {
                     count = 0;
-                    GuardarMarcas();
+                 //   GuardarMarcas();
                 }
 
                 timerRecording.Tag = count;
@@ -1640,6 +1662,16 @@ namespace Kenos.Win
                 Logger.Log.Error(new Exception("Error guardando archivo de prueba de grabación", ex));
             }
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            videoGrabber.StartPreview();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            videoGrabber.StopPreview();
         }
 
         

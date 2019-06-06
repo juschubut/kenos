@@ -46,6 +46,10 @@
             this.rdLayout6 = new System.Windows.Forms.RadioButton();
             this.rdLayout1 = new System.Windows.Forms.RadioButton();
             this.pnlCamaraIp = new System.Windows.Forms.Panel();
+<<<<<<< HEAD
+=======
+            this.label12 = new System.Windows.Forms.Label();
+>>>>>>> develop
             this.panel1 = new System.Windows.Forms.Panel();
             this.lnkMoveStartup = new System.Windows.Forms.LinkLabel();
             this.lnkMoveDown = new System.Windows.Forms.LinkLabel();
@@ -72,6 +76,13 @@
             this.label5 = new System.Windows.Forms.Label();
             this.LabelDispositivo = new System.Windows.Forms.Label();
             this.pnlCamara = new System.Windows.Forms.Panel();
+<<<<<<< HEAD
+=======
+            this.label16 = new System.Windows.Forms.Label();
+            this.cbVideoInput = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.cbVideoFormat = new System.Windows.Forms.ComboBox();
+>>>>>>> develop
             this.LabelNorma = new System.Windows.Forms.Label();
             this.cbNorma = new System.Windows.Forms.ComboBox();
             this.LabelSubtipo = new System.Windows.Forms.Label();
@@ -81,7 +92,15 @@
             this.cbVideoDevice = new System.Windows.Forms.ComboBox();
             this.cbVideoSubtype = new System.Windows.Forms.ComboBox();
             this.chkHabilitada = new System.Windows.Forms.CheckBox();
+<<<<<<< HEAD
             this.label12 = new System.Windows.Forms.Label();
+=======
+            this.label13 = new System.Windows.Forms.Label();
+            this.cbFormat = new System.Windows.Forms.ComboBox();
+            this.cbCodec = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+>>>>>>> develop
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.pnlCamaraIp.SuspendLayout();
@@ -98,7 +117,11 @@
             this.cboTipo.Items.AddRange(new object[] {
             "Cámara Digital / Analógica",
             "Cámara IP"});
+<<<<<<< HEAD
             this.cboTipo.Location = new System.Drawing.Point(0, 80);
+=======
+            this.cboTipo.Location = new System.Drawing.Point(0, 136);
+>>>>>>> develop
             this.cboTipo.Name = "cboTipo";
             this.cboTipo.Size = new System.Drawing.Size(392, 24);
             this.cboTipo.TabIndex = 0;
@@ -107,7 +130,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
+<<<<<<< HEAD
             this.label1.Location = new System.Drawing.Point(0, 60);
+=======
+            this.label1.Location = new System.Drawing.Point(0, 116);
+>>>>>>> develop
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(36, 17);
             this.label1.TabIndex = 23;
@@ -263,6 +290,10 @@
             this.rdLayout2.Appearance = System.Windows.Forms.Appearance.Button;
             this.rdLayout2.AutoSize = true;
             this.rdLayout2.CheckAlign = System.Drawing.ContentAlignment.BottomCenter;
+<<<<<<< HEAD
+=======
+            this.rdLayout2.Enabled = false;
+>>>>>>> develop
             this.rdLayout2.FlatAppearance.BorderSize = 0;
             this.rdLayout2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rdLayout2.Image = global::Kenos.Win.Properties.Resources.layout_2;
@@ -282,6 +313,10 @@
             this.rdLayout4.Appearance = System.Windows.Forms.Appearance.Button;
             this.rdLayout4.AutoSize = true;
             this.rdLayout4.CheckAlign = System.Drawing.ContentAlignment.BottomCenter;
+<<<<<<< HEAD
+=======
+            this.rdLayout4.Enabled = false;
+>>>>>>> develop
             this.rdLayout4.FlatAppearance.BorderSize = 0;
             this.rdLayout4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rdLayout4.Image = global::Kenos.Win.Properties.Resources.layout_4;
@@ -300,6 +335,10 @@
             this.rdLayout6.Appearance = System.Windows.Forms.Appearance.Button;
             this.rdLayout6.AutoSize = true;
             this.rdLayout6.CheckAlign = System.Drawing.ContentAlignment.BottomCenter;
+<<<<<<< HEAD
+=======
+            this.rdLayout6.Enabled = false;
+>>>>>>> develop
             this.rdLayout6.FlatAppearance.BorderSize = 0;
             this.rdLayout6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rdLayout6.Image = global::Kenos.Win.Properties.Resources.layout_6;
@@ -354,11 +393,27 @@
             this.pnlCamaraIp.Controls.Add(this.label7);
             this.pnlCamaraIp.Controls.Add(this.label5);
             this.pnlCamaraIp.Controls.Add(this.LabelDispositivo);
+<<<<<<< HEAD
             this.pnlCamaraIp.Location = new System.Drawing.Point(0, 114);
+=======
+            this.pnlCamaraIp.Location = new System.Drawing.Point(0, 170);
+>>>>>>> develop
             this.pnlCamaraIp.Name = "pnlCamaraIp";
             this.pnlCamaraIp.Size = new System.Drawing.Size(520, 354);
             this.pnlCamaraIp.TabIndex = 3;
             // 
+<<<<<<< HEAD
+=======
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(269, 114);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(153, 17);
+            this.label12.TabIndex = 57;
+            this.label12.Text = "Prueba de movimiento:";
+            // 
+>>>>>>> develop
             // panel1
             // 
             this.panel1.Controls.Add(this.lnkMoveStartup);
@@ -607,11 +662,20 @@
             this.vgPreview.Display_Active = true;
             this.vgPreview.Display_AlphaBlendEnabled = false;
             this.vgPreview.Display_AlphaBlendValue = 180;
+<<<<<<< HEAD
             this.vgPreview.Display_AspectRatio = VidGrab.TAspectRatio.ar_Stretch;
             this.vgPreview.Display_AutoSize = false;
             this.vgPreview.Display_Embedded = true;
             this.vgPreview.Display_FullScreen = false;
             this.vgPreview.Display_Height = 240;
+=======
+            this.vgPreview.Display_AspectRatio = VidGrab.TAspectRatio.ar_Box;
+            this.vgPreview.Display_AutoSize = false;
+            this.vgPreview.Display_Embedded = true;
+            this.vgPreview.Display_Embedded_FitParent = false;
+            this.vgPreview.Display_FullScreen = false;
+            this.vgPreview.Display_Height = 382;
+>>>>>>> develop
             this.vgPreview.Display_Left = 10;
             this.vgPreview.Display_Monitor = 0;
             this.vgPreview.Display_MouseMovesWindow = true;
@@ -628,11 +692,20 @@
             this.vgPreview.DualDisplay_Active = false;
             this.vgPreview.DualDisplay_AlphaBlendEnabled = false;
             this.vgPreview.DualDisplay_AlphaBlendValue = 180;
+<<<<<<< HEAD
             this.vgPreview.DualDisplay_AspectRatio = VidGrab.TAspectRatio.ar_Stretch;
             this.vgPreview.DualDisplay_AutoSize = false;
             this.vgPreview.DualDisplay_Embedded = false;
             this.vgPreview.DualDisplay_FullScreen = false;
             this.vgPreview.DualDisplay_Height = 240;
+=======
+            this.vgPreview.DualDisplay_AspectRatio = VidGrab.TAspectRatio.ar_Box;
+            this.vgPreview.DualDisplay_AutoSize = false;
+            this.vgPreview.DualDisplay_Embedded = false;
+            this.vgPreview.DualDisplay_Embedded_FitParent = false;
+            this.vgPreview.DualDisplay_FullScreen = false;
+            this.vgPreview.DualDisplay_Height = 382;
+>>>>>>> develop
             this.vgPreview.DualDisplay_Left = 20;
             this.vgPreview.DualDisplay_Monitor = 0;
             this.vgPreview.DualDisplay_MouseMovesWindow = true;
@@ -735,6 +808,10 @@
             this.vgPreview.PlayerFileName = "";
             this.vgPreview.PlayerForcedCodec = "";
             this.vgPreview.PlayerFramePosition = ((long)(1));
+<<<<<<< HEAD
+=======
+            this.vgPreview.PlayerHwAccel = VidGrab.THwAccel.hw_None;
+>>>>>>> develop
             this.vgPreview.PlayerRefreshPausedDisplay = false;
             this.vgPreview.PlayerRefreshPausedDisplayFrameRate = 0D;
             this.vgPreview.PlayerSpeedRatio = 1D;
@@ -800,7 +877,11 @@
             this.vgPreview.TextOverlay_AlphaBlendValue = 180;
             this.vgPreview.TextOverlay_BkColor = 16777215;
             this.vgPreview.TextOverlay_Enabled = false;
+<<<<<<< HEAD
 // TODO: Code generation for '' failed because of Exception 'Invalid Primitive Type: System.IntPtr. Consider using CodeObjectCreateExpression.'.
+=======
+// TODO: Error de generación de código de '' por la excepción 'Tipo primitivo no válido: System.IntPtr. Utilice CodeObjectCreateExpression.'.
+>>>>>>> develop
             this.vgPreview.TextOverlay_FontColor = 16776960;
             this.vgPreview.TextOverlay_FontSize = 12;
             this.vgPreview.TextOverlay_GradientColor = 8388608;
@@ -830,7 +911,11 @@
             this.vgPreview.TVUseFrequencyOverrides = false;
             this.vgPreview.UseClock = true;
             this.vgPreview.VCRHorizontalLocking = false;
+<<<<<<< HEAD
             this.vgPreview.Version = "v10.6.2.2 (build 170509) - Copyright ©2017 Datastead";
+=======
+            this.vgPreview.Version = "v10.8.4.6 (build 3406.181221) - Copyright (c)2018 Datastead";
+>>>>>>> develop
             this.vgPreview.VideoCompression_DataRate = -1;
             this.vgPreview.VideoCompression_KeyFrameRate = 15;
             this.vgPreview.VideoCompression_PFramesPerKeyFrame = 0;
@@ -962,6 +1047,13 @@
             // 
             // pnlCamara
             // 
+<<<<<<< HEAD
+=======
+            this.pnlCamara.Controls.Add(this.label16);
+            this.pnlCamara.Controls.Add(this.cbVideoInput);
+            this.pnlCamara.Controls.Add(this.label15);
+            this.pnlCamara.Controls.Add(this.cbVideoFormat);
+>>>>>>> develop
             this.pnlCamara.Controls.Add(this.LabelNorma);
             this.pnlCamara.Controls.Add(this.cbNorma);
             this.pnlCamara.Controls.Add(this.LabelSubtipo);
@@ -970,11 +1062,53 @@
             this.pnlCamara.Controls.Add(this.cbVideoSize);
             this.pnlCamara.Controls.Add(this.cbVideoDevice);
             this.pnlCamara.Controls.Add(this.cbVideoSubtype);
+<<<<<<< HEAD
             this.pnlCamara.Location = new System.Drawing.Point(445, 60);
             this.pnlCamara.Name = "pnlCamara";
             this.pnlCamara.Size = new System.Drawing.Size(507, 106);
             this.pnlCamara.TabIndex = 26;
             // 
+=======
+            this.pnlCamara.Location = new System.Drawing.Point(445, 116);
+            this.pnlCamara.Name = "pnlCamara";
+            this.pnlCamara.Size = new System.Drawing.Size(507, 185);
+            this.pnlCamara.TabIndex = 26;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(147, 114);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(92, 17);
+            this.label16.TabIndex = 48;
+            this.label16.Text = "Video Format";
+            // 
+            // cbVideoInput
+            // 
+            this.cbVideoInput.FormattingEnabled = true;
+            this.cbVideoInput.Location = new System.Drawing.Point(0, 133);
+            this.cbVideoInput.Name = "cbVideoInput";
+            this.cbVideoInput.Size = new System.Drawing.Size(141, 24);
+            this.cbVideoInput.TabIndex = 47;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(0, 113);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(79, 17);
+            this.label15.TabIndex = 46;
+            this.label15.Text = "Video Input";
+            // 
+            // cbVideoFormat
+            // 
+            this.cbVideoFormat.FormattingEnabled = true;
+            this.cbVideoFormat.Location = new System.Drawing.Point(147, 133);
+            this.cbVideoFormat.Name = "cbVideoFormat";
+            this.cbVideoFormat.Size = new System.Drawing.Size(360, 24);
+            this.cbVideoFormat.TabIndex = 45;
+            // 
+>>>>>>> develop
             // LabelNorma
             // 
             this.LabelNorma.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1068,7 +1202,11 @@
             this.chkHabilitada.Checked = true;
             this.chkHabilitada.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkHabilitada.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+<<<<<<< HEAD
             this.chkHabilitada.Location = new System.Drawing.Point(420, 80);
+=======
+            this.chkHabilitada.Location = new System.Drawing.Point(647, 82);
+>>>>>>> develop
             this.chkHabilitada.Name = "chkHabilitada";
             this.chkHabilitada.Size = new System.Drawing.Size(87, 21);
             this.chkHabilitada.TabIndex = 1;
@@ -1076,6 +1214,7 @@
             this.chkHabilitada.UseVisualStyleBackColor = true;
             this.chkHabilitada.CheckedChanged += new System.EventHandler(this.chkHabilitada_CheckedChanged);
             // 
+<<<<<<< HEAD
             // label12
             // 
             this.label12.AutoSize = true;
@@ -1084,12 +1223,70 @@
             this.label12.Size = new System.Drawing.Size(153, 17);
             this.label12.TabIndex = 57;
             this.label12.Text = "Prueba de movimiento:";
+=======
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(1, 62);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(60, 17);
+            this.label13.TabIndex = 27;
+            this.label13.Text = "Formato";
+            // 
+            // cbFormat
+            // 
+            this.cbFormat.FormattingEnabled = true;
+            this.cbFormat.Items.AddRange(new object[] {
+            "mp4",
+            "wmv"});
+            this.cbFormat.Location = new System.Drawing.Point(0, 82);
+            this.cbFormat.Name = "cbFormat";
+            this.cbFormat.Size = new System.Drawing.Size(121, 24);
+            this.cbFormat.TabIndex = 28;
+            this.cbFormat.SelectedIndexChanged += new System.EventHandler(this.changeFormatOutput);
+            // 
+            // cbCodec
+            // 
+            this.cbCodec.FormattingEnabled = true;
+            this.cbCodec.Location = new System.Drawing.Point(128, 82);
+            this.cbCodec.Name = "cbCodec";
+            this.cbCodec.Size = new System.Drawing.Size(264, 24);
+            this.cbCodec.TabIndex = 29;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(125, 62);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(48, 17);
+            this.label14.TabIndex = 30;
+            this.label14.Text = "Codec";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(399, 135);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(114, 25);
+            this.button1.TabIndex = 31;
+            this.button1.Text = "Device";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+>>>>>>> develop
             // 
             // VideoConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+<<<<<<< HEAD
             this.ClientSize = new System.Drawing.Size(520, 468);
+=======
+            this.ClientSize = new System.Drawing.Size(746, 671);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.cbCodec);
+            this.Controls.Add(this.cbFormat);
+            this.Controls.Add(this.label13);
+>>>>>>> develop
             this.Controls.Add(this.chkHabilitada);
             this.Controls.Add(this.pnlCamara);
             this.Controls.Add(this.pnlCamaraIp);
@@ -1171,5 +1368,17 @@
         private System.Windows.Forms.LinkLabel lnkMoveRight;
         private System.Windows.Forms.LinkLabel lnkMoveLeft;
         private System.Windows.Forms.Label label12;
+<<<<<<< HEAD
+=======
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox cbFormat;
+        private System.Windows.Forms.ComboBox cbCodec;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ComboBox cbVideoInput;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ComboBox cbVideoFormat;
+        private System.Windows.Forms.Button button1;
+>>>>>>> develop
     }
 }

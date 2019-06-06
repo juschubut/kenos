@@ -1,8 +1,8 @@
 [2.1.1.1000]
 - Soporte de multiples camaras. Configuraciones para 1, 4 y 6 camaras
 - Soporte camaras IP
-- Soporte Streaming para publicacion de la grabación en otras salas de audiencia. 
-- Movimiento durante grabación para camaras ONVIF.
+- Soporte Streaming para publicacion de la grabaciï¿½n en otras salas de audiencia. 
+- Movimiento durante grabaciï¿½n para camaras ONVIF.
 - Definicion de posicion inicial para camaras ONVIF.
 
 
@@ -21,17 +21,17 @@
 
 
 [1.0.0.16002]
-- Fix en control de posicion de archivo cuando se reproduce prueba de grabación
+- Fix en control de posicion de archivo cuando se reproduce prueba de grabaciï¿½n
 
 
 [1.0.0.16001]
-- Marcas de tiempo en inicio, pausa, continuación y finalizacion de grabación
-- Validación para impedir dos instancias activas. 
+- Marcas de tiempo en inicio, pausa, continuaciï¿½n y finalizacion de grabaciï¿½n
+- Validaciï¿½n para impedir dos instancias activas. 
 
 
 [1.0.0.16000]
 - Manejo de pausas por medio de la aplicacion en lugar de ser realizada por el componente. 
-- Con cada pausa se genera un archivo nuevo, y luego de finalizada la grabación se unen generando un nuevo archivo con el total.
+- Con cada pausa se genera un archivo nuevo, y luego de finalizada la grabaciï¿½n se unen generando un nuevo archivo con el total.
 
 
 [1.0.0.15000]
@@ -46,5 +46,5 @@
 
 [1.0.0.13000]
 - Impide que se pueda cerrar el sistema sin confirmar o cancelar.
-- Impide que se pueda realizar una prueba de grabación luego de una grabacion terminada (stop).
-- Confirmacion automatica de grabacion luego de terminarla (stop). Esta opción se puede deshabilitar por config.
+- Impide que se pueda realizar una prueba de grabaciï¿½n luego de una grabacion terminada (stop).
+- Confirmacion automatica de grabacion luego de terminarla (stop). Esta opciï¿½n se puede deshabilitar por config.

@@ -58,6 +58,7 @@ namespace Kenos.Win.Properties {
   <string>Fiscal, beep.wav</string>
   <string>Imputado, beep.wav</string>
   <string>Defensor, beep.wav</string>
+<<<<<<< HEAD
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection CasosPrueba {
             get {
@@ -238,11 +239,194 @@ namespace Kenos.Win.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+=======
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection CasosPrueba {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["CasosPrueba"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int PruebaGrabacionIntervalo {
+            get {
+                return ((int)(this["PruebaGrabacionIntervalo"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("8")]
+        public int WmvProfileVersion {
+            get {
+                return ((int)(this["WmvProfileVersion"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public double AlertaEspacioLibre {
+            get {
+                return ((double)(this["AlertaEspacioLibre"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool TextoVideoHabilitado {
+            get {
+                return ((bool)(this["TextoVideoHabilitado"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("%sys_time[dd/mm/yyyy hh:nn]% - {0}")]
+        public string TextoVideoTemplate {
+            get {
+                return ((string)(this["TextoVideoTemplate"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("25")]
+        public int FrameRatePredeterminado {
+            get {
+                return ((int)(this["FrameRatePredeterminado"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int TextoVideoFontSize {
+            get {
+                return ((int)(this["TextoVideoFontSize"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PruebaGrabacionObligatoria {
+            get {
+                return ((bool)(this["PruebaGrabacionObligatoria"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("600000")]
+        public int WmvVideoBitRates {
+            get {
+                return ((int)(this["WmvVideoBitRates"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int WmvVideoQuality {
+            get {
+                return ((int)(this["WmvVideoQuality"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("LAME Audio Encoder")]
+        public string AudioCompressor {
+            get {
+                return ((string)(this["AudioCompressor"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool RegistracionHabilitada {
+            get {
+                return ((bool)(this["RegistracionHabilitada"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://apprw/kenos/registrar")]
+        public string RegistracionUrl {
+            get {
+                return ((string)(this["RegistracionUrl"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ConfirmacionAutomatica {
+            get {
+                return ((bool)(this["ConfirmacionAutomatica"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Pausa - {0:HH:mm}hs.")]
+        public string TextoEnPausa {
+            get {
+                return ((string)(this["TextoEnPausa"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Inicio - {0:dd/MM/yyyy HH:mm}hs.")]
+        public string TextoEnInicio {
+            get {
+                return ((string)(this["TextoEnInicio"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Fin - {0:dd/MM/yyyy HH:mm}hs.")]
+        public string TextoEnFin {
+            get {
+                return ((string)(this["TextoEnFin"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Continuación - {0:HH:mm}hs.")]
+        public string TextEnReanudar {
+            get {
+                return ((string)(this["TextEnReanudar"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("video")]
+        public string ModoGrabacionPredeterminado {
+            get {
+                return ((string)(this["ModoGrabacionPredeterminado"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+>>>>>>> develop
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <string>Usuarios</string>
   <string>SUPTRIB\mbogliacino</string>
   <string>SUPTRIB\abiaggio</string>
+<<<<<<< HEAD
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection Administradores {
             get {
@@ -272,3 +456,34 @@ namespace Kenos.Win.Properties {
         }
     }
 }
+=======
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection Administradores {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["Administradores"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5000")]
+        public int StreamingDefaultPort {
+            get {
+                return ((int)(this["StreamingDefaultPort"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\n<ArrayOfString xmlns:xsi=\"http://www.w3.o" +
+            "rg/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\n  <str" +
+            "ing>Kenos.ExpedienteSecretaria.Connector,Kenos.ExpedienteSecretaria</string>\n</A" +
+            "rrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection Connectors {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["Connectors"]));
+            }
+        }
+    }
+}
+>>>>>>> develop
