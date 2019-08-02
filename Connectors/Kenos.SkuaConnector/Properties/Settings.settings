@@ -1,0 +1,36 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Kenos.SkuaConnector.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="VideosPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">~/medios/videos/</Value>
+    </Setting>
+    <Setting Name="UserName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Skua</Value>
+    </Setting>
+    <Setting Name="Password" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">newskua</Value>
+    </Setting>
+    <Setting Name="DomainName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">rw-sij-desa-02</Value>
+    </Setting>
+    <Setting Name="VideosRealPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">\\RW-SIJ-DESA-02\digitalizaciones\</Value>
+    </Setting>
+    <Setting Name="MailFrom" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">igader@juschubut.gov.ar</Value>
+    </Setting>
+    <Setting Name="SMTP" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">mail.juschubut.gov.ar</Value>
+    </Setting>
+    <Setting Name="Conexion" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">integrated security=false;data source=rw-sij-desa-02;persist security info=True;initial catalog=Skua; user=UserNewSkua; pwd=newskua</Value>
+    </Setting>
+    <Setting Name="Formato" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">.wmv</Value>
+    </Setting>
+    <Setting Name="Servidor" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">rw-sij-desa-02</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

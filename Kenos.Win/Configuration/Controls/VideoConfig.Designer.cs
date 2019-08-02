@@ -46,6 +46,7 @@
             this.rdLayout6 = new System.Windows.Forms.RadioButton();
             this.rdLayout1 = new System.Windows.Forms.RadioButton();
             this.pnlCamaraIp = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lnkMoveStartup = new System.Windows.Forms.LinkLabel();
             this.lnkMoveDown = new System.Windows.Forms.LinkLabel();
@@ -81,7 +82,7 @@
             this.cbVideoDevice = new System.Windows.Forms.ComboBox();
             this.cbVideoSubtype = new System.Windows.Forms.ComboBox();
             this.chkHabilitada = new System.Windows.Forms.CheckBox();
-            this.label12 = new System.Windows.Forms.Label();
+            this.txtUrl = new System.Windows.Forms.TextBox();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.pnlCamaraIp.SuspendLayout();
@@ -333,6 +334,7 @@
             // 
             // pnlCamaraIp
             // 
+            this.pnlCamaraIp.Controls.Add(this.txtUrl);
             this.pnlCamaraIp.Controls.Add(this.label12);
             this.pnlCamaraIp.Controls.Add(this.panel1);
             this.pnlCamaraIp.Controls.Add(this.btnPreviewStop);
@@ -358,6 +360,15 @@
             this.pnlCamaraIp.Name = "pnlCamaraIp";
             this.pnlCamaraIp.Size = new System.Drawing.Size(520, 354);
             this.pnlCamaraIp.TabIndex = 3;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(269, 114);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(153, 17);
+            this.label12.TabIndex = 57;
+            this.label12.Text = "Prueba de movimiento:";
             // 
             // panel1
             // 
@@ -472,9 +483,9 @@
             this.lblUrl.ForeColor = System.Drawing.Color.DarkRed;
             this.lblUrl.Location = new System.Drawing.Point(-3, 96);
             this.lblUrl.Name = "lblUrl";
-            this.lblUrl.Size = new System.Drawing.Size(13, 17);
+            this.lblUrl.Size = new System.Drawing.Size(30, 17);
             this.lblUrl.TabIndex = 55;
-            this.lblUrl.Text = "-";
+            this.lblUrl.Text = "Url:";
             // 
             // label11
             // 
@@ -610,6 +621,7 @@
             this.vgPreview.Display_AspectRatio = VidGrab.TAspectRatio.ar_Stretch;
             this.vgPreview.Display_AutoSize = false;
             this.vgPreview.Display_Embedded = true;
+            this.vgPreview.Display_Embedded_FitParent = false;
             this.vgPreview.Display_FullScreen = false;
             this.vgPreview.Display_Height = 240;
             this.vgPreview.Display_Left = 10;
@@ -631,6 +643,7 @@
             this.vgPreview.DualDisplay_AspectRatio = VidGrab.TAspectRatio.ar_Stretch;
             this.vgPreview.DualDisplay_AutoSize = false;
             this.vgPreview.DualDisplay_Embedded = false;
+            this.vgPreview.DualDisplay_Embedded_FitParent = false;
             this.vgPreview.DualDisplay_FullScreen = false;
             this.vgPreview.DualDisplay_Height = 240;
             this.vgPreview.DualDisplay_Left = 20;
@@ -830,7 +843,7 @@
             this.vgPreview.TVUseFrequencyOverrides = false;
             this.vgPreview.UseClock = true;
             this.vgPreview.VCRHorizontalLocking = false;
-            this.vgPreview.Version = "v10.6.2.2 (build 170509) - Copyright ©2017 Datastead";
+            this.vgPreview.Version = "v10.8.2.4 (build 3174.180524) - Copyright ©2018 Datastead";
             this.vgPreview.VideoCompression_DataRate = -1;
             this.vgPreview.VideoCompression_KeyFrameRate = 15;
             this.vgPreview.VideoCompression_PFramesPerKeyFrame = 0;
@@ -1076,14 +1089,15 @@
             this.chkHabilitada.UseVisualStyleBackColor = true;
             this.chkHabilitada.CheckedChanged += new System.EventHandler(this.chkHabilitada_CheckedChanged);
             // 
-            // label12
+            // txtUrl
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(269, 114);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(153, 17);
-            this.label12.TabIndex = 57;
-            this.label12.Text = "Prueba de movimiento:";
+            this.txtUrl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtUrl.ForeColor = System.Drawing.Color.DarkRed;
+            this.txtUrl.Location = new System.Drawing.Point(27, 94);
+            this.txtUrl.Name = "txtUrl";
+            this.txtUrl.Size = new System.Drawing.Size(223, 23);
+            this.txtUrl.TabIndex = 58;
+            this.txtUrl.Text = "rtps://10.1.1.3:88/videoSub";
             // 
             // VideoConfig
             // 
@@ -1171,5 +1185,6 @@
         private System.Windows.Forms.LinkLabel lnkMoveRight;
         private System.Windows.Forms.LinkLabel lnkMoveLeft;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txtUrl;
     }
 }

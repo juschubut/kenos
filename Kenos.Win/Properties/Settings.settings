@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="DatasteadLicenseKey" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">--- datastead-license-key ---</Value>
+      <Value Profile="(Default)">3262443125200627035110-27abijuschugovar</Value>
     </Setting>
     <Setting Name="DatasteadLicenseKeyRTSP" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">--- datastead-license-key-rtsp ---</Value>
+      <Value Profile="(Default)">DTSTDRTSP:4814446211562164240574-75abijuschugovar</Value>
     </Setting>
     <Setting Name="PathGrabacion" Type="System.String" Scope="Application">
       <Value Profile="(Default)">C:\Temp\</Value>
@@ -93,6 +93,15 @@
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;string&gt;Kenos.ExpedienteSecretaria.Connector,Kenos.ExpedienteSecretaria&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="GenerarMarcasTiempoXml" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="WmvHabilitado" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Mp4Habilitado" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

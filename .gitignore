@@ -1,5 +1,6 @@
-Kenos.Web/Instancias
-**/packages
+.vs
+.git
+Demo
 **/bin
 
 **/obj

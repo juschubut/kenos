@@ -123,7 +123,21 @@ namespace Kenos.Win.Controls.VideoGrabberControl
 
                         MessageBox.Show(rs.Message, "ONVIF", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
+
+
+
+                    // TODO Corroborar si en versiones mas nuevas no hace falta este fix
+                    // Fix: Activo esta opcion cuando uso camara IP sin modo nativo. Sino no se guarda el auto.
+                    if (!Config.Current.OutputSetting.UseAudioFromCamera)
+                    {
+                        this.AudioDeviceRendering = true;
+                        Config.Current.AudioSetting.AudioDeviceRendering = true;
+
+                    }
                 }
+
+
+               
             }
 
             return isValid;
