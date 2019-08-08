@@ -53,6 +53,8 @@ namespace Kenos.Win
 
                 capture.AudioInputLevel = 65535; // Maximo valor
 
+                capture.AudioSource = VidGrab.TAudioSource.as_UseExternalAudio;
+
                 if (capture.AudioDevice < 0)
                 {
                     string message = "No se encontró el dispositivo de grabación de audio";
@@ -62,6 +64,10 @@ namespace Kenos.Win
                     MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
+            }
+            else
+            {
+                capture.AudioSource = VidGrab.TAudioSource.as_Default;
             }
 
             return true;

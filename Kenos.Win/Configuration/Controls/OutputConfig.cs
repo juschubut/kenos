@@ -59,11 +59,13 @@ namespace Kenos.Win.ConfigControls
 
             WinHelper.LoadComboBoxFromDelimitedText(cbAudioCompressor, this.VideoGrabber.AudioCompressors);
             WinHelper.LoadComboBoxFromDelimitedText(cboVideoCompressor, this.VideoGrabber.VideoCompressors);
+            WinHelper.LoadComboBoxFromDelimitedText(cboCompressorAudioMP4, this.VideoGrabber.AudioCompressors);
 
             WinHelper.ComboBoxSelectByText(cbAudioCompressor, c.AudioCompressor);
             WinHelper.ComboBoxSelectByText(cbFrames, c.Video.WMV.FramesRate.ToString());
             WinHelper.ComboBoxSelectByText(cboVideoFormat, c.Video.Format);
             WinHelper.ComboBoxSelectByText(cboVideoCompressor, c.Video.Mp4.VideoCompressor);
+            WinHelper.ComboBoxSelectByText(cboCompressorAudioMP4, c.Video.Mp4.AudioCompressor);
              
             cbVideoFormat_SelectedIndexChanged(null, null);
             chkModoNativo_CheckedChanged(null, null);
@@ -92,8 +94,12 @@ namespace Kenos.Win.ConfigControls
 
             c.Video.UseNativeFormat = false;
             if (c.Video.Format == "mp4")
+            {
                 c.Video.UseNativeFormat = chkModoNativo.Checked;
-                
+
+                if (cboCompressorAudioMP4.SelectedItem != null)
+                    c.Video.Mp4.AudioCompressor = cboCompressorAudioMP4.SelectedItem.ToString();
+            }   
         }
 
         private void cbVideoFormat_SelectedIndexChanged(object sender, EventArgs e)

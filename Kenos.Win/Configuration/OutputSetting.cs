@@ -78,6 +78,9 @@ namespace Kenos.Win
                     capture.ASFProfileVersion = VidGrab.TASFProfileVersion.apv_ProfileVersion_9;
 
 
+                capture.CompressionType = VidGrab.TCompressionType.ct_AudioVideo;
+                capture.CompressionMode = VidGrab.TCompressionMode.cm_CompressOnTheFly;
+               
                 return true;
             }
 
