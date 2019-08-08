@@ -14,6 +14,9 @@ namespace Kenos.Win.ConfigControls
 {
     public partial class VideoConfig : ConfigFormBase
     {
+        private const string PERFIL_BUSCAR = "perfil-buscar";
+        private const string PERFIL_MANUAL = "perfil-manual";
+
         private Color _colorOn = Color.Green;
         private Color _colorOff = Color.Red;
 
@@ -120,7 +123,7 @@ namespace Kenos.Win.ConfigControls
             txtIpPassword.Text = "";
             txtIpPort.Text = "";
             txtLogPreview.Text = "";
-            lblUrl.Text = "";
+            SetUrl("");
             cboPerfiles.Items.Clear();
             cboPresetPosition.Items.Clear();
 
@@ -149,8 +152,7 @@ namespace Kenos.Win.ConfigControls
                 else
                     txtIpPort.Text = "";
 
-                lblUrl.Text = setting.StreamUrl;
-
+                SetUrl(setting.StreamUrl);
                 
                 bool result = true;
 
@@ -242,7 +244,7 @@ namespace Kenos.Win.ConfigControls
 
                     setting.Username = txtIpUsuario.Text;
                     setting.Password = txtIpPassword.Text;
-                    setting.StreamUrl = lblUrl.Text;
+                    setting.StreamUrl = txtUrl.Text;
                 }
                 else
                 {
@@ -348,16 +350,33 @@ namespace Kenos.Win.ConfigControls
             txtLogPreview.Text += string.Format("{0} - {1}{2}", e.severity, e.infoMsg, System.Environment.NewLine);
         }
 
-        private void Reset(ComboBox cbo)
+        private void ResetPerfiles()
         {
-            cbo.Items.Clear();
-            cbo.Items.Add("Buscar...");
+            cboPerfiles.Items.Clear();
+
+            cboPerfiles.Items.Add(new ComboBoxItem
+            {
+                Value = PERFIL_BUSCAR,
+                Text = "Buscar..."
+            });
+
+            cboPerfiles.Items.Add(new ComboBoxItem
+            {
+                Value = PERFIL_MANUAL,
+                Text = "Ingresar URL..."
+            });
+        }
+
+        private void ResetPosiciones()
+        {
+            cboPresetPosition.Items.Clear();
+            cboPresetPosition.Items.Add("Buscar...");
         }
 
         private void txtCamaraIp_TextChanged(object sender, EventArgs e)
         {
-            Reset(cboPerfiles);
-            Reset(cboPresetPosition);
+            ResetPerfiles();
+            ResetPosiciones();
 
             _onvifDevice = null;
         }
@@ -366,23 +385,33 @@ namespace Kenos.Win.ConfigControls
         {
             ComboBoxItem item = cboPerfiles.SelectedItem as ComboBoxItem;
 
-            if (item == null)
+            if (item == null || item.Value == PERFIL_BUSCAR)
             {
                 if (!LoadPerfiles())
                 {
-                    Reset(cboPerfiles);
+                    ResetPerfiles();
                 }
             }
             else
             {
-                this.OnvifDevice.SetCurrentProfile(item.Value);
-
-                var rs = this.OnvifDevice.GetRTSPStreamUri();
-
-                if (rs.IsSuccess)
-                    lblUrl.Text = rs.Uri;
+                if (item.Value == PERFIL_MANUAL)
+                {
+                    txtUrl.Visible = true;
+                    lblUrl.Text = "Url:";
+                }
                 else
-                    lblUrl.Text = "";
+                {
+                    txtUrl.Visible = false;
+
+                    this.OnvifDevice.SetCurrentProfile(item.Value);
+
+                    var rs = this.OnvifDevice.GetRTSPStreamUri();
+
+                    if (rs.IsSuccess)
+                        SetUrl(rs.Uri);
+                    else
+                        SetUrl("");
+                }
 
                 vgPreview.Stop();
             }
@@ -402,6 +431,11 @@ namespace Kenos.Win.ConfigControls
             }
         }
 
+        private void SetUrl(string url)
+        {
+            lblUrl.Text = url;
+            txtUrl.Text = url;
+        }
 
         private void LoadPresets()
         {
@@ -452,8 +486,14 @@ namespace Kenos.Win.ConfigControls
             if (rs.IsSuccess)
                 txtLogPreview.Text = "";
 
-            return rs.IsSuccess;
 
+            cboPerfiles.Items.Add(new ComboBoxItem
+            {
+                Value = PERFIL_MANUAL,
+                Text = "Ingresar URL..."
+            });
+
+            return rs.IsSuccess;
         }
 
         private void LoadOnvif()

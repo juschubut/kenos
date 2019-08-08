@@ -328,7 +328,6 @@
             this.videoGrabber.TextOverlay_Align = VidGrab.TTextOverlayAlign.tf_Left;
             this.videoGrabber.TextOverlay_BkColor = 16777215;
             this.videoGrabber.TextOverlay_Enabled = false;
-// TODO: Code generation for '' failed because of Exception 'Invalid Primitive Type: System.IntPtr. Consider using CodeObjectCreateExpression.'.
             this.videoGrabber.TextOverlay_FontColor = 16776960;
             this.videoGrabber.TextOverlay_GradientColor = 8388608;
             this.videoGrabber.TextOverlay_GradientMode = VidGrab.TTextOverlayGradientMode.gm_Disabled;

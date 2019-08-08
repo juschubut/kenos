@@ -20,10 +20,17 @@ namespace Kenos.Win
         {
         }
 
+        public void LoadDefaults()
+        {
+        }
+
         public bool IsValid() 
         {
-            if (string.IsNullOrEmpty(this.AudioDevice))
-                return false;
+            if (!Config.Current.OutputSetting.UseAudioFromCamera)
+            {
+                if (string.IsNullOrEmpty(this.AudioDevice))
+                    return false;
+            }
 
             if (string.IsNullOrEmpty(this.AudioOutputDevice) && this.AudioDeviceRendering)
                 return false;
@@ -33,25 +40,34 @@ namespace Kenos.Win
 
         public bool Apply(VidGrab.VideoGrabber capture)
         {
-            capture.AudioDevice = capture.FindIndexInListByName(capture.AudioDevices, this.AudioDevice, false, true);
-            
-            capture.AudioRenderer = capture.FindIndexInListByName(capture.AudioRenderers, this.AudioOutputDevice, false, true);
-            capture.AudioInput = capture.FindIndexInListByName(capture.AudioInputs, this.AudioDeviceLine, false, true);
-            capture.AudioFormat = (VidGrab.TAudioFormat)capture.FindIndexInListByName(capture.AudioFormats, this.AudioFormat, false, true);
-            
-            capture.AudioInputLevel = 65535; // Maximo valor
             capture.AudioRecording = true;
-
             capture.AudioDeviceRendering = this.AudioDeviceRendering;
 
-            if (capture.AudioDevice < 0)
+            if (!Config.Current.OutputSetting.UseAudioFromCamera)
             {
-                string message = "No se encontró el dispositivo de grabación de audio";
+                capture.AudioDevice = capture.FindIndexInListByName(capture.AudioDevices, this.AudioDevice, false, true);
 
-                Logger.Log.Info(message);
+                capture.AudioRenderer = capture.FindIndexInListByName(capture.AudioRenderers, this.AudioOutputDevice, false, true);
+                capture.AudioInput = capture.FindIndexInListByName(capture.AudioInputs, this.AudioDeviceLine, false, true);
+                capture.AudioFormat = (VidGrab.TAudioFormat)capture.FindIndexInListByName(capture.AudioFormats, this.AudioFormat, false, true);
 
-                MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                capture.AudioInputLevel = 65535; // Maximo valor
+
+                capture.AudioSource = VidGrab.TAudioSource.as_UseExternalAudio;
+
+                if (capture.AudioDevice < 0)
+                {
+                    string message = "No se encontró el dispositivo de grabación de audio";
+
+                    Logger.Log.Info(message);
+
+                    MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            else
+            {
+                capture.AudioSource = VidGrab.TAudioSource.as_Default;
             }
 
             return true;

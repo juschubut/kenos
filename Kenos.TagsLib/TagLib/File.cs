@@ -891,7 +891,7 @@ namespace Kenos.TagsLib.TagLib {
 			for (buffer = ReadBlock (read_size); buffer.Count > 0;
 				buffer = ReadBlock (read_size)) {
 				
-				// TODO: (1) previous partial match
+				// +TODO: (1) previous partial match
 				
 				// (2) pattern contained in current buffer
 				

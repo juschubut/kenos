@@ -25,7 +25,7 @@ namespace Kenos.Win.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("--- datastead-license-key ---")]
+        [global::System.Configuration.DefaultSettingValueAttribute("3262443125200627035110-27abijuschugovar")]
         public string DatasteadLicenseKey {
             get {
                 return ((string)(this["DatasteadLicenseKey"]));
@@ -34,7 +34,7 @@ namespace Kenos.Win.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("--- datastead-license-key-rtsp ---")]
+        [global::System.Configuration.DefaultSettingValueAttribute("DTSTDRTSP:4814446211562164240574-75abijuschugovar")]
         public string DatasteadLicenseKeyRTSP {
             get {
                 return ((string)(this["DatasteadLicenseKeyRTSP"]));
@@ -268,6 +268,33 @@ namespace Kenos.Win.Properties {
         public global::System.Collections.Specialized.StringCollection Connectors {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["Connectors"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool GenerarMarcasTiempoXml {
+            get {
+                return ((bool)(this["GenerarMarcasTiempoXml"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool WmvHabilitado {
+            get {
+                return ((bool)(this["WmvHabilitado"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Mp4Habilitado {
+            get {
+                return ((bool)(this["Mp4Habilitado"]));
             }
         }
     }

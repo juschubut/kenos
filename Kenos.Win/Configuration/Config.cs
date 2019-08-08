@@ -127,8 +127,14 @@ namespace Kenos.Win
             if (!this.AudioSetting.IsValid())
                 return false;
 
-            //if (string.IsNullOrEmpty(this.WmvProfile))
-            //    return false;
+            foreach(var vs in this.VideoSettings)
+            {
+                if (vs.IsEnabled && !vs.IsValid())
+                    return false;
+            }
+
+            if (!this.OutputSetting.IsValid())
+                return false;
 
             return true;
         }
@@ -186,6 +192,8 @@ namespace Kenos.Win
                     c = new Config();
                 }
 
+                c.LoadDefaults();
+
                 return c;
             }
             catch (Exception ex)
@@ -195,6 +203,12 @@ namespace Kenos.Win
 
                 return new Config();
             }
+        }
+
+        private void LoadDefaults()
+        {
+            this.AudioSetting.LoadDefaults();
+            this.OutputSetting.LoadDefaults();
         }
 
         private void InitVideoSettings()

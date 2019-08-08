@@ -94,6 +94,8 @@ namespace Kenos.Win
             }
             else
             {
+                capture.VideoSource = VidGrab.TVideoSource.vs_VideoCaptureDevice;
+
                 if (string.IsNullOrEmpty(this.VideoDevice))
                 {
                     string message = "No se puede iniciar la grabación porque no tiene configurado un dispositivo de grabación.";

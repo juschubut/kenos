@@ -420,11 +420,9 @@ namespace Kenos.Win
                     rdVideo.Enabled = false;
                 }
 
-                string extension = rdVideo.Checked ? "wmv" : "mp3";
-
                 lnkTest.Enabled = true;
 
-                metadata.FullFileName = string.Format("{0}{1}.{2}", Properties.Settings.Default.PathGrabacion, Guid.NewGuid(), extension);
+                metadata.FullFileName = Config.Current.OutputSetting.CreateTemporalFullFileName(rdVideo.Checked);
 
                 Log("Archivo donde se realiza grabación {0}", metadata.FullFileName);
 
@@ -451,12 +449,6 @@ namespace Kenos.Win
                 Log("...... Descripción: " + _metadata.Descripcion);
 
                 HabilitarForm();
-
-                if (Path.GetExtension(_metadata.FullFileName).Equals(".wmv", StringComparison.InvariantCultureIgnoreCase))
-                    rdVideo.Checked = true;
-                else
-                    rdAudio.Checked = true;
-
 
                 if (!_pruebaGrabacion.Realizada)
                 {
@@ -804,6 +796,12 @@ namespace Kenos.Win
                 }
             }
 
+            if (!_config.OutputSetting.IsValid())
+            {
+                MessageBox.Show(this, "La configuración no es válida para comenzar a grabar.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
             if (extraConfig.Streaming)
             {
                 if (!_config.StreamingSetting.IsValid())
@@ -827,7 +825,7 @@ namespace Kenos.Win
 
             if (modoPrueba && _metadata == null)
             {
-                extraConfig.FileName = string.Format("{0}{1}.wmv", Properties.Settings.Default.PathGrabacion, Guid.NewGuid());
+                extraConfig.FileName = Config.Current.OutputSetting.CreateTemporalFullFileName(extraConfig.Video);
                 extraConfig.Etiqueta = "[Prueba]";
             }
             else
@@ -995,13 +993,18 @@ namespace Kenos.Win
 
         private bool ValidarUsuarioConfig()
         {
-            foreach (string userAdmin in Properties.Settings.Default.Administradores)
+            var admins = Properties.Settings.Default.Administradores;
+
+            if (admins == null || admins.Count == 0)
+                return true;
+
+            foreach (string userAdmin in admins)
             {
                 if (WindowsIdentity.GetCurrent().Name.Equals(userAdmin, StringComparison.CurrentCultureIgnoreCase))
                     return true;
             }
 
-            foreach (string role in Properties.Settings.Default.Administradores)
+            foreach (string role in admins)
             {
                 if (SecurityHelper.IsInGroup(role))
                     return true;
@@ -1192,19 +1195,21 @@ namespace Kenos.Win
 
         private void GuardarMarcas()
         {
-
-            if (_dtMarcaTiempo != null && _metadata != null)
+            if (Properties.Settings.Default.GenerarMarcasTiempoXml)
             {
-                try
+                if (_dtMarcaTiempo != null && _metadata != null)
                 {
-                    using (StreamWriter sw = new StreamWriter(_metadata.FullFileName + ".xml", false))
+                    try
                     {
-                        _dtMarcaTiempo.DataSet.WriteXml(sw);
+                        using (StreamWriter sw = new StreamWriter(_metadata.FullFileName + ".xml", false))
+                        {
+                            _dtMarcaTiempo.DataSet.WriteXml(sw);
+                        }
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Log.Error(ex);
+                    catch (Exception ex)
+                    {
+                        Logger.Log.Error(ex);
+                    }
                 }
             }
         }
@@ -1269,7 +1274,19 @@ namespace Kenos.Win
 
             if (videoGrabber.CurrentState == VidGrab.TCurrentState.cs_Recording
                 || videoGrabber.CurrentState == TCurrentState.cs_Playback)
-            {
+            { /*
+                TFrameInfo frameInfo = (TFrameInfo)Marshal.PtrToStructure((IntPtr)e.frameInfo, typeof(TFrameInfo));
+                int h = 0;
+                int m = 0;
+                int s = 0;
+               
+                if (frameInfo.dVTimeCode_IsAvailable > 0) // if available
+                {
+                    h = frameInfo.dVTimeCode_Hour;
+                    m = frameInfo.dVTimeCode_Min;
+                    s = frameInfo.dVTimeCode_Sec;
+                }*/
+
                 TFrameInfo frameInfo = (TFrameInfo)Marshal.PtrToStructure((IntPtr)e.frameInfo, typeof(TFrameInfo));
                 int h = 0;
                 int m = 0;
@@ -1281,6 +1298,20 @@ namespace Kenos.Win
                     m = frameInfo.dVTimeCode_Min;
                     s = frameInfo.dVTimeCode_Sec;
                 }
+                else
+                    if (frameInfo.dVDateTime_IsAvailable > 0) // if available
+                    {
+                        h = frameInfo.dVDateTime_Hour;
+                        m = frameInfo.dVDateTime_Min;
+                        s = frameInfo.dVDateTime_Sec;
+                    }
+                    else
+                    {
+                        h = frameInfo.frameTime_Hour;
+                        m = frameInfo.frameTime_Min;
+                        s = frameInfo.frameTime_Sec;
+                    }
+
 
                 TimeSpan ts = new TimeSpan(h, m, s).Add(_marcaTiempoInicial);
 
@@ -1601,7 +1632,7 @@ namespace Kenos.Win
 
         private void videoGrabber_CriticalError(object sender, CriticalErrorEventArgs evt)
         {
-            if (videoGrabber.CurrentState == TCurrentState.cs_Recording)
+            if (videoGrabber.CurrentState == TCurrentState.cs_Recording || _estado == CaptureState.Started)
             {
                 lblAlerta.Text = evt.Log.infoMsg;
                 MostrarAlerta(true);

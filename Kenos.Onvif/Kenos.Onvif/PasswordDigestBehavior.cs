@@ -38,7 +38,6 @@ namespace Kenos.Onvif
 
         public void Validate(ServiceEndpoint endpoint)
         {
-            // Todo bien.
             return;
         }
     }

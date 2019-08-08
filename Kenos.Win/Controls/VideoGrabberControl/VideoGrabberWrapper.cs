@@ -178,7 +178,7 @@ namespace Kenos.Win.Controls.VideoGrabberControl
             base.StartAudioRecording();
         }
 
-        public new void ResumeAudioRecording()
+        public void ResumeAudioRecording()
         {
             Log("Continuando Grabación de audio");
             base.StartAudioRecording();
@@ -378,29 +378,25 @@ namespace Kenos.Win.Controls.VideoGrabberControl
             
             if (extraConfig.Video)
             {
-                isValid = this.ConfigureToVideo(extraConfig);
-
-                this.RecordingFileName = string.Format("{0}\\{1}.wmv", pathRoot, fileName);
-
-                if (!isValid)
-                    return false;
-            }
-            else
-            {
-                // Captura de audio
-                isValid = this.ConfigureToAudio();
-
-                this.RecordingFileName = string.Format("{0}\\{1}.mp3", pathRoot, fileName);
+                isValid = this.ConfigureVideoDevices(extraConfig);
 
                 if (!isValid)
                     return false;
             }
            
-
+            // Audio
             isValid = config.AudioSetting.Apply(this);
 
             if (!isValid)
                 return false;
+
+            // Output
+            isValid = config.OutputSetting.Apply(this, extraConfig);
+
+            if (!isValid)
+                return false;
+
+            this.RecordingFileName = string.Format("{0}\\{1}.{2}", pathRoot, fileName, config.OutputSetting.OutputFileExtension(extraConfig.Video));
             
             ConfigureStreaming(extraConfig.Streaming);
 
@@ -409,25 +405,6 @@ namespace Kenos.Win.Controls.VideoGrabberControl
 
             return true;
         }
-
-        private bool ConfigureStreaming(bool streamingEnabled)
-        {
-
-            if (streamingEnabled)
-            {
-                Config config = Config.Current;
-
-                this.NetworkStreaming = VidGrab.TNetworkStreaming.ns_ASFDirectNetworkStreaming;
-                return config.StreamingSetting.Apply(this);
-            }
-            else
-            {
-                this.NetworkStreaming = VidGrab.TNetworkStreaming.ns_Disabled;
-            }
-
-            return true;
-        }
-
         private bool ConfigureToAudio()
         {
             Config config = Config.Current;
@@ -452,72 +429,41 @@ namespace Kenos.Win.Controls.VideoGrabberControl
             return true;
         }
 
-        private bool ConfigureToVideo(ExtraConfig extraConfig)
+
+        private bool ConfigureStreaming(bool streamingEnabled)
+        {
+
+            if (streamingEnabled)
+            {
+                Config config = Config.Current;
+
+                this.NetworkStreaming = VidGrab.TNetworkStreaming.ns_ASFDirectNetworkStreaming;
+                return config.StreamingSetting.Apply(this);
+            }
+            else
+            {
+                this.NetworkStreaming = VidGrab.TNetworkStreaming.ns_Disabled;
+            }
+
+            return true;
+        }
+        
+        private bool ConfigureVideoDevices(ExtraConfig extraConfig)
         {
             Config config = Config.Current;
 
             this.CurrentOnvifIndex = 0;
             _mixerSources = new List<VideoGrabberBaseWrapper>();
 
-            bool isValid = ConfigureVideoMixer(config);
-            
-            /*bool isValid = true;
-            config.VideoSettings.FirstOrDefault().Apply(this);
-            */
+            bool isValid = false;
 
-            //this.UseNearestVideoSize(640, 480, true);
+            if (config.VideoSourceCount > 1)
+                isValid = ConfigureVideoMixer(config);
+            else 
+                isValid = this.ConfigureVideoGrabberToVideo(config.VideoSettings.FirstOrDefault());
 
             if (!isValid)
                 return false;
-
-            this.FrameRate = config.OutputSetting.FramesRate;
-            this.RecordingMethod = VidGrab.TRecordingMethod.rm_ASF;
-            this.ASFVideoFrameRate = config.OutputSetting.FramesRate;
-            this.ASFVideoBitRate = config.OutputSetting.VideoBitRate;
-            this.ASFVideoQuality = config.OutputSetting.VideoQuality;
-            this.VideoRenderer = VidGrab.TVideoRenderer.vr_AutoSelect;
-
-            if (Properties.Settings.Default.WmvProfileVersion == 8)
-            {
-                this.ASFProfileVersion = VidGrab.TASFProfileVersion.apv_ProfileVersion_8;
-            }
-            else
-            {
-                this.ASFProfileVersion = VidGrab.TASFProfileVersion.apv_ProfileVersion_9;
-            }
-
-            // capture.ASFFixedFrameRate = true;
-            this.FrameGrabber = VidGrab.TFrameGrabber.fg_Disabled;
-
-
-            if (Properties.Settings.Default.TextoVideoHabilitado)
-            {
-                int target = 0;
-
-                this.SetTextOverlay_TargetDisplay(target, -1);
-
-                Font font = new Font(FontFamily.GenericSansSerif, Properties.Settings.Default.TextoVideoFontSize, FontStyle.Regular);
-
-                this.SetTextOverlay_Top(target, 0);
-                this.SetTextOverlay_Left(target, -1);
-                this.SetTextOverlay_Right(target, 0);
-                this.SetTextOverlay_Font(target, font.ToHfont());
-                this.SetTextOverlay_HighResFont(target, false);
-                this.SetTextOverlay_VideoAlignment(target, VidGrab.TVideoAlignment.oa_RightBottom);
-                this.SetTextOverlay_Shadow(target, false);
-                this.SetTextOverlay_Transparent(target, false);
-                this.SetTextOverlay_BkColor(target, ColorTranslator.ToWin32(Color.Black));
-                this.SetTextOverlay_FontColor(target, ColorTranslator.ToWin32(Color.White));
-                this.SetTextOverlay_String(target, string.Format(Properties.Settings.Default.TextoVideoTemplate, extraConfig.Etiqueta));
-
-                this.SetTextOverlay_Enabled(target, true);
-
-                this.FrameGrabber = VidGrab.TFrameGrabber.fg_CaptureStream;
-            }
-            else
-            {
-                this.FrameGrabber = VidGrab.TFrameGrabber.fg_Disabled;
-            }
 
             return true;
         }
@@ -628,11 +574,6 @@ namespace Kenos.Win.Controls.VideoGrabberControl
         #endregion
 
         #region Mixer
-        /*public bool IsMixerMode
-        {
-            get { return Config.Current.VideoSourceCount > 1; }
-        }*/
-
         private void MixerDestroy()
         {
             if (_mixerSources != null)

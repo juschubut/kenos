@@ -181,6 +181,39 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="..\ExternalLibrary\Microsoft.Web.Services3\WSE.config">
+      <Link>WSE.config</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\Microsoft.Web.Services3\wsePolicy.xsd">
+      <Link>wsePolicy.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x64\DatasteadRtspSource_x64.ax">
+      <Link>x64\DatasteadRtspSource_x64.ax</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x64\_REGISTER_FILTER.cmd">
+      <Link>x64\_REGISTER_FILTER.cmd</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x64\_UNREGISTER_FILTER.cmd">
+      <Link>x64\_UNREGISTER_FILTER.cmd</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x86\DatasteadRtspSource_x86.ax">
+      <Link>x86\DatasteadRtspSource_x86.ax</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x86\_REGISTER_FILTER.cmd">
+      <Link>x86\_REGISTER_FILTER.cmd</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x86\_UNREGISTER_FILTER.cmd">
+      <Link>x86\_UNREGISTER_FILTER.cmd</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
@@ -297,6 +330,111 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon_moveUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\ExternalLibrary\Microsoft.Web.Services3\Microsoft.Web.Services3.dll">
+      <Link>Microsoft.Web.Services3.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x64\avcodec_datastead_rtsp_x64-58.dll">
+      <Link>x64\avcodec_datastead_rtsp_x64-58.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x64\avdevice_datastead_rtsp_x64-58.dll">
+      <Link>x64\avdevice_datastead_rtsp_x64-58.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x64\avfilter_datastead_rtsp_x64-7.dll">
+      <Link>x64\avfilter_datastead_rtsp_x64-7.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x64\avformat_datastead_rtsp_x64-58.dll">
+      <Link>x64\avformat_datastead_rtsp_x64-58.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x64\avresample_datastead_rtsp_x64-4.dll">
+      <Link>x64\avresample_datastead_rtsp_x64-4.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x64\avstream_datastead_rtsp_x64.dll">
+      <Link>x64\avstream_datastead_rtsp_x64.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x64\avutil_datastead_rtsp_x64-56.dll">
+      <Link>x64\avutil_datastead_rtsp_x64-56.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x64\ldts_x64.dll">
+      <Link>x64\ldts_x64.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x64\msvcr100.dll">
+      <Link>x64\msvcr100.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x64\sdts_x64.dll">
+      <Link>x64\sdts_x64.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x64\swresample_datastead_rtsp_x64-3.dll">
+      <Link>x64\swresample_datastead_rtsp_x64-3.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x64\swscale_datastead_rtsp_x64-5.dll">
+      <Link>x64\swscale_datastead_rtsp_x64-5.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x86\avcodec_datastead_rtsp_x86-58.dll">
+      <Link>x86\avcodec_datastead_rtsp_x86-58.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x86\avdevice_datastead_rtsp_x86-58.dll">
+      <Link>x86\avdevice_datastead_rtsp_x86-58.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x86\avfilter_datastead_rtsp_x86-7.dll">
+      <Link>x86\avfilter_datastead_rtsp_x86-7.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x86\avformat_datastead_rtsp_x86-58.dll">
+      <Link>x86\avformat_datastead_rtsp_x86-58.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x86\avresample_datastead_rtsp_x86-4.dll">
+      <Link>x86\avresample_datastead_rtsp_x86-4.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x86\avstream_datastead_rtsp_x86.dll">
+      <Link>x86\avstream_datastead_rtsp_x86.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x86\avutil_datastead_rtsp_x86-56.dll">
+      <Link>x86\avutil_datastead_rtsp_x86-56.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x86\ldts_x86.dll">
+      <Link>x86\ldts_x86.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x86\msvcr100.dll">
+      <Link>x86\msvcr100.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x86\sdts_x86.dll">
+      <Link>x86\sdts_x86.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x86\swresample_datastead_rtsp_x86-3.dll">
+      <Link>x86\swresample_datastead_rtsp_x86-3.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ExternalLibrary\TVideoGrabber\x86\swscale_datastead_rtsp_x86-5.dll">
+      <Link>x86\swscale_datastead_rtsp_x86-5.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

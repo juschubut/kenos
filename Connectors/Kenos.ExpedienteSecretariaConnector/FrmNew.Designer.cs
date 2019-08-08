@@ -170,6 +170,7 @@
             this.Controls.Add(this.txtNumero);
             this.Controls.Add(this.LabelNumero);
             this.Name = "FrmNew";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Nueva audiencia";
             this.Load += new System.EventHandler(this.FrmNew_Load);
             this.pnlBotonera.ResumeLayout(false);
