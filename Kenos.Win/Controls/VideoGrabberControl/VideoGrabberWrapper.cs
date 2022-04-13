@@ -161,6 +161,8 @@ namespace Kenos.Win.Controls.VideoGrabberControl
 
         public new void ResumeRecording()
         {
+            Configure();
+
             Log("Continuando Grabación de audio y video");
 
             MixerStart();
@@ -189,6 +191,8 @@ namespace Kenos.Win.Controls.VideoGrabberControl
             MixerStop();
 
             base.Stop();
+
+            MixerDestroy();
 
             this.RecordingFileName = _output.CreateNew();
         }
@@ -364,8 +368,15 @@ namespace Kenos.Win.Controls.VideoGrabberControl
         #endregion
 
         #region Configure
+        private ExtraConfig _extraConfig;
+        private bool Configure()
+        {
+            return Configure(_extraConfig);
+        }
+
         public bool Configure(ExtraConfig extraConfig)
         {
+            _extraConfig = extraConfig;
             Config config = Config.Current;
             string pathRoot = Path.GetDirectoryName(extraConfig.FileName);
             string fileName = Path.GetFileNameWithoutExtension(extraConfig.FileName);
