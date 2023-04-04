@@ -1,0 +1,92 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Connectors", "Connectors", "{1953A783-934E-4ED6-9070-37872858947F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kenos.Common", "Kenos.Common\Kenos.Common.csproj", "{714F93C8-0DF8-4D1C-8659-89537D1528D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kenos.SimpleConnector", "Connectors\Kenos.SimpleConnector\Kenos.SimpleConnector.csproj", "{10F611E7-5FDF-430B-BF98-BA0BB2ADA6C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kenos.SkuaConnector", "Connectors\Kenos.SkuaConnector\Kenos.SkuaConnector.csproj", "{E59C5DFE-0510-4C1A-8631-FC32BC1AB85E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kenos.Win", "Kenos.Win\Kenos.Win.csproj", "{EAD9B790-DB4E-4F08-8A1B-4889092C5CED}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6B143A39-C7B2-4743-9917-92262C60E9A6} = {6B143A39-C7B2-4743-9917-92262C60E9A6}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kenos.Player", "Kenos.Player\Kenos.Player.csproj", "{4996C710-F2F0-47D3-AA9F-02D048689F4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kenos.FamiliaConnector", "Connectors\Kenos.FamiliaConnector\Kenos.FamiliaConnector.csproj", "{FC7796FF-53F1-4D0C-A204-3AD57EBBD7B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kenos.Web", "Kenos.Web\Kenos.Web.csproj", "{5163B5CD-3852-4FC1-AFE5-577CB23E9DB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kenos.TagsLib", "Kenos.TagsLib\Kenos.TagsLib.csproj", "{6B143A39-C7B2-4743-9917-92262C60E9A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kenos.PlayerLauncher", "Kenos.PlayerLauncher\Kenos.PlayerLauncher.csproj", "{BE6F1448-F8E4-4280-9376-804D4C2A5D5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kenos.EjemploConnector", "Connectors\Kenos.EjemploConnector\Kenos.EjemploConnector.csproj", "{02932DBE-145E-468A-8DC9-22B2E21E624B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kenos.ExpedienteSimpleConnector", "Connectors\Kenos.ExpedienteSimpleConnector\Kenos.ExpedienteSimpleConnector.csproj", "{94120104-6503-4CE7-BB46-66363BC9575A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{714F93C8-0DF8-4D1C-8659-89537D1528D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{714F93C8-0DF8-4D1C-8659-89537D1528D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{714F93C8-0DF8-4D1C-8659-89537D1528D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{714F93C8-0DF8-4D1C-8659-89537D1528D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10F611E7-5FDF-430B-BF98-BA0BB2ADA6C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10F611E7-5FDF-430B-BF98-BA0BB2ADA6C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10F611E7-5FDF-430B-BF98-BA0BB2ADA6C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10F611E7-5FDF-430B-BF98-BA0BB2ADA6C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E59C5DFE-0510-4C1A-8631-FC32BC1AB85E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E59C5DFE-0510-4C1A-8631-FC32BC1AB85E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E59C5DFE-0510-4C1A-8631-FC32BC1AB85E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E59C5DFE-0510-4C1A-8631-FC32BC1AB85E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAD9B790-DB4E-4F08-8A1B-4889092C5CED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAD9B790-DB4E-4F08-8A1B-4889092C5CED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAD9B790-DB4E-4F08-8A1B-4889092C5CED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAD9B790-DB4E-4F08-8A1B-4889092C5CED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4996C710-F2F0-47D3-AA9F-02D048689F4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4996C710-F2F0-47D3-AA9F-02D048689F4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4996C710-F2F0-47D3-AA9F-02D048689F4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4996C710-F2F0-47D3-AA9F-02D048689F4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC7796FF-53F1-4D0C-A204-3AD57EBBD7B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC7796FF-53F1-4D0C-A204-3AD57EBBD7B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC7796FF-53F1-4D0C-A204-3AD57EBBD7B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC7796FF-53F1-4D0C-A204-3AD57EBBD7B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5163B5CD-3852-4FC1-AFE5-577CB23E9DB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5163B5CD-3852-4FC1-AFE5-577CB23E9DB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5163B5CD-3852-4FC1-AFE5-577CB23E9DB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5163B5CD-3852-4FC1-AFE5-577CB23E9DB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B143A39-C7B2-4743-9917-92262C60E9A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B143A39-C7B2-4743-9917-92262C60E9A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B143A39-C7B2-4743-9917-92262C60E9A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B143A39-C7B2-4743-9917-92262C60E9A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE6F1448-F8E4-4280-9376-804D4C2A5D5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE6F1448-F8E4-4280-9376-804D4C2A5D5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE6F1448-F8E4-4280-9376-804D4C2A5D5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE6F1448-F8E4-4280-9376-804D4C2A5D5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02932DBE-145E-468A-8DC9-22B2E21E624B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02932DBE-145E-468A-8DC9-22B2E21E624B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02932DBE-145E-468A-8DC9-22B2E21E624B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02932DBE-145E-468A-8DC9-22B2E21E624B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94120104-6503-4CE7-BB46-66363BC9575A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94120104-6503-4CE7-BB46-66363BC9575A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94120104-6503-4CE7-BB46-66363BC9575A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94120104-6503-4CE7-BB46-66363BC9575A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{10F611E7-5FDF-430B-BF98-BA0BB2ADA6C5} = {1953A783-934E-4ED6-9070-37872858947F}
+		{E59C5DFE-0510-4C1A-8631-FC32BC1AB85E} = {1953A783-934E-4ED6-9070-37872858947F}
+		{FC7796FF-53F1-4D0C-A204-3AD57EBBD7B3} = {1953A783-934E-4ED6-9070-37872858947F}
+		{02932DBE-145E-468A-8DC9-22B2E21E624B} = {1953A783-934E-4ED6-9070-37872858947F}
+		{94120104-6503-4CE7-BB46-66363BC9575A} = {1953A783-934E-4ED6-9070-37872858947F}
+	EndGlobalSection
+EndGlobal
