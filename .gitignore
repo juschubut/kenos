@@ -1,3 +1,4 @@
+**.vs
 **/bin
 **/obj
 *.pdb
@@ -6,6 +7,6 @@
 *.cache
 *.suo
 *.user
-
-
+**/Temp
+**/packages
 

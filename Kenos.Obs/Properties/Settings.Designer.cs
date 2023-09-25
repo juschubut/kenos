@@ -25,15 +25,6 @@ namespace Kenos.Win.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("193060991980386969-STJC")]
-        public string LicenseKey {
-            get {
-                return ((string)(this["LicenseKey"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("C:\\Temp\\")]
         public string PathGrabacion {
             get {
@@ -43,34 +34,10 @@ namespace Kenos.Win.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>Juez, beep.wav</string>
-  <string>Fiscal, beep.wav</string>
-  <string>Imputado, beep.wav</string>
-  <string>Defensor, beep.wav</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection CasosPrueba {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["CasosPrueba"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("2")]
         public int PruebaGrabacionIntervalo {
             get {
                 return ((int)(this["PruebaGrabacionIntervalo"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("8")]
-        public int WmvProfileVersion {
-            get {
-                return ((int)(this["WmvProfileVersion"]));
             }
         }
         
@@ -103,24 +70,6 @@ namespace Kenos.Win.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("25")]
-        public int FrameRatePredeterminado {
-            get {
-                return ((int)(this["FrameRatePredeterminado"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
-        public int TextoVideoFontSize {
-            get {
-                return ((int)(this["TextoVideoFontSize"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool PruebaGrabacionObligatoria {
             get {
@@ -130,59 +79,10 @@ namespace Kenos.Win.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("600000")]
-        public int WmvVideoBitRates {
-            get {
-                return ((int)(this["WmvVideoBitRates"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("50")]
-        public int WmvVideoQuality {
-            get {
-                return ((int)(this["WmvVideoQuality"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("LAME Audio Encoder")]
-        public string AudioCompressor {
-            get {
-                return ((string)(this["AudioCompressor"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>Kenos.SimpleConnector.Connector,Kenos.SimpleConnector</string>
-  <string>Kenos.FamiliaConnector.Connector,Kenos.FamiliaConnector</string>
-</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection Connectors {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["Connectors"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("audio")]
         public string ModoGrabacionPredeterminado {
             get {
                 return ((string)(this["ModoGrabacionPredeterminado"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool RegistracionHabilitada {
-            get {
-                return ((bool)(this["RegistracionHabilitada"]));
             }
         }
         
@@ -201,17 +101,6 @@ namespace Kenos.Win.Properties {
         public bool ConfirmacionAutomatica {
             get {
                 return ((bool)(this["ConfirmacionAutomatica"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
-            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>KenosAdmin</string>\r\n</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection Administradores {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["Administradores"]));
             }
         }
         
@@ -248,6 +137,105 @@ namespace Kenos.Win.Properties {
         public string TextEnReanudar {
             get {
                 return ((string)(this["TextEnReanudar"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
+  <string>Juez, beep.wav</string>
+  <string>Fiscal, beep.wav</string>
+  <string>Imputado, beep.wav</string>
+  <string>Defensor, beep.wav</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection CasosPrueba {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["CasosPrueba"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsd=\"http://www.w3." +
+            "org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n  <s" +
+            "tring>Kenos.SimpleConnector.Connector,Kenos.SimpleConnector</string>\r\n</ArrayOfS" +
+            "tring>")]
+        public global::System.Collections.Specialized.StringCollection Connectors {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["Connectors"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RegistracionHabilitada {
+            get {
+                return ((bool)(this["RegistracionHabilitada"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ws://localhost:4444")]
+        public string ObsUrl {
+            get {
+                return ((string)(this["ObsUrl"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files\\obs-studio\\bin\\64bit\\")]
+        public string ObsWorkingDirectory {
+            get {
+                return ((string)(this["ObsWorkingDirectory"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("obs64.exe")]
+        public string ObsFileName {
+            get {
+                return ((string)(this["ObsFileName"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("--disable-updater ")]
+        public string ObsArguments {
+            get {
+                return ((string)(this["ObsArguments"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("kenos")]
+        public string ObsProfileName {
+            get {
+                return ((string)(this["ObsProfileName"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Audio")]
+        public string ObsAudioMode {
+            get {
+                return ((string)(this["ObsAudioMode"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Video")]
+        public string ObsVideoMode {
+            get {
+                return ((string)(this["ObsVideoMode"]));
             }
         }
     }
