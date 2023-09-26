@@ -200,7 +200,7 @@ namespace Kenos.Win.OpebBroacasterSoftware
 				while (true)
 				{
 					Thread.Sleep(_keepAliveInterval);
-					if (keepAliveToken.IsCancellationRequested)
+					if (keepAliveToken.IsCancellationRequested || State == ObsStates.Closing)
 					{
 						break;
 					}
@@ -317,8 +317,12 @@ namespace Kenos.Win.OpebBroacasterSoftware
 
 		public void Dispose()
 		{
+			State = ObsStates.Closing;
+
 			if (_obsProcess != null)
-				_obsProcess.Close();
+			{
+				_obsProcess.Kill();
+			}
 
 			if (_wsConnected)
 			{

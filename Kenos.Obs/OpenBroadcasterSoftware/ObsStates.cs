@@ -7,6 +7,7 @@
 		Recording,
 		Paused,
 		Playing,
-		Ready
+		Ready,
+		Closing
 	}
 }

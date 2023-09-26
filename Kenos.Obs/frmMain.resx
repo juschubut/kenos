@@ -123,6 +123,9 @@
   <metadata name="mnuNueva.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>243, 17</value>
   </metadata>
+  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>153, 17</value>
+  </metadata>
   <data name="txtDescripcion.ToolTip" xml:space="preserve">
     <value>Ingrese un text y luego presiones "Enter" o haga click sobre el boton "+" para agregar una marca de tiempo. 
 Las marcas de tiempo son utiles para revisar la grabación con posterioridad y poder avanzar hasta determinados eventos.</value>

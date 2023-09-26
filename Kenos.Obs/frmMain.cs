@@ -1047,19 +1047,21 @@ namespace Kenos.Win
             {
                 Invoke(new MethodInvoker(() =>
                 {
+                    if (!_closing)
+                    {
 
-                    if (args.IsRecordingPaused)
-                        lblGrabando.Text = "Pausado...";
-                    else if (args.IsRecording)
-                        lblGrabando.Text = "Grabando...";
-                    else
-                        lblGrabando.Text = "-";
+                        if (args.IsRecordingPaused)
+                            lblGrabando.Text = "Pausado...";
+                        else if (args.IsRecording)
+                            lblGrabando.Text = "Grabando...";
+                        else
+                            lblGrabando.Text = "-";
 
-                    var ts = TimeSpan.FromMilliseconds(args.RecordingDuration);
+                        var ts = TimeSpan.FromMilliseconds(args.RecordingDuration);
 
-                    if (ts.TotalMilliseconds > 0)
-                        lblDuracion.Text = String.Format("{0:hh}:{0:mm}:{0:ss}", ts);
-
+                        if (ts.TotalMilliseconds > 0)
+                            lblDuracion.Text = String.Format("{0:hh}:{0:mm}:{0:ss}", ts);
+                    }
                 }));
             }
         }
@@ -1252,6 +1254,7 @@ namespace Kenos.Win
             LabelArchivo.ForeColor = Color.White;
             LabelTiempo.ForeColor = Color.White;
             pnlObs.BackColor = Common.Styles.ColorFondoPrimario;
+
             LabelDescripcion.ForeColor = Common.Styles.ColorFuentePrimario;
 
             gvMarcas.BackgroundColor = Common.Styles.ColorFondoSecundario;
