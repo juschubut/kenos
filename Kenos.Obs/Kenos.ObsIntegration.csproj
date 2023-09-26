@@ -103,6 +103,7 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="OpenBroadcasterSoftware\ObsRecordingStatusEventArgs.cs" />
     <Compile Include="OpenBroadcasterSoftware\ObsRecordingStartedEventArgs.cs" />
     <Compile Include="OpenBroadcasterSoftware\ObsLogEventArgs.cs" />
     <Compile Include="OpenBroadcasterSoftware\ObsStates.cs" />

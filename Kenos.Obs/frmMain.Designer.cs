@@ -30,10 +30,10 @@
         {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.lnkTest = new System.Windows.Forms.LinkLabel();
 			this.lnkCancelar = new System.Windows.Forms.LinkLabel();
@@ -76,6 +76,7 @@
 			this.lblDuracion = new System.Windows.Forms.Label();
 			this.pnlBotonera = new System.Windows.Forms.Panel();
 			this.pnlObs = new System.Windows.Forms.Panel();
+			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gvMarcas)).BeginInit();
@@ -84,6 +85,8 @@
 			this.pnlReencodingProgress.SuspendLayout();
 			this.pnlInfo.SuspendLayout();
 			this.pnlBotonera.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+			this.splitContainer1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// panel1
@@ -279,14 +282,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.gvMarcas.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(91)))), ((int)(((byte)(91)))), ((int)(((byte)(93)))));
-			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle5.BackColor = System.Drawing.Color.LightSlateGray;
-			dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.gvMarcas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightSlateGray;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.gvMarcas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.gvMarcas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.gvMarcas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Tiemp,
@@ -294,14 +297,14 @@
 			this.gvMarcas.Location = new System.Drawing.Point(708, 428);
 			this.gvMarcas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.gvMarcas.Name = "gvMarcas";
-			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle8.BackColor = System.Drawing.Color.LightSlateGray;
-			dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
-			dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.gvMarcas.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle4.BackColor = System.Drawing.Color.LightSlateGray;
+			dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+			dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.gvMarcas.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
 			this.gvMarcas.RowHeadersWidth = 62;
 			this.gvMarcas.Size = new System.Drawing.Size(780, 610);
 			this.gvMarcas.TabIndex = 8;
@@ -311,9 +314,9 @@
 			// Tiemp
 			// 
 			this.Tiemp.DataPropertyName = "Tiempo";
-			dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-			dataGridViewCellStyle6.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.Tiemp.DefaultCellStyle = dataGridViewCellStyle6;
+			dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+			dataGridViewCellStyle2.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.Tiemp.DefaultCellStyle = dataGridViewCellStyle2;
 			this.Tiemp.Frozen = true;
 			this.Tiemp.HeaderText = "Tiempo";
 			this.Tiemp.MinimumWidth = 8;
@@ -325,8 +328,8 @@
 			// 
 			this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.Descripcion.DataPropertyName = "Descripcion";
-			dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.Descripcion.DefaultCellStyle = dataGridViewCellStyle7;
+			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.Descripcion.DefaultCellStyle = dataGridViewCellStyle3;
 			this.Descripcion.HeaderText = "Descripción";
 			this.Descripcion.MinimumWidth = 8;
 			this.Descripcion.Name = "Descripcion";
@@ -570,7 +573,7 @@
 			this.lblArchivo.Location = new System.Drawing.Point(147, 57);
 			this.lblArchivo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.lblArchivo.Name = "lblArchivo";
-			this.lblArchivo.Size = new System.Drawing.Size(538, 0);
+			this.lblArchivo.Size = new System.Drawing.Size(629, 39);
 			this.lblArchivo.TabIndex = 5;
 			this.lblArchivo.Text = "-";
 			// 
@@ -649,7 +652,7 @@
 			this.pnlBotonera.Controls.Add(this.lnkPlay);
 			this.pnlBotonera.Controls.Add(this.lnkGrabar);
 			this.pnlBotonera.Controls.Add(this.lblGrabando);
-			this.pnlBotonera.Location = new System.Drawing.Point(701, 126);
+			this.pnlBotonera.Location = new System.Drawing.Point(701, 125);
 			this.pnlBotonera.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.pnlBotonera.Name = "pnlBotonera";
 			this.pnlBotonera.Size = new System.Drawing.Size(787, 72);
@@ -659,7 +662,7 @@
 			// 
 			this.pnlObs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-			this.pnlObs.BackColor = System.Drawing.Color.Navy;
+			this.pnlObs.BackColor = System.Drawing.Color.Black;
 			this.pnlObs.CausesValidation = false;
 			this.pnlObs.Enabled = false;
 			this.pnlObs.Location = new System.Drawing.Point(9, 125);
@@ -667,11 +670,20 @@
 			this.pnlObs.Size = new System.Drawing.Size(692, 913);
 			this.pnlObs.TabIndex = 22;
 			// 
+			// splitContainer1
+			// 
+			this.splitContainer1.Location = new System.Drawing.Point(809, 313);
+			this.splitContainer1.Name = "splitContainer1";
+			this.splitContainer1.Size = new System.Drawing.Size(500, 100);
+			this.splitContainer1.SplitterDistance = 166;
+			this.splitContainer1.TabIndex = 23;
+			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1503, 1050);
+			this.Controls.Add(this.splitContainer1);
 			this.Controls.Add(this.pnlInfo);
 			this.Controls.Add(this.pnlBotonera);
 			this.Controls.Add(this.pnlReencodingProgress);
@@ -704,6 +716,8 @@
 			this.pnlInfo.PerformLayout();
 			this.pnlBotonera.ResumeLayout(false);
 			this.pnlBotonera.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+			this.splitContainer1.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -753,6 +767,7 @@
         private System.Windows.Forms.Panel pnlBotonera;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel pnlObs;
+		private System.Windows.Forms.SplitContainer splitContainer1;
 	}
 }
 

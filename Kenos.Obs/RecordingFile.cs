@@ -12,7 +12,6 @@ namespace Kenos.Win
         private List<FileInfo> _files;
         private long _fileSize;
         private string _baseFileName;
-        private bool _videoReencoding = false;
         #endregion 
 
         #region Propiedades

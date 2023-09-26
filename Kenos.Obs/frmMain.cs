@@ -23,6 +23,7 @@ namespace Kenos.Win
         private FileMonitor _fileMonitor = null;
         private CaptureState _estado = CaptureState.NoSet;
         private RecordingFile _output = null;
+        private bool _closing = false;
 
         private Test.PruebaGrabacion _pruebaGrabacion = null;
         private bool _modoPrueba = false;
@@ -115,6 +116,7 @@ namespace Kenos.Win
             _obs.Initialize(pnlObs);
 
             _obs.OnRecordingStarted += OnRecordingStarted;
+            _obs.OnRecordingStatus += OnRecordingStatus;
             _obs.OnLog += OnLog;
         }
 
@@ -191,6 +193,7 @@ namespace Kenos.Win
                 e.Cancel = true;
                 return;
             }
+            _closing = true;
 
             _obs.Dispose();
 
@@ -900,9 +903,7 @@ namespace Kenos.Win
             lnkGrabar.Enabled = _estado == CaptureState.Initialized && _pruebaGrabacionRealizada;
             lnkPausar.Enabled = _estado == CaptureState.Started && !_modoPrueba;
 
-            //TODO ver estado de grabacion 
-            //lnkParar.Enabled = (_estado == CaptureState.Started && !_modoPrueba) || videoGrabber.CurrentState == TCurrentState.cs_Playback;
-            lnkParar.Enabled = false;
+            lnkParar.Enabled = (_estado == CaptureState.Started && !_modoPrueba) || _obs.State == ObsStates.Playing;
 
             lnkPlay.Enabled = _estado == CaptureState.Completed;
             lnkFinalizar.Enabled = _estado == CaptureState.Completed;
@@ -1038,23 +1039,51 @@ namespace Kenos.Win
         }
         #endregion
 
+
+
+        private void OnRecordingStatus(object sender, OpenBroadcasterSoftware.ObsRecordingStatusEventArgs args)
+        {
+            if (!_closing)
+            {
+                Invoke(new MethodInvoker(() =>
+                {
+
+                    if (args.IsRecordingPaused)
+                        lblGrabando.Text = "Pausado...";
+                    else if (args.IsRecording)
+                        lblGrabando.Text = "Grabando...";
+                    else
+                        lblGrabando.Text = "-";
+
+                    var ts = TimeSpan.FromMilliseconds(args.RecordingDuration);
+
+                    if (ts.TotalMilliseconds > 0)
+                        lblDuracion.Text = String.Format("{0:hh}:{0:mm}:{0:ss}", ts);
+
+                }));
+            }
+        }
+
         private void OnRecordingStarted(object sender, EventArgs args)
         {
-            lblGrabando.Text = "Grabando...";
+            Invoke(new MethodInvoker(() =>
+            {
+                lblGrabando.Text = "Grabando...";
 
-            _output = new RecordingFile(_obs.RecordingFileName);
-            lblArchivo.Text = _obs.RecordingFileName;
-            _estado = CaptureState.Started;
-            _fileMonitor = new FileMonitor(_obs.RecordingFileName);
-            Grabando(true);
+                _output = new RecordingFile(_obs.RecordingFileName);
+                lblArchivo.Text = _obs.RecordingFileName;
+                _estado = CaptureState.Started;
+                _fileMonitor = new FileMonitor(_obs.RecordingFileName);
+                Grabando(true);
 
-            HabilitarForm();
+                HabilitarForm();
 
-            if (!string.IsNullOrEmpty(Properties.Settings.Default.TextoEnInicio))
-                AgregarMarca(string.Format(Properties.Settings.Default.TextoEnInicio, DateTime.Now));
+                if (!string.IsNullOrEmpty(Properties.Settings.Default.TextoEnInicio))
+                    AgregarMarca(string.Format(Properties.Settings.Default.TextoEnInicio, DateTime.Now));
 
-            MostrarAlerta(false);
-            timerRecording.Start();
+                MostrarAlerta(false);
+                timerRecording.Start();
+            }));
         }
 
         private void gvMarcas_SelectionChanged(object sender, EventArgs e)

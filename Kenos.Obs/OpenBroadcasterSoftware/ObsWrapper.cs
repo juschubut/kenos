@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Kenos.Win.OpebBroacasterSoftware
@@ -16,13 +17,17 @@ namespace Kenos.Win.OpebBroacasterSoftware
 		private Process _obsProcess;
 		private OBSWebsocket _obsWebsocket;
 		private bool _wsConnected = false;
+		private CancellationTokenSource _keepAliveTokenSource;
+		private readonly int _keepAliveInterval = 500;
 
 		public string RecordingFileName { get; set; }
 		public ObsStates State { get; private set; } = ObsStates.NotSet;
 
-		//TODO ver cuando lanzar
 		public delegate void OnRecordingStartedDelegate(object sender, ObsRecordingStartedEventArgs args);
 		public event OnRecordingStartedDelegate OnRecordingStarted;
+
+		public delegate void OnRecordingStatusDelegate(object sender, ObsRecordingStatusEventArgs args);
+		public event OnRecordingStatusDelegate OnRecordingStatus;
 
 		public delegate void OnLogDelegate(object sender, ObsLogEventArgs args);
 		public event OnLogDelegate OnLog;
@@ -33,7 +38,8 @@ namespace Kenos.Win.OpebBroacasterSoftware
 
 		public void Stop()
 		{
-
+			_obsWebsocket.StopRecord();
+			State = ObsStates.Ready;
 		}
 
 		public bool Configure(CaptureConfig extraConfig)
@@ -42,8 +48,6 @@ namespace Kenos.Win.OpebBroacasterSoftware
 
 			_obsWebsocket.SetCurrentProgramScene(scene);
 			_obsWebsocket.SetProfileParameter("SimpleOutput", "FilePath", Properties.Settings.Default.PathGrabacion);
-
-
 
 			return true;
 		}
@@ -141,6 +145,11 @@ namespace Kenos.Win.OpebBroacasterSoftware
 					});
 				}
 			}
+			else if (!e.OutputState.IsActive)
+			{
+				State = ObsStates.Ready;
+			}
+
 		}
 
 		private void Websocket_Disconnected(object sender, OBSWebsocketDotNet.Communication.ObsDisconnectionInfo e)
@@ -152,6 +161,15 @@ namespace Kenos.Win.OpebBroacasterSoftware
 		{
 			_wsConnected = true;
 			ConfigureObs();
+
+			Ready();
+		}
+
+		private void Ready()
+		{
+			State = ObsStates.Ready;
+			if (OnReady != null)
+				OnReady(this, new EventArgs());
 		}
 
 		private void ConfigureObs()
@@ -174,8 +192,34 @@ namespace Kenos.Win.OpebBroacasterSoftware
 
 			_obsWebsocket.SetCurrentProfile(profileName);
 
-			if (OnReady != null)
-				OnReady(this, new EventArgs());
+			// Status 
+			_keepAliveTokenSource = new CancellationTokenSource();
+			CancellationToken keepAliveToken = _keepAliveTokenSource.Token;
+			Task statPollKeepAlive = Task.Factory.StartNew(() =>
+			{
+				while (true)
+				{
+					Thread.Sleep(_keepAliveInterval);
+					if (keepAliveToken.IsCancellationRequested)
+					{
+						break;
+					}
+
+					if (OnRecordingStatus != null)
+					{
+						var stats = _obsWebsocket.GetRecordStatus();
+
+						OnRecordingStatus(this, new ObsRecordingStatusEventArgs
+						{
+							IsRecording = stats.IsRecording,
+							IsRecordingPaused = stats.IsRecordingPaused,
+							RecordingDuration = stats.RecordingDuration,
+							RecordingBytes = stats.RecordingBytes
+						});
+					}
+
+				}
+			}, keepAliveToken, TaskCreationOptions.LongRunning, TaskScheduler.Default);
 		}
 
 		private void PreviewPanel_Resize(object sender, EventArgs e)
@@ -275,6 +319,14 @@ namespace Kenos.Win.OpebBroacasterSoftware
 		{
 			if (_obsProcess != null)
 				_obsProcess.Close();
+
+			if (_wsConnected)
+			{
+				_keepAliveTokenSource.Cancel();
+
+				_obsWebsocket.Disconnect();
+				_wsConnected = false;
+			}
 		}
 
 		private string GetScene(ModosGrabacion modo)

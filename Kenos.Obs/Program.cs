@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.DirectoryServices.AccountManagement;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -52,7 +53,26 @@ namespace Kenos.Win
 
 			var processes = Process.GetProcesses();
 
-			var obs = processes.Where(x => x.ProcessName.Contains("obs")).ToList();
+			var obsProcessName = Path.GetFileNameWithoutExtension(Properties.Settings.Default.ObsFileName);
+			var obs = processes.Where(x => x.ProcessName.Equals(obsProcessName, StringComparison.InvariantCultureIgnoreCase)).ToList();
+
+			if (obs.Any())
+			{
+				var dialog = MessageBox.Show("La aplicacion OBS se encuentra activa. Para poder correr kenos debe cerrarla. ¿Desea cerrarla y continuar con kenos?", "Kenos", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+
+				if (dialog == DialogResult.Yes)
+				{
+					obs.ForEach(x =>
+					{
+						x.Kill();
+					});
+
+					return false;
+				}
+				else
+					return true;
+			}
+
 
 			return false;
 		}

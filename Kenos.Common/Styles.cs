@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Kenos.Common
+﻿namespace Kenos.Common
 {
     public class Styles
     {
-        public static System.Drawing.Color ColorFondoTerciario { get { return System.Drawing.Color.FromArgb(50, 68, 80); } }
+        public static System.Drawing.Color ColorFondoTerciario { get { return System.Drawing.Color.FromArgb(25, 27, 38); } }
 
         public static System.Drawing.Color ColorFondoSecundario { get { return System.Drawing.Color.FromArgb(194, 195, 201); } }
 
