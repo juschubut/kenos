@@ -52,7 +52,7 @@ namespace Kenos.Win
 			try
 			{
 				// Remueve los bordes 
-				SetWindowLong(process.MainWindowHandle, GWL_STYLE, WS_VISIBLE);
+				//		SetWindowLong(process.MainWindowHandle, GWL_STYLE, WS_VISIBLE);
 			}
 			catch { }
 		}

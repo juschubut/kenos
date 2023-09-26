@@ -79,7 +79,7 @@ namespace Kenos.Win.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("audio")]
+        [global::System.Configuration.DefaultSettingValueAttribute("video")]
         public string ModoGrabacionPredeterminado {
             get {
                 return ((string)(this["ModoGrabacionPredeterminado"]));

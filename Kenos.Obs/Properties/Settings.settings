@@ -21,7 +21,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ModoGrabacionPredeterminado" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">audio</Value>
+      <Value Profile="(Default)">video</Value>
     </Setting>
     <Setting Name="RegistracionUrl" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://apprw/kenos/registrar</Value>

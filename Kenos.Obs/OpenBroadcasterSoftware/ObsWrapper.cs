@@ -42,6 +42,12 @@ namespace Kenos.Win.OpebBroacasterSoftware
 			State = ObsStates.Ready;
 		}
 
+		public void Pause()
+		{
+			_obsWebsocket.PauseRecord();
+			State = ObsStates.Paused;
+		}
+
 		public bool Configure(CaptureConfig extraConfig)
 		{
 			var scene = GetScene(extraConfig.Video);
@@ -344,6 +350,14 @@ namespace Kenos.Win.OpebBroacasterSoftware
 				return Properties.Settings.Default.ObsVideoMode;
 			else
 				return Properties.Settings.Default.ObsAudioMode;
+		}
+
+		public void Resume()
+		{
+			if (State == ObsStates.Paused)
+				_obsWebsocket.ResumeRecord();
+			else
+				_obsWebsocket.StartRecord();
 		}
 	}
 }

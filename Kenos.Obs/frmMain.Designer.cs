@@ -30,10 +30,10 @@
         {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.lnkTest = new System.Windows.Forms.LinkLabel();
 			this.lnkCancelar = new System.Windows.Forms.LinkLabel();
@@ -77,6 +77,7 @@
 			this.pnlBotonera = new System.Windows.Forms.Panel();
 			this.pnlObs = new System.Windows.Forms.Panel();
 			this.splitContainer = new System.Windows.Forms.SplitContainer();
+			this.wmpPlayer = new AxWMPLib.AxWindowsMediaPlayer();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gvMarcas)).BeginInit();
@@ -89,6 +90,7 @@
 			this.splitContainer.Panel1.SuspendLayout();
 			this.splitContainer.Panel2.SuspendLayout();
 			this.splitContainer.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.wmpPlayer)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// panel1
@@ -284,14 +286,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.gvMarcas.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(91)))), ((int)(((byte)(91)))), ((int)(((byte)(93)))));
-			dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle17.BackColor = System.Drawing.Color.LightSlateGray;
-			dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle17.ForeColor = System.Drawing.Color.White;
-			dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.gvMarcas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
+			dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle29.BackColor = System.Drawing.Color.LightSlateGray;
+			dataGridViewCellStyle29.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle29.ForeColor = System.Drawing.Color.White;
+			dataGridViewCellStyle29.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle29.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.gvMarcas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle29;
 			this.gvMarcas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.gvMarcas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Tiemp,
@@ -299,14 +301,14 @@
 			this.gvMarcas.Location = new System.Drawing.Point(11, 308);
 			this.gvMarcas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.gvMarcas.Name = "gvMarcas";
-			dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle20.BackColor = System.Drawing.Color.LightSlateGray;
-			dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle20.ForeColor = System.Drawing.Color.White;
-			dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.gvMarcas.RowHeadersDefaultCellStyle = dataGridViewCellStyle20;
+			dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle32.BackColor = System.Drawing.Color.LightSlateGray;
+			dataGridViewCellStyle32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle32.ForeColor = System.Drawing.Color.White;
+			dataGridViewCellStyle32.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle32.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.gvMarcas.RowHeadersDefaultCellStyle = dataGridViewCellStyle32;
 			this.gvMarcas.RowHeadersWidth = 62;
 			this.gvMarcas.Size = new System.Drawing.Size(767, 656);
 			this.gvMarcas.TabIndex = 8;
@@ -316,9 +318,9 @@
 			// Tiemp
 			// 
 			this.Tiemp.DataPropertyName = "Tiempo";
-			dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-			dataGridViewCellStyle18.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.Tiemp.DefaultCellStyle = dataGridViewCellStyle18;
+			dataGridViewCellStyle30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+			dataGridViewCellStyle30.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.Tiemp.DefaultCellStyle = dataGridViewCellStyle30;
 			this.Tiemp.Frozen = true;
 			this.Tiemp.HeaderText = "Tiempo";
 			this.Tiemp.MinimumWidth = 8;
@@ -330,8 +332,8 @@
 			// 
 			this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.Descripcion.DataPropertyName = "Descripcion";
-			dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.Descripcion.DefaultCellStyle = dataGridViewCellStyle19;
+			dataGridViewCellStyle31.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.Descripcion.DefaultCellStyle = dataGridViewCellStyle31;
 			this.Descripcion.HeaderText = "Descripción";
 			this.Descripcion.MinimumWidth = 8;
 			this.Descripcion.Name = "Descripcion";
@@ -470,14 +472,14 @@
 			// 
 			// pnlProbando
 			// 
-			this.pnlProbando.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.pnlProbando.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.pnlProbando.BackColor = System.Drawing.Color.YellowGreen;
 			this.pnlProbando.Controls.Add(this.lblProbando);
-			this.pnlProbando.Location = new System.Drawing.Point(3, 38);
+			this.pnlProbando.Location = new System.Drawing.Point(0, 897);
 			this.pnlProbando.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.pnlProbando.Name = "pnlProbando";
-			this.pnlProbando.Size = new System.Drawing.Size(697, 92);
+			this.pnlProbando.Size = new System.Drawing.Size(704, 67);
 			this.pnlProbando.TabIndex = 16;
 			this.pnlProbando.Visible = false;
 			// 
@@ -486,10 +488,10 @@
 			this.lblProbando.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.lblProbando.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblProbando.Location = new System.Drawing.Point(4, 6);
+			this.lblProbando.Location = new System.Drawing.Point(4, 4);
 			this.lblProbando.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.lblProbando.Name = "lblProbando";
-			this.lblProbando.Size = new System.Drawing.Size(688, 80);
+			this.lblProbando.Size = new System.Drawing.Size(695, 60);
 			this.lblProbando.TabIndex = 0;
 			this.lblProbando.Text = "Pruebe que el sonido de cada micrófono se escuche correctamente. Luego presione e" +
     "l botón \"Confirmar\" para finalizar la prueba de grabación.";
@@ -672,9 +674,9 @@
 			this.pnlObs.BackColor = System.Drawing.Color.Black;
 			this.pnlObs.CausesValidation = false;
 			this.pnlObs.Enabled = false;
-			this.pnlObs.Location = new System.Drawing.Point(2, 2);
+			this.pnlObs.Location = new System.Drawing.Point(0, 2);
 			this.pnlObs.Name = "pnlObs";
-			this.pnlObs.Size = new System.Drawing.Size(702, 962);
+			this.pnlObs.Size = new System.Drawing.Size(704, 962);
 			this.pnlObs.TabIndex = 22;
 			// 
 			// splitContainer
@@ -688,8 +690,10 @@
 			// splitContainer.Panel1
 			// 
 			this.splitContainer.Panel1.Controls.Add(this.pnlProbando);
+			this.splitContainer.Panel1.Controls.Add(this.wmpPlayer);
 			this.splitContainer.Panel1.Controls.Add(this.pnlObs);
 			this.splitContainer.Panel1.Controls.Add(this.pnlReencodingProgress);
+			this.splitContainer.Panel1.SizeChanged += new System.EventHandler(this.splitContainer_Panel1_SizeChanged);
 			this.splitContainer.Panel1MinSize = 470;
 			// 
 			// splitContainer.Panel2
@@ -703,6 +707,18 @@
 			this.splitContainer.Size = new System.Drawing.Size(1492, 965);
 			this.splitContainer.SplitterDistance = 704;
 			this.splitContainer.TabIndex = 23;
+			// 
+			// wmpPlayer
+			// 
+			this.wmpPlayer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.wmpPlayer.Enabled = true;
+			this.wmpPlayer.Location = new System.Drawing.Point(462, 35);
+			this.wmpPlayer.Name = "wmpPlayer";
+			this.wmpPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("wmpPlayer.OcxState")));
+			this.wmpPlayer.Size = new System.Drawing.Size(201, 289);
+			this.wmpPlayer.TabIndex = 23;
 			// 
 			// frmMain
 			// 
@@ -738,6 +754,7 @@
 			this.splitContainer.Panel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
 			this.splitContainer.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.wmpPlayer)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -787,6 +804,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel pnlObs;
 		private System.Windows.Forms.SplitContainer splitContainer;
+		private AxWMPLib.AxWindowsMediaPlayer wmpPlayer;
 	}
 }
 

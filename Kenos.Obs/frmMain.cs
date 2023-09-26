@@ -25,6 +25,7 @@ namespace Kenos.Win
         private RecordingFile _output = null;
         private bool _closing = false;
 
+        private bool _modoReproduccion = false;
         private Test.PruebaGrabacion _pruebaGrabacion = null;
         private bool _modoPrueba = false;
         private bool _pruebaGrabacionRealizada = false;
@@ -52,16 +53,10 @@ namespace Kenos.Win
             Log("******************* Kenos Iniciado *******************");
             LogKenosInformation();
 
-            Common.ModosGrabacion modo = Common.ModosGrabacion.Video;
-
-            if (Properties.Settings.Default.ModoGrabacionPredeterminado.Equals("audio", StringComparison.InvariantCultureIgnoreCase))
-                modo = Common.ModosGrabacion.Audio;
-
-            ModoGrabacion(modo);
-
             ResetGrabacion();
 
             ConfigurarForm();
+            Probando(false);
 
             _dtMarcaTiempo = CreateDataSourceMarcaTiempo();
 
@@ -117,7 +112,32 @@ namespace Kenos.Win
 
             _obs.OnRecordingStarted += OnRecordingStarted;
             _obs.OnRecordingStatus += OnRecordingStatus;
+            _obs.OnReady += OnReady;
             _obs.OnLog += OnLog;
+
+            /*
+
+            _modoReproduccion = true;
+            wmpPlayer.URL = "C:\\Temp\\2023-09-26 07-20-26.mp4";
+            wmpPlayer.Ctlcontrols.play();
+            ConfigurarForm();*/
+
+
+        }
+
+        private void OnReady(object sender, EventArgs args)
+        {
+            Common.ModosGrabacion modo = Common.ModosGrabacion.Video;
+
+            if (Properties.Settings.Default.ModoGrabacionPredeterminado.Equals("audio", StringComparison.InvariantCultureIgnoreCase))
+                modo = Common.ModosGrabacion.Audio;
+
+            Invoke(new MethodInvoker(() =>
+            {
+                ModoGrabacion(modo);
+
+                ConfigurarForm();
+            }));
         }
 
         private void OnLog(object sender, OpenBroadcasterSoftware.ObsLogEventArgs args)
@@ -148,7 +168,8 @@ namespace Kenos.Win
             lblProbando.Font = new Font(lblProbando.Font.FontFamily, 10);
             lblProbando.Text = "Pruebe que el sonido de cada micrófono se escuche correctamente. Luego presione el botón \"Confirmar\" para finalizar la prueba de grabación";
 
-            lnkPlay.Visible = true;
+            _modoReproduccion = true;
+            ConfigurarForm();
         }
 
         private void PruebaGrabacion_Iniciando(object sender, EventArgs e)
@@ -333,7 +354,7 @@ namespace Kenos.Win
             rdVideo.Checked = modo == Common.ModosGrabacion.Video;
             rdAudio.Checked = modo == Common.ModosGrabacion.Audio;
 
-            _obs.SetRecordingMode(Common.ModosGrabacion.Video);
+            _obs.SetRecordingMode(modo);
         }
 
         private bool IniciarGrabacion()
@@ -499,7 +520,7 @@ namespace Kenos.Win
                 Log("...... Archivo: " + _metadata.FullFileName);
                 Log("...... Descripción: " + _metadata.Descripcion);
 
-                HabilitarForm();
+                ConfigurarForm();
 
                 if (Path.GetExtension(_metadata.FullFileName).Equals(".wmv", StringComparison.InvariantCultureIgnoreCase))
                     rdVideo.Checked = true;
@@ -569,7 +590,7 @@ namespace Kenos.Win
 
                     UnirArchivos();
 
-                    HabilitarForm();
+                    ConfigurarForm();
                 }
                 else if (_obs.State == ObsStates.Playing)
                 {
@@ -593,11 +614,11 @@ namespace Kenos.Win
 
             _estado = CaptureState.Paused;
 
-            _obs.Stop();
+            _obs.Pause();
 
             _marcaTiempoInicial = _marcaTiempoActual;
 
-            CrearNuevoArchivo();
+            //CrearNuevoArchivo();
 
             lnkPausar.Visible = false;
             lnkResume.Visible = true;
@@ -622,27 +643,17 @@ namespace Kenos.Win
         /// <param name="posicionInicio">Segundos donde se desea iniciar</param>
         private void Reproducir(long posicionInicio)
         {
-            //TODO ver reproduccion de grabacion 
+            wmpPlayer.URL = _obs.RecordingFileName;
+            wmpPlayer.Ctlcontrols.play();
 
-
-
-            HabilitarForm();
+            ConfigurarForm();
         }
 
         private void ContinuarGrabacion()
         {
             Log("Continuando Grabación...");
 
-            if (rdVideo.Checked)
-            {
-                //TODO iniciar grabacion video 
-                Log("Grabación de audio y video");
-            }
-            else
-            {
-                //TODO iniciar grabacion de audio 
-                Log("Grabación de audio");
-            }
+            _obs.Resume();
 
             _estado = CaptureState.Started;
             lnkResume.Visible = false;
@@ -802,7 +813,7 @@ namespace Kenos.Win
                 }
             }
 
-            HabilitarForm();
+            ConfigurarForm();
 
             lblDuracion.Text = "00:00:00";
             lblTamanio.Text = "0MB";
@@ -897,7 +908,7 @@ namespace Kenos.Win
             }
         }
 
-        private void HabilitarForm()
+        private void ConfigurarForm()
         {
             lnkNueva.Enabled = _estado == CaptureState.Initialized || _estado == CaptureState.NoSet;
             lnkGrabar.Enabled = _estado == CaptureState.Initialized && _pruebaGrabacionRealizada;
@@ -940,12 +951,21 @@ namespace Kenos.Win
             pnlBotonera.BackColor = Kenos.Common.Styles.ColorFondoTerciario;
             lblGrabando.Visible = _estado == CaptureState.Started;
             lblGrabando.ForeColor = Color.Red;
-        }
 
-        private void ConfigurarForm()
-        {
-            lnkResume.Visible = false;
-            lnkParar.Visible = true;
+            if (_modoReproduccion)
+            {
+                lnkResume.Visible = false;
+                lnkParar.Visible = false;
+                lnkPlay.Visible = true;
+                wmpPlayer.Visible = true;
+                pnlObs.Visible = false;
+            }
+            else
+            {
+                lnkPlay.Visible = false;
+                wmpPlayer.Visible = false;
+                pnlObs.Visible = true;
+            }
         }
 
         private void Probando(bool probando)
@@ -1078,7 +1098,7 @@ namespace Kenos.Win
                 _fileMonitor = new FileMonitor(_obs.RecordingFileName);
                 Grabando(true);
 
-                HabilitarForm();
+                ConfigurarForm();
 
                 if (!string.IsNullOrEmpty(Properties.Settings.Default.TextoEnInicio))
                     AgregarMarca(string.Format(Properties.Settings.Default.TextoEnInicio, DateTime.Now));
@@ -1225,9 +1245,14 @@ namespace Kenos.Win
                 result = MessageBox.Show(this, "Si cancela la grabación se perderán todos los datos (audio/video/eventos) registrados hasta el momento \n¿Está seguro que desea cancelar la grabación?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
 
             if (result == DialogResult.Yes)
+            {
+                _modoReproduccion = false;
+
                 CancelarGrabacion();
+            }
             else
                 Log("Click en boton Cancelar - Sin efecto");
+
         }
 
         private void lnkFinalizar_MouseClick(object sender, MouseEventArgs e)
@@ -1235,7 +1260,10 @@ namespace Kenos.Win
             Log("Click en boton Confirmar");
 
             if (_estado == CaptureState.Completed)
+            {
+                _modoReproduccion = false;
                 Finalizar();
+            }
             else
                 MessageBox.Show(this, "No existe ninguna grabación iniciada", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
@@ -1318,6 +1346,18 @@ namespace Kenos.Win
             {
                 Logger.Log.Error(new Exception("Error guardando archivo de prueba de grabación", ex));
             }
+        }
+
+        private void splitContainer_Panel1_SizeChanged(object sender, EventArgs e)
+        {
+            var h = splitContainer.Panel1.Height;
+            var w = splitContainer.Panel1.Width;
+            var top = 23;
+
+            wmpPlayer.Height = h - top;
+            wmpPlayer.Width = w;
+            wmpPlayer.Left = 0;
+            wmpPlayer.Top = top;
         }
     }
 }
