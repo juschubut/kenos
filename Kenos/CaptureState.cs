@@ -5,7 +5,7 @@ namespace Kenos
 	[Flags]
 	public enum CaptureState
 	{
-		NoSet = 0,
+		NotSet = 0,
 		Initialized = 1,
 		Recording = 2,
 		Paused = 4,

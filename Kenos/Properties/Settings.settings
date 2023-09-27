@@ -2,12 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Kenos.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ObsVideoMode" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">video</Value>
-    </Setting>
-    <Setting Name="ObsAudioMode" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">audio</Value>
-    </Setting>
     <Setting Name="ObsProfileName" Type="System.String" Scope="Application">
       <Value Profile="(Default)">kenos</Value>
     </Setting>

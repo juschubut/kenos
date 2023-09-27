@@ -1,5 +1,4 @@
-﻿using Kenos.Common;
-using OBSWebsocketDotNet;
+﻿using OBSWebsocketDotNet;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,7 +18,6 @@ namespace Kenos.OpenBroadcasterSoftware
 		private bool _wsConnected = false;
 		private CancellationTokenSource _keepAliveTokenSource;
 		private readonly int _keepAliveInterval = 500;
-		private List<string> _scenes = null;
 
 		public string RecordingFileName { get; set; }
 		public ObsStates State { get; private set; } = ObsStates.NotSet;
@@ -49,11 +47,8 @@ namespace Kenos.OpenBroadcasterSoftware
 			State = ObsStates.Paused;
 		}
 
-		public bool Configure(CaptureConfig extraConfig)
+		public bool Configure()
 		{
-			var scene = GetScene(extraConfig.Video);
-
-			_obsWebsocket.SetCurrentProgramScene(scene);
 			_obsWebsocket.SetProfileParameter("SimpleOutput", "FilePath", Properties.Settings.Default.PathGrabacion);
 
 			return true;
@@ -256,7 +251,7 @@ namespace Kenos.OpenBroadcasterSoftware
 				});
 		}
 
-		public bool ValidateConfig(CaptureConfig extraConfig)
+		public bool ValidateConfig()
 		{
 			if (!_wsConnected)
 			{
@@ -279,17 +274,9 @@ namespace Kenos.OpenBroadcasterSoftware
 
 			var scences = _obsWebsocket.ListScenes();
 
-			if (scences == null)
+			if (scences.Count == 0)
 			{
-				MessageBox.Show($"Configuración inválida de audio y video en OBS", "Kenos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-				return false;
-			}
-
-			var scene = GetScene(extraConfig.Video);
-
-			if (!scences.Any(x => x.Name.Equals(scene, StringComparison.InvariantCultureIgnoreCase)))
-			{
-				MessageBox.Show($"Configuración inválida para \"{scene}\"", "Kenos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				MessageBox.Show($"Configuración de escenas inválida en OBS", "Kenos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return false;
 			}
 
@@ -313,13 +300,10 @@ namespace Kenos.OpenBroadcasterSoftware
 			return false;
 		}
 
-		public void SetRecordingMode(ModosGrabacion modo)
+		public void SetRecordingMode(string modo)
 		{
 			if (_wsConnected)
-			{
-				var scene = GetScene(modo);
-				_obsWebsocket.SetCurrentProgramScene(scene);
-			}
+				_obsWebsocket.SetCurrentProgramScene(modo);
 		}
 
 		public void Dispose()
@@ -340,38 +324,17 @@ namespace Kenos.OpenBroadcasterSoftware
 			}
 		}
 
-		private string GetScene(ModosGrabacion modo)
-		{
-			return GetScene(modo == ModosGrabacion.Video);
-		}
-
-		private string GetScene(bool video)
-		{
-			if (_scenes == null)
-				_scenes = _obsWebsocket.GetSceneList().Scenes.Select(x => x.Name).ToList();
-
-			var scene = "";
-			if (video)
-				scene = Properties.Settings.Default.ObsVideoMode;
-			else
-				scene = Properties.Settings.Default.ObsAudioMode;
-
-			var obsScene = _scenes.FirstOrDefault(x => x.Equals(scene, StringComparison.InvariantCultureIgnoreCase));
-
-			if (obsScene == null)
-			{
-				MessageBox.Show($"No se encontró la configuracion para {scene} en OBS.", "Kenos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-			}
-
-			return obsScene;
-		}
-
 		public void Resume()
 		{
 			if (State == ObsStates.Paused)
 				_obsWebsocket.ResumeRecord();
 			else
 				_obsWebsocket.StartRecord();
+		}
+
+		public List<string> GetRecordingModes()
+		{
+			return _obsWebsocket.GetSceneList().Scenes.Select(x => x.Name).ToList();
 		}
 	}
 }

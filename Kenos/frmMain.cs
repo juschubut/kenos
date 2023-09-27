@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 /**
@@ -17,7 +18,6 @@ namespace Kenos
     public partial class frmMain : Form
     {
         private ObsWrapper _obs = new ObsWrapper();
-
 
         private Common.IConnector _connector;
         private Common.Metadata _metadata;
@@ -112,20 +112,33 @@ namespace Kenos
 
         private void OnReady(object sender, EventArgs args)
         {
-            Common.ModosGrabacion modo = Common.ModosGrabacion.Video;
-
-            if (Properties.Settings.Default.ModoGrabacionPredeterminado.Equals("audio", StringComparison.InvariantCultureIgnoreCase))
-                modo = Common.ModosGrabacion.Audio;
-
             Invoke(new MethodInvoker(() =>
             {
-                ModoGrabacion(modo);
-
+                CargarModosGrabacion();
                 ConfigurarForm();
             }));
         }
 
-        private void OnLog(object sender, OpenBroadcasterSoftware.ObsLogEventArgs args)
+        private void CargarModosGrabacion()
+        {
+            var modos = _obs.GetRecordingModes();
+
+            cboModo.Items.Clear();
+            cboModo.Items.AddRange(modos.ToArray<object>());
+
+            if (!string.IsNullOrEmpty(Properties.Settings.Default.ModoGrabacionPredeterminado))
+            {
+                var modo = modos.FirstOrDefault(x => x.Equals(Properties.Settings.Default.ModoGrabacionPredeterminado, StringComparison.InvariantCultureIgnoreCase));
+
+                cboModo.SelectedItem = modo;
+            }
+            else if (modos.Count > 0)
+            {
+                cboModo.SelectedIndex = 0;
+            }
+        }
+
+        private void OnLog(object sender, ObsLogEventArgs args)
         {
             if (args.IsError)
             {
@@ -160,6 +173,8 @@ namespace Kenos
         private void PruebaGrabacion_Iniciando(object sender, EventArgs e)
         {
             Probando(true);
+
+            _pruebaGrabacion.Verificada = false;
 
             if (!IniciarGrabacion())
             {
@@ -319,89 +334,71 @@ namespace Kenos
         {
             ConfigurarForm();
         }
-
-        private void rdAudio_Click(object sender, EventArgs e)
-        {
-            Log("Seleccion de grabacion de audio");
-            _obs.SetRecordingMode(Common.ModosGrabacion.Audio);
-        }
-
-        private void rdVideo_Click(object sender, EventArgs e)
-        {
-            Log("Seleccion de grabacion de video");
-            _obs.SetRecordingMode(Common.ModosGrabacion.Video);
-        }
         #endregion
 
         #region Metodos
-        private void ModoGrabacion(Common.ModosGrabacion modo)
-        {
-            rdVideo.Checked = modo == Common.ModosGrabacion.Video;
-            rdAudio.Checked = modo == Common.ModosGrabacion.Audio;
-
-            _obs.SetRecordingMode(modo);
-        }
-
         private bool IniciarGrabacion()
         {
+            bool isOk = true;
+
             Log("Iniciando grabación");
 
             Logger.Log.IncreaseLogIndentation();
 
             try
             {
-                CaptureConfig extraConfig = new CaptureConfig();
-
                 _marcaTiempoActual = new TimeSpan();
                 _marcaTiempoInicial = new TimeSpan();
 
-                extraConfig.Video = rdVideo.Checked;
-                extraConfig.Etiqueta = _metadata?.Etiqueta;
-
-                if (!_obs.ValidateConfig(extraConfig))
+                if (!_obs.ValidateConfig())
                 {
                     Log("Grabación suspendida por configuracion inválida");
 
-                    return false;
+                    isOk = false;
                 }
 
-                if (_metadata != null)
+                if (isOk)
                 {
-                    Log("Metadata:");
-                    Log(_metadata.ToString());
+                    if (_metadata != null)
+                    {
+                        Log("Metadata:");
+                        Log(_metadata.ToString());
+                    }
+
+                    _dtMarcaTiempo.Clear();
+
+                    isOk = _obs.Configure();
                 }
 
-                _dtMarcaTiempo.Clear();
+                if (isOk)
+                {
 
-                var result = _obs.Configure(extraConfig);
+                    lblArchivo.Text = _obs.RecordingFileName;
 
-                if (!result)
-                    return false;
+                    gvMarcas.AutoGenerateColumns = false;
+                    gvMarcas.DataSource = _dtMarcaTiempo;
 
+                    if (_metadata != null)
+                        _metadata.FullFileName = _obs.RecordingFileName;
 
-                lblArchivo.Text = _obs.RecordingFileName;
-
-                gvMarcas.AutoGenerateColumns = false;
-                gvMarcas.DataSource = _dtMarcaTiempo;
-
-                if (_metadata != null)
-                    _metadata.FullFileName = _obs.RecordingFileName;
-
-                _obs.StartRecording();
-                Log(extraConfig.Video ? "Grabación de audio y video" : "Grabación de audio");
-
-                return true;
+                    _obs.StartRecording();
+                    Log("Grabación Iniciada");
+                }
             }
             catch (Exception ex)
             {
-                Logger.Log.Error(ex);
+                isOk = false;
 
-                return false;
+                Logger.Log.Error(ex);
             }
             finally
             {
                 Logger.Log.DecreaseLogIndentation();
             }
+
+            ConfigurarForm();
+
+            return isOk;
         }
 
         private void NuevaGrabacion()
@@ -443,20 +440,9 @@ namespace Kenos
                     return;
                 }
 
-                if (metadata.ForzarModoGrabacion)
-                {
-                    ModoGrabacion(metadata.ModoGrabacion);
-                    rdAudio.Enabled = false;
-                    rdVideo.Enabled = false;
-                }
-
-                string extension = rdVideo.Checked ? "wmv" : "mp3";
-
                 lnkTest.Enabled = true;
 
-                metadata.FullFileName = string.Format("{0}{1}.{2}", Properties.Settings.Default.PathGrabacion, Guid.NewGuid(), extension);
-
-                Log("Archivo donde se realiza grabación {0}", metadata.FullFileName);
+                Log("Path donde se realiza grabación {0}", Properties.Settings.Default.PathGrabacion);
 
                 ResetGrabacion();
 
@@ -482,12 +468,7 @@ namespace Kenos
 
                 ConfigurarForm();
 
-                if (Path.GetExtension(_metadata.FullFileName).Equals(".wmv", StringComparison.InvariantCultureIgnoreCase))
-                    rdVideo.Checked = true;
-                else
-                    rdAudio.Checked = true;
-
-                if (!_pruebaGrabacionRealizada)
+                if (!_pruebaGrabacion.Realizada)
                 {
                     MessageBox.Show(this, "Debe realizar la prueba de grabación antes de comenzar a grabar", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -537,8 +518,6 @@ namespace Kenos
                 if (_obs.State == ObsStates.Recording || _obs.State == ObsStates.Paused)
                 {
                     _obs.Stop();
-
-                    Grabando(false);
 
                     MostrarAlerta(false);
                     timerRecording.Stop();
@@ -593,13 +572,10 @@ namespace Kenos
         {
             Log("Reproduciendo.");
 
-            if (_modoPrueba)
-            {
-                if (!_pruebaGrabacion.Verificada)
-                    Log("Verificación de Prueba de grabación iniciada.");
+            if (!_pruebaGrabacion.Verificada)
+                Log("Verificación de Prueba de grabación iniciada.");
 
-                _pruebaGrabacion.Verificada = true;
-            }
+            _pruebaGrabacion.Verificada = true;
 
             wmpPlayer.URL = _obs.RecordingFileName;
             wmpPlayer.Ctlcontrols.play();
@@ -613,7 +589,7 @@ namespace Kenos
 
             _obs.Resume();
 
-            _estado = CaptureState.Started;
+            _estado = CaptureState.Recording;
             lnkResume.Visible = false;
             lnkPausar.Visible = true;
 
@@ -621,6 +597,31 @@ namespace Kenos
                 AgregarMarca(string.Format(Properties.Settings.Default.TextEnReanudar, DateTime.Now));
 
             Log("Grabación continuada");
+        }
+
+        private void ConfirmarPruebaGrabacion()
+        {
+            if (_pruebaGrabacion.Verificada)
+            {
+                Log("Finalizando pruebas de grabación");
+
+                _pruebaGrabacion.Confirmada = true;
+                _estado = CaptureState.Initialized;
+
+                wmpPlayer.Ctlcontrols.stop();
+
+                GuardarMarcas();
+
+                GuardarPrueba();
+
+                ResetGrabacion(false);
+            }
+            else
+            {
+                Log("Informando al usuario que debe reproducir la grabación para poder confirmarla");
+
+                MessageBox.Show(this, "Debe reproducir la grabación y verificar el correcto funcionamiento antes de poder confirmar la prueba de grabación", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void Finalizar()
@@ -631,31 +632,7 @@ namespace Kenos
 
             try
             {
-                if (_modoPrueba)
-                {
-                    if (_pruebaGrabacion.Verificada)
-                    {
-                        Log("Finalizando pruebas de grabación");
-
-                        _modoPrueba = false;
-                        _pruebaGrabacionRealizada = true;
-
-                        _obs.Stop();
-
-                        GuardarMarcas();
-
-                        GuardarPrueba();
-
-                        ResetGrabacion(false);
-                    }
-                    else
-                    {
-                        Log("Informando al usuario que debe reproducir la grabación para poder confirmarla");
-
-                        MessageBox.Show(this, "Debe reproducir la grabación y verificar el correcto funcionamiento antes de poder confirmar la prueba de grabación", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-                else if (_metadata != null)
+                if (_metadata != null)
                 {
                     Log("Finalizando grabación de audiencia");
 
@@ -663,9 +640,6 @@ namespace Kenos
                     {
                         if (!string.IsNullOrEmpty(Properties.Settings.Default.TextoEnFin))
                             AgregarMarca(string.Format(Properties.Settings.Default.TextoEnFin, DateTime.Now));
-
-                        if (_obs.State == ObsStates.Playing)
-                            _obs.StopPlayer();
 
                         _metadata.MarcasTiempo = GetMarcasTiempo();
 
@@ -860,7 +834,7 @@ namespace Kenos
                 pnlAlerta.Visible = true;
 
 
-                if (_estado == CaptureState.Started)
+                if (_estado == CaptureState.Recording)
                 {
                     Log("Pausando grabación por aleta. " + lblAlerta.Text);
                     Pausar();
@@ -878,30 +852,23 @@ namespace Kenos
 
         private void ConfigurarForm()
         {
-            lnkNueva.Enabled = _estado == CaptureState.Initialized || _estado == CaptureState.NoSet;
+            lnkNueva.Enabled = _estado == CaptureState.Initialized || _estado == CaptureState.NotSet;
             lnkGrabar.Enabled = _estado == CaptureState.Initialized && _pruebaGrabacion.Realizada;
-            lnkPausar.Enabled = _estado == CaptureState.Started && _obs.State == ObsStates.Recording;
-            lnkParar.Enabled = (_estado == CaptureState.Started && _obs.State == ObsStates.Recording) || _obs.State == ObsStates.Playing;
-            lnkPlay.Enabled = _estado == CaptureState.Completed;
-            lnkFinalizar.Enabled = _estado == CaptureState.Completed;
-            lnkCancelar.Enabled = (_estado != CaptureState.NoSet);
-            lnkTest.Enabled = _estado == CaptureState.Initialized || _estado == CaptureState.NoSet;
+            lnkPausar.Enabled = _estado == CaptureState.Recording && _obs.State == ObsStates.Recording;
+            lnkParar.Enabled = _estado == CaptureState.Recording || _estado == CaptureState.Testing || _estado == CaptureState.PlayingTest;
+            lnkPlay.Enabled = _estado == CaptureState.PlayingTest;
+            lnkFinalizar.Enabled = _estado == CaptureState.Completed || _estado == CaptureState.PlayingTest;
+            lnkCancelar.Enabled = (_estado != CaptureState.NotSet);
+            lnkTest.Enabled = _estado == CaptureState.Initialized || _estado == CaptureState.NotSet;
 
             if (lnkCancelar.Enabled && Properties.Settings.Default.ConfirmacionAutomatica)
-                lnkCancelar.Enabled = _estado != CaptureState.Started;
+                lnkCancelar.Enabled = _estado != CaptureState.Completed;
 
             btnAgregarMarca.Enabled = _estado == CaptureState.Initialized;
 
-            bool forzarModoGrabacion = false;
-
-            if (_metadata != null)
-                forzarModoGrabacion = _metadata.ForzarModoGrabacion;
-
-            rdAudio.Enabled = _estado != CaptureState.Started && !forzarModoGrabacion;
-            rdVideo.Enabled = _estado != CaptureState.Started && !forzarModoGrabacion;
-
-            lblDuracion.Enabled = _estado == CaptureState.Started;
-            lblTamanio.Enabled = _estado == CaptureState.Started;
+            cboModo.Enabled = !(_estado == CaptureState.Recording || _estado == CaptureState.Testing);
+            lblDuracion.Enabled = _estado == CaptureState.Recording || _estado == CaptureState.Testing;
+            lblTamanio.Enabled = _estado == CaptureState.Recording || _estado == CaptureState.Testing;
 
             lnkResume.Visible = _estado == CaptureState.Paused;
             lnkPausar.Visible = _estado != CaptureState.Paused;
@@ -915,8 +882,9 @@ namespace Kenos
             }
 
             pnlBotonera.BackColor = Kenos.Common.Styles.ColorFondoTerciario;
-            lblGrabando.Visible = _estado == CaptureState.Started;
+            lblGrabando.Visible = _estado == CaptureState.Recording || _estado == CaptureState.Testing;
             lblGrabando.ForeColor = Color.Red;
+
 
             if (_estado == CaptureState.PlayingTest)
             {
@@ -928,10 +896,10 @@ namespace Kenos
             }
             else
             {
+                lnkParar.Visible = true;
                 lnkPlay.Visible = false;
                 wmpPlayer.Visible = false;
                 pnlObs.Visible = true;
-                Probando(false);
             }
         }
 
@@ -942,19 +910,10 @@ namespace Kenos
                 lblProbando.Font = new Font(lblProbando.Font.FontFamily, 14);
 
                 lblProbando.Text = "Iniciando pruebas";
-                _estado = CaptureState.PlayingTest;
+                _estado = CaptureState.Testing;
             }
 
             pnlProbando.Visible = probando;
-        }
-
-        private void Grabando(bool grabando)
-        {
-            rdAudio.Enabled = !grabando;
-            rdVideo.Enabled = !grabando;
-
-            lblDuracion.Enabled = grabando;
-            lblTamanio.Enabled = grabando;
         }
 
         private DataTable CreateDataSourceMarcaTiempo()
@@ -1060,9 +1019,11 @@ namespace Kenos
 
                 _output = new RecordingFile(_obs.RecordingFileName);
                 lblArchivo.Text = _obs.RecordingFileName;
-                _estado = CaptureState.Started;
+
+                if (_estado != CaptureState.Testing)
+                    _estado = CaptureState.Recording;
+
                 _fileMonitor = new FileMonitor(_obs.RecordingFileName);
-                Grabando(true);
 
                 ConfigurarForm();
 
@@ -1206,7 +1167,7 @@ namespace Kenos
 
             DialogResult result = DialogResult.No;
 
-            if (_estado == CaptureState.NoSet || _estado == CaptureState.Initialized)
+            if (_estado == CaptureState.NotSet || _estado == CaptureState.Initialized)
                 result = DialogResult.Yes;
             else
                 result = MessageBox.Show(this, "Si cancela la grabación se perderán todos los datos (audio/video/eventos) registrados hasta el momento \n¿Está seguro que desea cancelar la grabación?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
@@ -1224,11 +1185,10 @@ namespace Kenos
         {
             Log("Click en boton Confirmar");
 
-            if (_estado == CaptureState.Started.Recording || _estado == CaptureState.Testing)
-            {
-                _modoReproduccion = false;
+            if (_estado == CaptureState.Recording || _estado == CaptureState.Testing)
                 Finalizar();
-            }
+            else if (_estado == CaptureState.PlayingTest)
+                ConfirmarPruebaGrabacion();
             else
                 MessageBox.Show(this, "No existe ninguna grabación iniciada", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
@@ -1251,6 +1211,8 @@ namespace Kenos
             LabelDescripcion.ForeColor = Common.Styles.ColorFuentePrimario;
 
             gvMarcas.BackgroundColor = Common.Styles.ColorFondoSecundario;
+            cboModo.BackColor = Common.Styles.ColorFondoPrimario;
+
         }
 
         private void LogKenosInformation()
@@ -1323,6 +1285,16 @@ namespace Kenos
             wmpPlayer.Width = w;
             wmpPlayer.Left = 0;
             wmpPlayer.Top = top;
+        }
+
+        private void cboModo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var modo = cboModo.SelectedItem.ToString();
+
+            _obs.SetRecordingMode(modo);
+            Log($"Seleccion de modo de grabación -> {modo}");
+
+            gvMarcas.Focus();
         }
     }
 }

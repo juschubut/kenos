@@ -76,7 +76,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CaptureConfig.cs" />
     <Compile Include="CaptureState.cs" />
     <Compile Include="FileMonitor.cs" />
     <Compile Include="frmMain.cs">

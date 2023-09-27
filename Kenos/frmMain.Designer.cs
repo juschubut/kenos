@@ -30,10 +30,10 @@
         {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.lnkTest = new System.Windows.Forms.LinkLabel();
 			this.lnkCancelar = new System.Windows.Forms.LinkLabel();
@@ -42,14 +42,10 @@
 			this.mnuNueva = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.lblDescripcion = new System.Windows.Forms.Label();
-			this.rdVideo = new System.Windows.Forms.RadioButton();
-			this.rdAudio = new System.Windows.Forms.RadioButton();
 			this.txtDescripcion = new System.Windows.Forms.TextBox();
 			this.LabelDescripcion = new System.Windows.Forms.Label();
 			this.timerRecording = new System.Windows.Forms.Timer(this.components);
 			this.gvMarcas = new System.Windows.Forms.DataGridView();
-			this.Tiemp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.pnlAlerta = new System.Windows.Forms.Panel();
 			this.label2 = new System.Windows.Forms.Label();
 			this.lblAlerta = new System.Windows.Forms.Label();
@@ -77,7 +73,11 @@
 			this.pnlBotonera = new System.Windows.Forms.Panel();
 			this.pnlObs = new System.Windows.Forms.Panel();
 			this.splitContainer = new System.Windows.Forms.SplitContainer();
+			this.cboModo = new System.Windows.Forms.ComboBox();
+			this.label3 = new System.Windows.Forms.Label();
 			this.wmpPlayer = new AxWMPLib.AxWindowsMediaPlayer();
+			this.Tiemp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gvMarcas)).BeginInit();
@@ -97,14 +97,14 @@
 			// 
 			this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.panel1.Controls.Add(this.label3);
+			this.panel1.Controls.Add(this.cboModo);
 			this.panel1.Controls.Add(this.lnkTest);
 			this.panel1.Controls.Add(this.lnkCancelar);
 			this.panel1.Controls.Add(this.lnkFinalizar);
 			this.panel1.Controls.Add(this.lnkNueva);
 			this.panel1.Controls.Add(this.pictureBox1);
 			this.panel1.Controls.Add(this.lblDescripcion);
-			this.panel1.Controls.Add(this.rdVideo);
-			this.panel1.Controls.Add(this.rdAudio);
 			this.panel1.Location = new System.Drawing.Point(0, 0);
 			this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.panel1.Name = "panel1";
@@ -203,50 +203,6 @@
 			this.lblDescripcion.Text = "-";
 			this.lblDescripcion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// rdVideo
-			// 
-			this.rdVideo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.rdVideo.AutoSize = true;
-			this.rdVideo.BackColor = System.Drawing.Color.Transparent;
-			this.rdVideo.Checked = true;
-			this.rdVideo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.rdVideo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.rdVideo.ForeColor = System.Drawing.Color.DimGray;
-			this.rdVideo.Image = global::Kenos.Properties.Resources.icon_video;
-			this.rdVideo.Location = new System.Drawing.Point(1344, 26);
-			this.rdVideo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.rdVideo.Name = "rdVideo";
-			this.rdVideo.Size = new System.Drawing.Size(60, 40);
-			this.rdVideo.TabIndex = 1;
-			this.rdVideo.TabStop = true;
-			this.rdVideo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-			this.toolTip.SetToolTip(this.rdVideo, "Grabación de Audio y Video");
-			this.rdVideo.UseVisualStyleBackColor = false;
-			this.rdVideo.CheckedChanged += new System.EventHandler(this.rdTipoGrabacion_CheckedChanged);
-			this.rdVideo.Click += new System.EventHandler(this.rdVideo_Click);
-			// 
-			// rdAudio
-			// 
-			this.rdAudio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.rdAudio.AutoSize = true;
-			this.rdAudio.BackColor = System.Drawing.Color.Transparent;
-			this.rdAudio.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-			this.rdAudio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.rdAudio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.rdAudio.ForeColor = System.Drawing.Color.DimGray;
-			this.rdAudio.Image = global::Kenos.Properties.Resources.icon_audio;
-			this.rdAudio.Location = new System.Drawing.Point(1258, 26);
-			this.rdAudio.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.rdAudio.Name = "rdAudio";
-			this.rdAudio.Size = new System.Drawing.Size(51, 40);
-			this.rdAudio.TabIndex = 1;
-			this.rdAudio.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-			this.rdAudio.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-			this.toolTip.SetToolTip(this.rdAudio, "Grabación solo de Audio");
-			this.rdAudio.UseVisualStyleBackColor = false;
-			this.rdAudio.CheckedChanged += new System.EventHandler(this.rdTipoGrabacion_CheckedChanged);
-			this.rdAudio.Click += new System.EventHandler(this.rdAudio_Click);
-			// 
 			// txtDescripcion
 			// 
 			this.txtDescripcion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -285,14 +241,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.gvMarcas.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(91)))), ((int)(((byte)(91)))), ((int)(((byte)(93)))));
-			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle5.BackColor = System.Drawing.Color.LightSlateGray;
-			dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.gvMarcas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle9.BackColor = System.Drawing.Color.LightSlateGray;
+			dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle9.ForeColor = System.Drawing.Color.White;
+			dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.gvMarcas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
 			this.gvMarcas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.gvMarcas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Tiemp,
@@ -300,42 +256,19 @@
 			this.gvMarcas.Location = new System.Drawing.Point(11, 308);
 			this.gvMarcas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.gvMarcas.Name = "gvMarcas";
-			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle8.BackColor = System.Drawing.Color.LightSlateGray;
-			dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
-			dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.gvMarcas.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
-			this.gvMarcas.RowHeadersWidth = 62;
+			dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle12.BackColor = System.Drawing.Color.LightSlateGray;
+			dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle12.ForeColor = System.Drawing.Color.White;
+			dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.gvMarcas.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+			this.gvMarcas.RowHeadersWidth = 30;
 			this.gvMarcas.Size = new System.Drawing.Size(767, 656);
 			this.gvMarcas.TabIndex = 8;
 			this.gvMarcas.SelectionChanged += new System.EventHandler(this.gvMarcas_SelectionChanged);
 			this.gvMarcas.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gvMarcas_UserDeletingRow);
-			// 
-			// Tiemp
-			// 
-			this.Tiemp.DataPropertyName = "Tiempo";
-			dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-			dataGridViewCellStyle6.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.Tiemp.DefaultCellStyle = dataGridViewCellStyle6;
-			this.Tiemp.Frozen = true;
-			this.Tiemp.HeaderText = "Tiempo";
-			this.Tiemp.MinimumWidth = 8;
-			this.Tiemp.Name = "Tiemp";
-			this.Tiemp.ReadOnly = true;
-			this.Tiemp.Width = 150;
-			// 
-			// Descripcion
-			// 
-			this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.Descripcion.DataPropertyName = "Descripcion";
-			dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.Descripcion.DefaultCellStyle = dataGridViewCellStyle7;
-			this.Descripcion.HeaderText = "Descripción";
-			this.Descripcion.MinimumWidth = 8;
-			this.Descripcion.Name = "Descripcion";
 			// 
 			// pnlAlerta
 			// 
@@ -391,7 +324,7 @@
 			this.btnAgregarMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnAgregarMarca.ForeColor = System.Drawing.Color.White;
 			this.btnAgregarMarca.Image = global::Kenos.Properties.Resources.agregar;
-			this.btnAgregarMarca.Location = new System.Drawing.Point(732, 265);
+			this.btnAgregarMarca.Location = new System.Drawing.Point(732, 267);
 			this.btnAgregarMarca.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.btnAgregarMarca.Name = "btnAgregarMarca";
 			this.btnAgregarMarca.Size = new System.Drawing.Size(45, 40);
@@ -707,6 +640,34 @@
 			this.splitContainer.SplitterDistance = 704;
 			this.splitContainer.TabIndex = 23;
 			// 
+			// cboModo
+			// 
+			this.cboModo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.cboModo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cboModo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.cboModo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.cboModo.FormattingEnabled = true;
+			this.cboModo.Items.AddRange(new object[] {
+            "Audio",
+            "Video"});
+			this.cboModo.Location = new System.Drawing.Point(1233, 35);
+			this.cboModo.Name = "cboModo";
+			this.cboModo.Size = new System.Drawing.Size(172, 44);
+			this.cboModo.TabIndex = 7;
+			this.cboModo.TabStop = false;
+			this.cboModo.SelectedIndexChanged += new System.EventHandler(this.cboModo_SelectedIndexChanged);
+			// 
+			// label3
+			// 
+			this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label3.AutoSize = true;
+			this.label3.ForeColor = System.Drawing.Color.White;
+			this.label3.Location = new System.Drawing.Point(1231, 13);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(49, 20);
+			this.label3.TabIndex = 8;
+			this.label3.Text = "Modo";
+			// 
 			// wmpPlayer
 			// 
 			this.wmpPlayer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -718,6 +679,29 @@
 			this.wmpPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("wmpPlayer.OcxState")));
 			this.wmpPlayer.Size = new System.Drawing.Size(201, 289);
 			this.wmpPlayer.TabIndex = 23;
+			// 
+			// Tiemp
+			// 
+			this.Tiemp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+			this.Tiemp.DataPropertyName = "Tiempo";
+			dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+			dataGridViewCellStyle10.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.Tiemp.DefaultCellStyle = dataGridViewCellStyle10;
+			this.Tiemp.Frozen = true;
+			this.Tiemp.HeaderText = "Tiempo";
+			this.Tiemp.MinimumWidth = 8;
+			this.Tiemp.Name = "Tiemp";
+			this.Tiemp.ReadOnly = true;
+			// 
+			// Descripcion
+			// 
+			this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.Descripcion.DataPropertyName = "Descripcion";
+			dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.Descripcion.DefaultCellStyle = dataGridViewCellStyle11;
+			this.Descripcion.HeaderText = "Descripción";
+			this.Descripcion.MinimumWidth = 8;
+			this.Descripcion.Name = "Descripcion";
 			// 
 			// frmMain
 			// 
@@ -761,8 +745,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RadioButton rdVideo;
-        private System.Windows.Forms.RadioButton rdAudio;
         private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.Label LabelDescripcion;
         private System.Windows.Forms.Button btnAgregarMarca;
@@ -772,8 +754,6 @@
         private System.Windows.Forms.Label lblAlerta;
         private System.Windows.Forms.DataGridView gvMarcas;
         private System.Windows.Forms.ToolTip toolTip;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tiemp;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.ContextMenuStrip mnuNueva;
         private System.Windows.Forms.Panel pnlProbando;
         private System.Windows.Forms.Label lblProbando;
@@ -804,6 +784,10 @@
         private System.Windows.Forms.Panel pnlObs;
 		private System.Windows.Forms.SplitContainer splitContainer;
 		private AxWMPLib.AxWindowsMediaPlayer wmpPlayer;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.ComboBox cboModo;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Tiemp;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
 	}
 }
 
