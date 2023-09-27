@@ -22,8 +22,39 @@ namespace Kenos.Win.Test
         public event EventHandler Finalizado;
         public event EventHandler Cancelado;
 
+
+        /// <summary>
+        /// Flag para conocer si el usuario reprodujo la grabacion y verificó el correcto funcionamiento.
+        /// </summary>
+        public bool Verificada { get; set; }
+
+        /// <summary>
+        /// Flag para conocer si el usuario realizo o no la prueba de funcionamiento.
+        /// </summary>
+        public bool Iniciada { get; private set; }
+
+        /// <summary>
+        /// Flag para conocer si el usuario finalizo la prueba de funcionamiento.
+        /// </summary>
+        public bool Confirmada { get; set; }
+
+        /// <summary>
+        /// Flag para conocer si el usuario inició la prueba de grabación y verifico el correcto funcionamiento 
+        /// </summary>
+        public bool Realizada 
+        { 
+            get 
+            {    
+                return (this.Iniciada && this.Confirmada && this.Verificada)
+                    || !Properties.Settings.Default.PruebaGrabacionObligatoria; 
+            }
+        }
+
         public PruebaGrabacion()
         {
+            this.Iniciada = !Properties.Settings.Default.PruebaGrabacionObligatoria;
+            this.Verificada = true;
+
             _timer.Interval = Properties.Settings.Default.PruebaGrabacionIntervalo * 1000;
             _timer.Tick += _timer_Tick;
 
@@ -76,7 +107,11 @@ namespace Kenos.Win.Test
 
         public void Comenzar()
         {
+            this.Iniciada = true;
+            this.Verificada = false;
+            this.Confirmada = false;
             _forzarCancelacion = false;
+
             _index = -1;
 
             if (this.Iniciando != null)
@@ -125,13 +160,17 @@ namespace Kenos.Win.Test
             }
         }
 
-
         public void Finalizar()
         {
             if (this.Finalizado != null)
             {
                 this.Finalizado(this, new EventArgs());
             }
+        }
+
+        public void Confirmar()
+        {
+            this.Confirmada = true;
         }
 
         public bool Proximo()
@@ -152,7 +191,7 @@ namespace Kenos.Win.Test
 
                 simpleSound.Play();
             }
-            catch
+            catch 
             {
                 Logger.Log.Error("Beep not found");
             }

@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Media;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -41,12 +38,12 @@ namespace Kenos.Win.Test
         /// <summary>
         /// Flag para conocer si el usuario inició la prueba de grabación y verifico el correcto funcionamiento 
         /// </summary>
-        public bool Realizada 
-        { 
-            get 
-            {    
+        public bool Realizada
+        {
+            get
+            {
                 return (this.Iniciada && this.Confirmada && this.Verificada)
-                    || !Properties.Settings.Default.PruebaGrabacionObligatoria; 
+                    || !Properties.Settings.Default.PruebaGrabacionObligatoria;
             }
         }
 
@@ -100,7 +97,7 @@ namespace Kenos.Win.Test
                 Logger.Log.Error(ex);
             }
             finally
-            { 
+            {
                 Logger.Log.DecreaseLogIndentation();
             }
         }
@@ -191,7 +188,7 @@ namespace Kenos.Win.Test
 
                 simpleSound.Play();
             }
-            catch 
+            catch
             {
                 Logger.Log.Error("Beep not found");
             }

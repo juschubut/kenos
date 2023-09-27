@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace Kenos.Win
+namespace Kenos
 {
 	public class WindowsWrapper
 	{

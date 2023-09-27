@@ -1,4 +1,4 @@
-﻿namespace Kenos.Win
+﻿namespace Kenos
 {
     partial class frmMain
     {
@@ -30,10 +30,10 @@
         {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.lnkTest = new System.Windows.Forms.LinkLabel();
 			this.lnkCancelar = new System.Windows.Forms.LinkLabel();
@@ -77,6 +77,7 @@
 			this.pnlBotonera = new System.Windows.Forms.Panel();
 			this.pnlObs = new System.Windows.Forms.Panel();
 			this.splitContainer = new System.Windows.Forms.SplitContainer();
+			this.wmpPlayer = new AxWMPLib.AxWindowsMediaPlayer();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gvMarcas)).BeginInit();
@@ -89,6 +90,7 @@
 			this.splitContainer.Panel1.SuspendLayout();
 			this.splitContainer.Panel2.SuspendLayout();
 			this.splitContainer.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.wmpPlayer)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// panel1
@@ -114,7 +116,7 @@
 			this.lnkTest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.lnkTest.BackColor = System.Drawing.Color.Transparent;
 			this.lnkTest.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.lnkTest.Image = global::Kenos.Win.Properties.Resources.icon_prueba;
+			this.lnkTest.Image = global::Kenos.Properties.Resources.icon_prueba;
 			this.lnkTest.Location = new System.Drawing.Point(1411, 18);
 			this.lnkTest.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.lnkTest.Name = "lnkTest";
@@ -128,7 +130,7 @@
 			// 
 			this.lnkCancelar.BackColor = System.Drawing.Color.Transparent;
 			this.lnkCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.lnkCancelar.Image = global::Kenos.Win.Properties.Resources.icon_cancelar;
+			this.lnkCancelar.Image = global::Kenos.Properties.Resources.icon_cancelar;
 			this.lnkCancelar.Location = new System.Drawing.Point(204, 18);
 			this.lnkCancelar.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.lnkCancelar.Name = "lnkCancelar";
@@ -142,7 +144,7 @@
 			// 
 			this.lnkFinalizar.BackColor = System.Drawing.Color.Transparent;
 			this.lnkFinalizar.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.lnkFinalizar.Image = global::Kenos.Win.Properties.Resources.icon_confirmar;
+			this.lnkFinalizar.Image = global::Kenos.Properties.Resources.icon_confirmar;
 			this.lnkFinalizar.Location = new System.Drawing.Point(111, 18);
 			this.lnkFinalizar.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.lnkFinalizar.Name = "lnkFinalizar";
@@ -157,7 +159,7 @@
 			this.lnkNueva.BackColor = System.Drawing.Color.Transparent;
 			this.lnkNueva.ContextMenuStrip = this.mnuNueva;
 			this.lnkNueva.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.lnkNueva.Image = global::Kenos.Win.Properties.Resources.icon_nuevo;
+			this.lnkNueva.Image = global::Kenos.Properties.Resources.icon_nuevo;
 			this.lnkNueva.Location = new System.Drawing.Point(18, 18);
 			this.lnkNueva.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.lnkNueva.Name = "lnkNueva";
@@ -177,7 +179,7 @@
 			this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-			this.pictureBox1.Image = global::Kenos.Win.Properties.Resources.logo;
+			this.pictureBox1.Image = global::Kenos.Properties.Resources.logo;
 			this.pictureBox1.Location = new System.Drawing.Point(290, 14);
 			this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.pictureBox1.Name = "pictureBox1";
@@ -210,7 +212,7 @@
 			this.rdVideo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.rdVideo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.rdVideo.ForeColor = System.Drawing.Color.DimGray;
-			this.rdVideo.Image = global::Kenos.Win.Properties.Resources.icon_video;
+			this.rdVideo.Image = global::Kenos.Properties.Resources.icon_video;
 			this.rdVideo.Location = new System.Drawing.Point(1344, 26);
 			this.rdVideo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.rdVideo.Name = "rdVideo";
@@ -232,7 +234,7 @@
 			this.rdAudio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.rdAudio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.rdAudio.ForeColor = System.Drawing.Color.DimGray;
-			this.rdAudio.Image = global::Kenos.Win.Properties.Resources.icon_audio;
+			this.rdAudio.Image = global::Kenos.Properties.Resources.icon_audio;
 			this.rdAudio.Location = new System.Drawing.Point(1258, 26);
 			this.rdAudio.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.rdAudio.Name = "rdAudio";
@@ -283,14 +285,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.gvMarcas.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(91)))), ((int)(((byte)(91)))), ((int)(((byte)(93)))));
-			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightSlateGray;
-			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.gvMarcas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle5.BackColor = System.Drawing.Color.LightSlateGray;
+			dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.gvMarcas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
 			this.gvMarcas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.gvMarcas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Tiemp,
@@ -298,14 +300,14 @@
 			this.gvMarcas.Location = new System.Drawing.Point(11, 308);
 			this.gvMarcas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.gvMarcas.Name = "gvMarcas";
-			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle4.BackColor = System.Drawing.Color.LightSlateGray;
-			dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
-			dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.gvMarcas.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle8.BackColor = System.Drawing.Color.LightSlateGray;
+			dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+			dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.gvMarcas.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
 			this.gvMarcas.RowHeadersWidth = 62;
 			this.gvMarcas.Size = new System.Drawing.Size(767, 656);
 			this.gvMarcas.TabIndex = 8;
@@ -315,9 +317,9 @@
 			// Tiemp
 			// 
 			this.Tiemp.DataPropertyName = "Tiempo";
-			dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-			dataGridViewCellStyle2.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.Tiemp.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+			dataGridViewCellStyle6.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.Tiemp.DefaultCellStyle = dataGridViewCellStyle6;
 			this.Tiemp.Frozen = true;
 			this.Tiemp.HeaderText = "Tiempo";
 			this.Tiemp.MinimumWidth = 8;
@@ -329,8 +331,8 @@
 			// 
 			this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.Descripcion.DataPropertyName = "Descripcion";
-			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.Descripcion.DefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.Descripcion.DefaultCellStyle = dataGridViewCellStyle7;
 			this.Descripcion.HeaderText = "Descripción";
 			this.Descripcion.MinimumWidth = 8;
 			this.Descripcion.Name = "Descripcion";
@@ -388,7 +390,7 @@
 			this.btnAgregarMarca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnAgregarMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnAgregarMarca.ForeColor = System.Drawing.Color.White;
-			this.btnAgregarMarca.Image = global::Kenos.Win.Properties.Resources.agregar1;
+			this.btnAgregarMarca.Image = global::Kenos.Properties.Resources.agregar;
 			this.btnAgregarMarca.Location = new System.Drawing.Point(732, 265);
 			this.btnAgregarMarca.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.btnAgregarMarca.Name = "btnAgregarMarca";
@@ -404,7 +406,7 @@
 			// 
 			this.lnkGrabar.BackColor = System.Drawing.Color.Transparent;
 			this.lnkGrabar.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.lnkGrabar.Image = global::Kenos.Win.Properties.Resources.icon_grabar;
+			this.lnkGrabar.Image = global::Kenos.Properties.Resources.icon_grabar;
 			this.lnkGrabar.Location = new System.Drawing.Point(104, 4);
 			this.lnkGrabar.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.lnkGrabar.Name = "lnkGrabar";
@@ -418,7 +420,7 @@
 			this.lnkPlay.BackColor = System.Drawing.Color.Transparent;
 			this.lnkPlay.ContextMenuStrip = this.mnuNueva;
 			this.lnkPlay.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.lnkPlay.Image = global::Kenos.Win.Properties.Resources.icon_play;
+			this.lnkPlay.Image = global::Kenos.Properties.Resources.icon_play;
 			this.lnkPlay.Location = new System.Drawing.Point(23, 4);
 			this.lnkPlay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.lnkPlay.Name = "lnkPlay";
@@ -431,7 +433,7 @@
 			// 
 			this.lnkPausar.BackColor = System.Drawing.Color.Transparent;
 			this.lnkPausar.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.lnkPausar.Image = global::Kenos.Win.Properties.Resources.icon_pausa;
+			this.lnkPausar.Image = global::Kenos.Properties.Resources.icon_pausa;
 			this.lnkPausar.Location = new System.Drawing.Point(185, 4);
 			this.lnkPausar.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.lnkPausar.Name = "lnkPausar";
@@ -445,7 +447,7 @@
 			// 
 			this.lnkParar.BackColor = System.Drawing.Color.Transparent;
 			this.lnkParar.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.lnkParar.Image = global::Kenos.Win.Properties.Resources.icon_stop;
+			this.lnkParar.Image = global::Kenos.Properties.Resources.icon_stop;
 			this.lnkParar.Location = new System.Drawing.Point(266, 4);
 			this.lnkParar.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.lnkParar.Name = "lnkParar";
@@ -458,7 +460,7 @@
 			// 
 			this.lnkResume.BackColor = System.Drawing.Color.Transparent;
 			this.lnkResume.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.lnkResume.Image = global::Kenos.Win.Properties.Resources.icon_grabar;
+			this.lnkResume.Image = global::Kenos.Properties.Resources.icon_grabar;
 			this.lnkResume.Location = new System.Drawing.Point(104, 4);
 			this.lnkResume.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.lnkResume.Name = "lnkResume";
@@ -687,6 +689,7 @@
 			// splitContainer.Panel1
 			// 
 			this.splitContainer.Panel1.Controls.Add(this.pnlProbando);
+			this.splitContainer.Panel1.Controls.Add(this.wmpPlayer);
 			this.splitContainer.Panel1.Controls.Add(this.pnlObs);
 			this.splitContainer.Panel1.Controls.Add(this.pnlReencodingProgress);
 			this.splitContainer.Panel1.SizeChanged += new System.EventHandler(this.splitContainer_Panel1_SizeChanged);
@@ -703,6 +706,18 @@
 			this.splitContainer.Size = new System.Drawing.Size(1492, 965);
 			this.splitContainer.SplitterDistance = 704;
 			this.splitContainer.TabIndex = 23;
+			// 
+			// wmpPlayer
+			// 
+			this.wmpPlayer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.wmpPlayer.Enabled = true;
+			this.wmpPlayer.Location = new System.Drawing.Point(462, 35);
+			this.wmpPlayer.Name = "wmpPlayer";
+			this.wmpPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("wmpPlayer.OcxState")));
+			this.wmpPlayer.Size = new System.Drawing.Size(201, 289);
+			this.wmpPlayer.TabIndex = 23;
 			// 
 			// frmMain
 			// 
@@ -738,6 +753,7 @@
 			this.splitContainer.Panel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
 			this.splitContainer.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.wmpPlayer)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -787,6 +803,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel pnlObs;
 		private System.Windows.Forms.SplitContainer splitContainer;
+		private AxWMPLib.AxWindowsMediaPlayer wmpPlayer;
 	}
 }
 
