@@ -71,5 +71,11 @@
     <Setting Name="PathGrabacion" Type="System.String" Scope="Application">
       <Value Profile="(Default)">C:\Temp\</Value>
     </Setting>
+    <Setting Name="ConversionAutomaticaMP4" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ConversionAutomaticaTiempoMinimoEspera" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

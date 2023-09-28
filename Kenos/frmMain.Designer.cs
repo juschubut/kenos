@@ -77,7 +77,7 @@
 			this.pnlBotonera = new System.Windows.Forms.Panel();
 			this.pnlObs = new System.Windows.Forms.Panel();
 			this.splitContainer = new System.Windows.Forms.SplitContainer();
-			this.pnlIniciando = new System.Windows.Forms.Panel();
+			this.pnlStatus = new System.Windows.Forms.Panel();
 			this.lblStatus = new System.Windows.Forms.Label();
 			this.wmpPlayer = new AxWMPLib.AxWindowsMediaPlayer();
 			this.panel1.SuspendLayout();
@@ -92,7 +92,7 @@
 			this.splitContainer.Panel1.SuspendLayout();
 			this.splitContainer.Panel2.SuspendLayout();
 			this.splitContainer.SuspendLayout();
-			this.pnlIniciando.SuspendLayout();
+			this.pnlStatus.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.wmpPlayer)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -676,7 +676,7 @@
 			// 
 			// splitContainer.Panel1
 			// 
-			this.splitContainer.Panel1.Controls.Add(this.pnlIniciando);
+			this.splitContainer.Panel1.Controls.Add(this.pnlStatus);
 			this.splitContainer.Panel1.Controls.Add(this.pnlProbando);
 			this.splitContainer.Panel1.Controls.Add(this.wmpPlayer);
 			this.splitContainer.Panel1.Controls.Add(this.pnlObs);
@@ -696,26 +696,27 @@
 			this.splitContainer.SplitterDistance = 704;
 			this.splitContainer.TabIndex = 23;
 			// 
-			// pnlIniciando
+			// pnlStatus
 			// 
-			this.pnlIniciando.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.pnlStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.pnlIniciando.Controls.Add(this.lblStatus);
-			this.pnlIniciando.Location = new System.Drawing.Point(19, 345);
-			this.pnlIniciando.Name = "pnlIniciando";
-			this.pnlIniciando.Size = new System.Drawing.Size(670, 215);
-			this.pnlIniciando.TabIndex = 9;
+			this.pnlStatus.Controls.Add(this.lblStatus);
+			this.pnlStatus.Location = new System.Drawing.Point(19, 54);
+			this.pnlStatus.Name = "pnlStatus";
+			this.pnlStatus.Size = new System.Drawing.Size(670, 161);
+			this.pnlStatus.TabIndex = 9;
 			// 
 			// lblStatus
 			// 
 			this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblStatus.Location = new System.Drawing.Point(16, 66);
+			this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblStatus.Location = new System.Drawing.Point(16, 20);
 			this.lblStatus.Name = "lblStatus";
-			this.lblStatus.Size = new System.Drawing.Size(638, 69);
+			this.lblStatus.Size = new System.Drawing.Size(638, 119);
 			this.lblStatus.TabIndex = 0;
 			this.lblStatus.Text = "Iniciando...";
+			this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// wmpPlayer
 			// 
@@ -764,7 +765,7 @@
 			this.splitContainer.Panel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
 			this.splitContainer.ResumeLayout(false);
-			this.pnlIniciando.ResumeLayout(false);
+			this.pnlStatus.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.wmpPlayer)).EndInit();
 			this.ResumeLayout(false);
 
@@ -816,7 +817,7 @@
 		private System.Windows.Forms.ComboBox cboModo;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Tiemp;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
-		private System.Windows.Forms.Panel pnlIniciando;
+		private System.Windows.Forms.Panel pnlStatus;
 		private System.Windows.Forms.Label lblStatus;
 	}
 }

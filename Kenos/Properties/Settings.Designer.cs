@@ -211,5 +211,23 @@ namespace Kenos.Properties {
                 return ((string)(this["PathGrabacion"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ConversionAutomaticaMP4 {
+            get {
+                return ((bool)(this["ConversionAutomaticaMP4"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int ConversionAutomaticaTiempoMinimoEspera {
+            get {
+                return ((int)(this["ConversionAutomaticaTiempoMinimoEspera"]));
+            }
+        }
     }
 }

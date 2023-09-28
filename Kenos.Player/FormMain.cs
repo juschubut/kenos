@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Deployment.Application;
-using System.Drawing;
 using System.IO;
-using System.Reflection;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Kenos.Player
@@ -38,7 +33,7 @@ namespace Kenos.Player
 
             string fileName = "";
 
-            if (AppDomain.CurrentDomain.SetupInformation.ActivationArguments.ActivationData != null)
+            if (AppDomain.CurrentDomain?.SetupInformation?.ActivationArguments?.ActivationData != null)
             {
                 foreach (string arg in AppDomain.CurrentDomain.SetupInformation.ActivationArguments.ActivationData)
                 {
@@ -107,7 +102,7 @@ namespace Kenos.Player
 
             OpenFileDialog dialog = new OpenFileDialog();
 
-            dialog.Filter = "Todos|*.mp3;*.wmv;*.wav|Mp3|*.mp3|Wav|*.wav|Windows Media Video|*.wmv";
+            dialog.Filter = "Todos|*.mp3;*.wmv;*.wav|Mp3|*.mp3|Wav|*.wav|Windows Media Video|*.wmv|MPEG-4|*.mp4";
             result = dialog.ShowDialog(this);
 
             if (result == System.Windows.Forms.DialogResult.OK)
@@ -149,7 +144,7 @@ namespace Kenos.Player
 
             _tags = new List<TagsLib.Tag>();
 
-            _tags.Add(new TagsLib.Tag(){ Description = "Inicio" });
+            _tags.Add(new TagsLib.Tag() { Description = "Inicio" });
 
             if (file.Tags != null && file.Tags.Count > 0)
             {
@@ -191,7 +186,7 @@ namespace Kenos.Player
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-         
+
         private void gvMarcas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (gvMarcas.SelectedRows.Count > 0)
@@ -273,7 +268,7 @@ namespace Kenos.Player
             Kenos.TagsLib.Tag tag = new Kenos.TagsLib.Tag();
 
             try
-            {   
+            {
                 tag.TimeSpan = new TimeSpan(0, 0, Convert.ToInt32(wmpPlayer.Ctlcontrols.currentPosition));
                 tag.Description = texto;
 
@@ -294,7 +289,7 @@ namespace Kenos.Player
         private void BindTags()
         {
 
-            _tags.Sort(delegate(Kenos.TagsLib.Tag t1, Kenos.TagsLib.Tag t2)
+            _tags.Sort(delegate (Kenos.TagsLib.Tag t1, Kenos.TagsLib.Tag t2)
                 {
                     return t1.TimeSpan.CompareTo(t2.TimeSpan);
                 });
@@ -352,7 +347,7 @@ namespace Kenos.Player
 
         private void RefreshTags()
         {
-            _tags.Sort(delegate(Kenos.TagsLib.Tag t1, Kenos.TagsLib.Tag t2)
+            _tags.Sort(delegate (Kenos.TagsLib.Tag t1, Kenos.TagsLib.Tag t2)
             {
                 return t1.TimeSpan.CompareTo(t2.TimeSpan);
             });
@@ -441,7 +436,7 @@ namespace Kenos.Player
                 ApplicationDeployment updateCheck = ApplicationDeployment.CurrentDeployment;
 
                 UpdateCheckInfo updateCheckInfo = updateCheck.CheckForDetailedUpdate();
-                 
+
                 if (updateCheckInfo.UpdateAvailable)
                 {
 
@@ -521,6 +516,6 @@ namespace Kenos.Player
                 catch { }
             }
         }
-          
+
     }
 }

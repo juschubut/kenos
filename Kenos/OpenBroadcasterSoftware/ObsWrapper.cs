@@ -37,7 +37,20 @@ namespace Kenos.OpenBroadcasterSoftware
 
 		public void Stop()
 		{
-			_obsWebsocket.StopRecord();
+			string result = "";
+
+			Task.Run(() =>
+			{
+				try
+				{
+					result = _obsWebsocket.StopRecord();
+				}
+				catch (Exception ex)
+				{
+					LogError($"Error parando la granación", ex);
+				}
+			}).Wait();
+
 			State = ObsStates.Ready;
 		}
 
@@ -57,11 +70,6 @@ namespace Kenos.OpenBroadcasterSoftware
 		public void StartRecording()
 		{
 			_obsWebsocket.StartRecord();
-		}
-
-		public void StopPlayer()
-		{
-			_obsWebsocket.StopRecord();
 		}
 
 		public void Initialize(Panel previewPanel)
@@ -110,8 +118,9 @@ namespace Kenos.OpenBroadcasterSoftware
 			_obsWebsocket.Disconnected += Websocket_Disconnected;
 			_obsWebsocket.RecordStateChanged += Websocket_RecordStateChanged;
 			_obsWebsocket.VendorEvent += Websocket_VendorEvent;
+			_obsWebsocket.InputRemoved += Websocket_InputRemoved;
 
-			System.Threading.Tasks.Task.Run(() =>
+			Task.Run(() =>
 			{
 				try
 				{
@@ -121,6 +130,15 @@ namespace Kenos.OpenBroadcasterSoftware
 				{
 					LogError($"No se pudo conectar al websocket ({url})", ex);
 				}
+			});
+		}
+
+		private void Websocket_InputRemoved(object sender, OBSWebsocketDotNet.Types.Events.InputRemovedEventArgs e)
+		{
+			OnLog(this, new ObsLogEventArgs
+			{
+				IsError = false,
+				Message = $"Dispositivo desconectado \"{e.InputName}\"."
 			});
 		}
 

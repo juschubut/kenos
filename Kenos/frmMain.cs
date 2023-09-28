@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 /**
@@ -544,13 +545,9 @@ namespace Kenos
 
                     Log(string.Format("Grabación parada [{0}]", lblDuracion.Text));
 
-                    UnirArchivos();
+                    EsperarConversionAutomatica();
 
                     ConfigurarForm();
-                }
-                else if (_obs.State == ObsStates.Playing)
-                {
-                    _obs.Stop();
                 }
             }
             catch (Exception ex)
@@ -889,7 +886,7 @@ namespace Kenos
                 return;
             }
 
-            pnlIniciando.Visible = false;
+            pnlStatus.Visible = false;
             pnlBotonera.Enabled = true;
             lnkNueva.Enabled = _estado == CaptureState.Initialized || _estado == CaptureState.NotSet;
             lnkGrabar.Enabled = _estado == CaptureState.Initialized && _pruebaGrabacion.Realizada;
@@ -1111,16 +1108,62 @@ namespace Kenos
             return true;
         }
 
-        private void CrearNuevoArchivo()
+        public void EsperarConversionAutomatica()
         {
-            //TODO ver
-            _obs.RecordingFileName = _output.CreateNew();
-        }
+            if (Properties.Settings.Default.ConversionAutomaticaMP4)
+            {
+                try
+                {
+                    var path = Path.GetDirectoryName(_obs.RecordingFileName);
+                    var mp4 = Path.GetFileNameWithoutExtension(_obs.RecordingFileName) + ".mp4";
+                    var mp4FileName = Path.Combine(path, mp4);
+                    var finalizado = false;
 
-        private void UnirArchivos()
-        {
-            if (_metadata != null)
-                _metadata.FullFileName = _output.Merge();
+                    pnlStatus.Visible = true;
+                    lblStatus.Text = "Convirtiendo archivo a MP4. Este proceso puede demoarar unos minutos";
+
+                    var inicio = DateTime.Now;
+
+                    long tamanio = 0;
+
+                    while (!finalizado)
+                    {
+                        Application.DoEvents();
+
+                        var tiempoTranscurrido = DateTime.Now - inicio;
+                        FileInfo fi = new FileInfo(mp4FileName);
+
+                        if (fi != null && fi.Exists)
+                        {
+                            if (tamanio < fi.Length)    // Si esta crediendo el archivo, espero
+                                tamanio = fi.Length;
+                            else if (tamanio > 0
+                                    && tamanio == fi.Length
+                                    && tiempoTranscurrido.TotalSeconds > Properties.Settings.Default.ConversionAutomaticaTiempoMinimoEspera)
+                            {
+                                // si no crecio el archivo y paso el tiempo minimo finalizo
+                                finalizado = true;
+                                Application.DoEvents();
+                                Thread.Sleep(2000);
+                            }
+                            else
+                            {
+                                Thread.Sleep(1000);
+                            }
+                        }
+                    }
+
+                    if (_metadata != null)
+                        _metadata.FullFileName = mp4FileName;
+
+                    pnlStatus.Visible = false;
+                }
+                catch (Exception ex)
+                {
+                    lblStatus.Text = $"Error en conversion de archivo. {ex.Message}";
+                    Logger.Log.Error(new ApplicationException("Error en conversion de archivo", ex));
+                }
+            }
         }
 
         private void lnkNueva_MouseClick(object sender, MouseEventArgs e)
