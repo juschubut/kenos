@@ -35,6 +35,8 @@
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.label3 = new System.Windows.Forms.Label();
+			this.cboModo = new System.Windows.Forms.ComboBox();
 			this.lnkTest = new System.Windows.Forms.LinkLabel();
 			this.lnkCancelar = new System.Windows.Forms.LinkLabel();
 			this.lnkFinalizar = new System.Windows.Forms.LinkLabel();
@@ -46,6 +48,8 @@
 			this.LabelDescripcion = new System.Windows.Forms.Label();
 			this.timerRecording = new System.Windows.Forms.Timer(this.components);
 			this.gvMarcas = new System.Windows.Forms.DataGridView();
+			this.Tiemp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.pnlAlerta = new System.Windows.Forms.Panel();
 			this.label2 = new System.Windows.Forms.Label();
 			this.lblAlerta = new System.Windows.Forms.Label();
@@ -73,11 +77,9 @@
 			this.pnlBotonera = new System.Windows.Forms.Panel();
 			this.pnlObs = new System.Windows.Forms.Panel();
 			this.splitContainer = new System.Windows.Forms.SplitContainer();
-			this.cboModo = new System.Windows.Forms.ComboBox();
-			this.label3 = new System.Windows.Forms.Label();
 			this.wmpPlayer = new AxWMPLib.AxWindowsMediaPlayer();
-			this.Tiemp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.pnlIniciando = new System.Windows.Forms.Panel();
+			this.label4 = new System.Windows.Forms.Label();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gvMarcas)).BeginInit();
@@ -91,6 +93,7 @@
 			this.splitContainer.Panel2.SuspendLayout();
 			this.splitContainer.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.wmpPlayer)).BeginInit();
+			this.pnlIniciando.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// panel1
@@ -110,6 +113,34 @@
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(1503, 115);
 			this.panel1.TabIndex = 0;
+			// 
+			// label3
+			// 
+			this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label3.AutoSize = true;
+			this.label3.ForeColor = System.Drawing.Color.White;
+			this.label3.Location = new System.Drawing.Point(1231, 13);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(49, 20);
+			this.label3.TabIndex = 8;
+			this.label3.Text = "Modo";
+			// 
+			// cboModo
+			// 
+			this.cboModo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.cboModo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cboModo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.cboModo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.cboModo.FormattingEnabled = true;
+			this.cboModo.Items.AddRange(new object[] {
+            "Audio",
+            "Video"});
+			this.cboModo.Location = new System.Drawing.Point(1233, 35);
+			this.cboModo.Name = "cboModo";
+			this.cboModo.Size = new System.Drawing.Size(172, 44);
+			this.cboModo.TabIndex = 7;
+			this.cboModo.TabStop = false;
+			this.cboModo.SelectedIndexChanged += new System.EventHandler(this.cboModo_SelectedIndexChanged);
 			// 
 			// lnkTest
 			// 
@@ -269,6 +300,30 @@
 			this.gvMarcas.TabIndex = 8;
 			this.gvMarcas.SelectionChanged += new System.EventHandler(this.gvMarcas_SelectionChanged);
 			this.gvMarcas.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gvMarcas_UserDeletingRow);
+			// 
+			// Tiemp
+			// 
+			this.Tiemp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+			this.Tiemp.DataPropertyName = "Tiempo";
+			dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+			dataGridViewCellStyle10.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.Tiemp.DefaultCellStyle = dataGridViewCellStyle10;
+			this.Tiemp.Frozen = true;
+			this.Tiemp.HeaderText = "Tiempo";
+			this.Tiemp.MinimumWidth = 8;
+			this.Tiemp.Name = "Tiemp";
+			this.Tiemp.ReadOnly = true;
+			this.Tiemp.Width = 150;
+			// 
+			// Descripcion
+			// 
+			this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.Descripcion.DataPropertyName = "Descripcion";
+			dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.Descripcion.DefaultCellStyle = dataGridViewCellStyle11;
+			this.Descripcion.HeaderText = "Descripción";
+			this.Descripcion.MinimumWidth = 8;
+			this.Descripcion.Name = "Descripcion";
 			// 
 			// pnlAlerta
 			// 
@@ -621,6 +676,7 @@
 			// 
 			// splitContainer.Panel1
 			// 
+			this.splitContainer.Panel1.Controls.Add(this.pnlIniciando);
 			this.splitContainer.Panel1.Controls.Add(this.pnlProbando);
 			this.splitContainer.Panel1.Controls.Add(this.wmpPlayer);
 			this.splitContainer.Panel1.Controls.Add(this.pnlObs);
@@ -640,34 +696,6 @@
 			this.splitContainer.SplitterDistance = 704;
 			this.splitContainer.TabIndex = 23;
 			// 
-			// cboModo
-			// 
-			this.cboModo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.cboModo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cboModo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.cboModo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.cboModo.FormattingEnabled = true;
-			this.cboModo.Items.AddRange(new object[] {
-            "Audio",
-            "Video"});
-			this.cboModo.Location = new System.Drawing.Point(1233, 35);
-			this.cboModo.Name = "cboModo";
-			this.cboModo.Size = new System.Drawing.Size(172, 44);
-			this.cboModo.TabIndex = 7;
-			this.cboModo.TabStop = false;
-			this.cboModo.SelectedIndexChanged += new System.EventHandler(this.cboModo_SelectedIndexChanged);
-			// 
-			// label3
-			// 
-			this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.label3.AutoSize = true;
-			this.label3.ForeColor = System.Drawing.Color.White;
-			this.label3.Location = new System.Drawing.Point(1231, 13);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(49, 20);
-			this.label3.TabIndex = 8;
-			this.label3.Text = "Modo";
-			// 
 			// wmpPlayer
 			// 
 			this.wmpPlayer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -680,28 +708,23 @@
 			this.wmpPlayer.Size = new System.Drawing.Size(201, 289);
 			this.wmpPlayer.TabIndex = 23;
 			// 
-			// Tiemp
+			// pnlIniciando
 			// 
-			this.Tiemp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-			this.Tiemp.DataPropertyName = "Tiempo";
-			dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-			dataGridViewCellStyle10.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.Tiemp.DefaultCellStyle = dataGridViewCellStyle10;
-			this.Tiemp.Frozen = true;
-			this.Tiemp.HeaderText = "Tiempo";
-			this.Tiemp.MinimumWidth = 8;
-			this.Tiemp.Name = "Tiemp";
-			this.Tiemp.ReadOnly = true;
+			this.pnlIniciando.Controls.Add(this.label4);
+			this.pnlIniciando.Location = new System.Drawing.Point(19, 345);
+			this.pnlIniciando.Name = "pnlIniciando";
+			this.pnlIniciando.Size = new System.Drawing.Size(670, 215);
+			this.pnlIniciando.TabIndex = 9;
 			// 
-			// Descripcion
+			// label4
 			// 
-			this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.Descripcion.DataPropertyName = "Descripcion";
-			dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.Descripcion.DefaultCellStyle = dataGridViewCellStyle11;
-			this.Descripcion.HeaderText = "Descripción";
-			this.Descripcion.MinimumWidth = 8;
-			this.Descripcion.Name = "Descripcion";
+			this.label4.AutoSize = true;
+			this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label4.Location = new System.Drawing.Point(59, 66);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(464, 69);
+			this.label4.TabIndex = 0;
+			this.label4.Text = "Iniciando OBS...";
 			// 
 			// frmMain
 			// 
@@ -738,6 +761,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
 			this.splitContainer.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.wmpPlayer)).EndInit();
+			this.pnlIniciando.ResumeLayout(false);
+			this.pnlIniciando.PerformLayout();
 			this.ResumeLayout(false);
 
         }
@@ -788,6 +813,8 @@
 		private System.Windows.Forms.ComboBox cboModo;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Tiemp;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
+		private System.Windows.Forms.Panel pnlIniciando;
+		private System.Windows.Forms.Label label4;
 	}
 }
 
