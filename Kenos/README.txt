@@ -1,0 +1,23 @@
+﻿------------------------------
+Configuracion necesaria en OBS
+------------------------------
+- Perfil de configuraciones
+- Creacion de escenas válidas
+- Habilitación de websocket -> Tools/Websocket Server Settings
+- Output
+	- Configuracion de formato mkv
+	- Configuracion de Auto-remux -> Transformacion de mkv a mp4 de forma automática (File/Settings/Advanced/Recording)
+- Una vez finalizada la configuracón dejar OBS con:
+	- Preview lo mas grande posible
+	- Quitar todos los docks y dejar solo el Audio Mixer
+
+
+--------------------------------
+Configuracion necesaria en Kenos 
+--------------------------------
+- Perfil que se va a utilizar
+- Ruta donde se encuntra OBS
+- Archivo exe de OBS
+- Configuracion de puerto websocket OBS
+
+

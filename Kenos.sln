@@ -11,11 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kenos.SimpleConnector", "Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kenos.SkuaConnector", "Connectors\Kenos.SkuaConnector\Kenos.SkuaConnector.csproj", "{E59C5DFE-0510-4C1A-8631-FC32BC1AB85E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kenos.Win", "Kenos.Win\Kenos.Win.csproj", "{EAD9B790-DB4E-4F08-8A1B-4889092C5CED}"
-	ProjectSection(ProjectDependencies) = postProject
-		{6B143A39-C7B2-4743-9917-92262C60E9A6} = {6B143A39-C7B2-4743-9917-92262C60E9A6}
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kenos.Player", "Kenos.Player\Kenos.Player.csproj", "{4996C710-F2F0-47D3-AA9F-02D048689F4F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kenos.FamiliaConnector", "Connectors\Kenos.FamiliaConnector\Kenos.FamiliaConnector.csproj", "{FC7796FF-53F1-4D0C-A204-3AD57EBBD7B3}"
@@ -29,8 +24,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kenos.EjemploConnector", "Connectors\Kenos.EjemploConnector\Kenos.EjemploConnector.csproj", "{02932DBE-145E-468A-8DC9-22B2E21E624B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kenos.ExpedienteSimpleConnector", "Connectors\Kenos.ExpedienteSimpleConnector\Kenos.ExpedienteSimpleConnector.csproj", "{94120104-6503-4CE7-BB46-66363BC9575A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kenos.ObsIntegration", "Kenos.Obs\Kenos.ObsIntegration.csproj", "{AC67D87C-2A6A-4C57-AE14-1620BD316A9B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kenos", "Kenos\Kenos.csproj", "{9B16C2E3-17AE-4980-B642-FB729A4DDC5A}"
 EndProject
@@ -52,10 +45,6 @@ Global
 		{E59C5DFE-0510-4C1A-8631-FC32BC1AB85E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E59C5DFE-0510-4C1A-8631-FC32BC1AB85E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E59C5DFE-0510-4C1A-8631-FC32BC1AB85E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EAD9B790-DB4E-4F08-8A1B-4889092C5CED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EAD9B790-DB4E-4F08-8A1B-4889092C5CED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EAD9B790-DB4E-4F08-8A1B-4889092C5CED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EAD9B790-DB4E-4F08-8A1B-4889092C5CED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4996C710-F2F0-47D3-AA9F-02D048689F4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4996C710-F2F0-47D3-AA9F-02D048689F4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4996C710-F2F0-47D3-AA9F-02D048689F4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -84,10 +73,6 @@ Global
 		{94120104-6503-4CE7-BB46-66363BC9575A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94120104-6503-4CE7-BB46-66363BC9575A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94120104-6503-4CE7-BB46-66363BC9575A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AC67D87C-2A6A-4C57-AE14-1620BD316A9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC67D87C-2A6A-4C57-AE14-1620BD316A9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AC67D87C-2A6A-4C57-AE14-1620BD316A9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC67D87C-2A6A-4C57-AE14-1620BD316A9B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9B16C2E3-17AE-4980-B642-FB729A4DDC5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9B16C2E3-17AE-4980-B642-FB729A4DDC5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B16C2E3-17AE-4980-B642-FB729A4DDC5A}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -211,5 +211,8 @@
   <ItemGroup>
     <None Include="Resources\icon_audio.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="README.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -22,7 +22,7 @@ namespace Kenos
         private Common.IConnector _connector;
         private Common.Metadata _metadata;
         private FileMonitor _fileMonitor = null;
-        private CaptureState _estado = CaptureState.Initialized;
+        private CaptureState _estado = CaptureState.Initializing;
         private RecordingFile _output = null;
         private bool _closing = false;
         private PruebaGrabacion _pruebaGrabacion = null;
@@ -45,76 +45,24 @@ namespace Kenos
         {
             AplicarStyles();
 
-            Log("******************* Kenos Iniciado *******************");
-            LogKenosInformation();
-
-            ResetGrabacion();
-
             ConfigurarForm();
-            Probando(false);
+        }
 
-            _dtMarcaTiempo = CreateDataSourceMarcaTiempo();
-
-            Log("Cargando conectores");
-
-            bool connectorOk = false;
-
-            Logger.Log.IncreaseLogIndentation();
-
-            foreach (string connectorClassName in Properties.Settings.Default.Connectors)
-            {
-                if (!string.IsNullOrEmpty(connectorClassName))
-                {
-                    Log("Cargando " + connectorClassName);
-
-                    try
-                    {
-                        Common.IConnector connector = (Common.IConnector)Activator.CreateInstance(Type.GetType(connectorClassName, true));
-
-                        _connector = connector;
-
-                        AddConnectorMenuItem(connector);
-                        connectorOk = true;
-                    }
-                    catch (Exception ex)
-                    {
-                        Log("Error al cargar connector " + connectorClassName);
-                        Logger.Log.Error(ex);
-                    }
-                }
-            }
-
-            Logger.Log.DecreaseLogIndentation();
-
-            if (!connectorOk)
-            {
-                _connector = null;
-
-                MessageBox.Show(this, "No se puede cargar el connector, llame al administrador", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            _pruebaGrabacion = new PruebaGrabacion();
-            _pruebaGrabacion.PasoPrueba += PruebaGrabacion_PasoPrueba;
-            _pruebaGrabacion.Iniciando += PruebaGrabacion_Iniciando;
-            _pruebaGrabacion.Finalizado += PruebaGrabacion_Finalizado;
-            _pruebaGrabacion.Cancelado += PruebaGrabacion_Cancelado;
-            _pruebaGrabacion.Verificada = true;
-
-            AlertaEspacioDisco();
-
-            _obs.Initialize(pnlObs);
-
-            _obs.OnRecordingStarted += OnRecordingStarted;
-            _obs.OnRecordingStatus += OnRecordingStatus;
-            _obs.OnReady += OnReady;
-            _obs.OnLog += OnLog;
+        private void frmMain_Shown(object sender, EventArgs e)
+        {
+            InicializarKenos();
         }
 
         private void OnReady(object sender, EventArgs args)
         {
             Invoke(new MethodInvoker(() =>
             {
+                lblStatus.Text = "Cargando modos de grabación...";
+                Application.DoEvents();
                 CargarModosGrabacion();
+
+                _estado = CaptureState.NotSet;
+
                 ConfigurarForm();
             }));
         }
@@ -221,7 +169,6 @@ namespace Kenos
             Log("******************* Kenos Finalizado *******************");
         }
 
-
         private void gvMarcas_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
             DialogResult result = MessageBox.Show(this, string.Format("¿Está seguro que desea borrar la marca de tiempo de {0}?", e.Row.Cells[0].FormattedValue), this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
@@ -229,13 +176,6 @@ namespace Kenos
             if (result == DialogResult.No)
                 e.Cancel = true;
         }
-
-        #region Eventos Video Grabber
-        private void videoCapture_OnDeviceLost(object sender, EventArgs e)
-        {
-            MostrarAlerta(true, "Alerta: Existen problemas con la grabación de la audiencia");
-        }
-        #endregion
 
         private void timerRecording_Tick(object sender, EventArgs e)
         {
@@ -302,7 +242,6 @@ namespace Kenos
             }
         }
 
-
         private void btnAgregarMarca_Click(object sender, EventArgs e)
         {
             if (_obs.State != ObsStates.Recording)
@@ -337,6 +276,87 @@ namespace Kenos
         #endregion
 
         #region Metodos
+        private void InicializarKenos()
+        {
+            lblStatus.Text = "Inicializando...";
+            Application.DoEvents();
+
+            Log("******************* Kenos Iniciado *******************");
+            LogKenosInformation();
+
+            ResetGrabacion();
+
+            Probando(false);
+
+            _dtMarcaTiempo = CreateDataSourceMarcaTiempo();
+
+            lblStatus.Text = "Cargando conectores...";
+            Application.DoEvents();
+
+            Log("Cargando conectores");
+
+            bool connectorOk = false;
+
+            Logger.Log.IncreaseLogIndentation();
+
+            foreach (string connectorClassName in Properties.Settings.Default.Connectors)
+            {
+                if (!string.IsNullOrEmpty(connectorClassName))
+                {
+                    Log("Cargando " + connectorClassName);
+
+                    try
+                    {
+                        Common.IConnector connector = (Common.IConnector)Activator.CreateInstance(Type.GetType(connectorClassName, true));
+
+                        _connector = connector;
+
+                        AddConnectorMenuItem(connector);
+                        connectorOk = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        Log("Error al cargar connector " + connectorClassName);
+                        Logger.Log.Error(ex);
+                    }
+                }
+            }
+
+            Logger.Log.DecreaseLogIndentation();
+
+            if (!connectorOk)
+            {
+                _connector = null;
+
+                MessageBox.Show(this, "No se puede cargar el connector, llame al administrador", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            _pruebaGrabacion = new PruebaGrabacion();
+            _pruebaGrabacion.PasoPrueba += PruebaGrabacion_PasoPrueba;
+            _pruebaGrabacion.Iniciando += PruebaGrabacion_Iniciando;
+            _pruebaGrabacion.Finalizado += PruebaGrabacion_Finalizado;
+            _pruebaGrabacion.Cancelado += PruebaGrabacion_Cancelado;
+            _pruebaGrabacion.Verificada = true;
+
+            lblStatus.Text = "Validando espacio en disco...";
+            Application.DoEvents();
+
+            AlertaEspacioDisco();
+
+            lblStatus.Text = "Iniciando OBS...";
+            Application.DoEvents();
+
+            _obs.Initialize(pnlObs);
+
+            _obs.OnRecordingStarted += OnRecordingStarted;
+            _obs.OnRecordingStatus += OnRecordingStatus;
+            _obs.OnReady += OnReady;
+            _obs.OnLog += OnLog;
+
+            ConfigurarForm();
+        }
+
+
         private bool IniciarGrabacion()
         {
             bool isOk = true;
@@ -739,7 +759,8 @@ namespace Kenos
         {
             Log("Inicializando datos de grabación");
 
-            _estado = CaptureState.NotSet;
+            if (_estado != CaptureState.Initializing)
+                _estado = CaptureState.NotSet;
 
             if (resetMetadata)
             {
@@ -852,6 +873,24 @@ namespace Kenos
 
         private void ConfigurarForm()
         {
+            if (_estado == CaptureState.Initializing)
+            {
+                pnlBotonera.Enabled = false;
+                lnkNueva.Enabled = false;
+                lnkGrabar.Enabled = false;
+                lnkPausar.Enabled = false;
+                lnkParar.Enabled = false;
+                lnkPlay.Enabled = false;
+                lnkFinalizar.Enabled = false;
+                lnkCancelar.Enabled = false;
+                lnkTest.Enabled = false;
+                wmpPlayer.Visible = false;
+
+                return;
+            }
+
+            pnlIniciando.Visible = false;
+            pnlBotonera.Enabled = true;
             lnkNueva.Enabled = _estado == CaptureState.Initialized || _estado == CaptureState.NotSet;
             lnkGrabar.Enabled = _estado == CaptureState.Initialized && _pruebaGrabacion.Realizada;
             lnkPausar.Enabled = _estado == CaptureState.Recording && _obs.State == ObsStates.Recording;

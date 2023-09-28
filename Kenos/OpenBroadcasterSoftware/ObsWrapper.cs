@@ -229,7 +229,6 @@ namespace Kenos.OpenBroadcasterSoftware
 			WindowsWrapper.MoveWindow(_obsProcess.MainWindowHandle, 0, 0, _previewPanel.Width, _previewPanel.Height, true);
 		}
 
-
 		private void LogInfo(string message)
 		{
 			if (this.OnLog != null)
