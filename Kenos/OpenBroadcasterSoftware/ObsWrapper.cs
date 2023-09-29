@@ -78,34 +78,41 @@ namespace Kenos.OpenBroadcasterSoftware
 
 			_previewPanel = previewPanel;
 
-			// Creo el proceso para levantar OBS
-			_obsProcess = new Process
+			var ok = Step("Creando proceso OBS", () =>
 			{
-				StartInfo = new ProcessStartInfo
+				// Creo el proceso para levantar OBS
+				_obsProcess = new Process
 				{
-					WorkingDirectory = Properties.Settings.Default.ObsWorkingDirectory,
-					FileName = Properties.Settings.Default.ObsFileName,
-					Arguments = Properties.Settings.Default.ObsArguments
+					StartInfo = new ProcessStartInfo
+					{
+						WorkingDirectory = Properties.Settings.Default.ObsWorkingDirectory,
+						FileName = Properties.Settings.Default.ObsFileName,
+						Arguments = Properties.Settings.Default.ObsArguments
+					}
+				};
+
+				_obsProcess.Start();
+				_obsProcess.WaitForInputIdle();
+
+				while (_obsProcess.MainWindowHandle == IntPtr.Zero)
+				{
+					Thread.Sleep(100);
+					_obsProcess.Refresh();
 				}
-			};
 
-			_obsProcess.Start();
-			_obsProcess.WaitForInputIdle();
+			});
 
-			while (_obsProcess.MainWindowHandle == IntPtr.Zero)
+			ok = Step(ok, "Mostrando el proceso en el panel OBS", () =>
 			{
-				Thread.Sleep(100);
-				_obsProcess.Refresh();
-			}
+				// Muestro la interfaz gráfica de OBS en el panel 
+				WindowsWrapper.DisplayOnPanel(_obsProcess, previewPanel);
+				WindowsWrapper.MoveWindow(_obsProcess.MainWindowHandle, 0, 0, _previewPanel.Width, _previewPanel.Height, true);
 
-			// Muestro la interfaz gráfica de OBS en el panel 
-			WindowsWrapper.DisplayOnPanel(_obsProcess, previewPanel);
-			WindowsWrapper.MoveWindow(_obsProcess.MainWindowHandle, 0, 0, _previewPanel.Width, _previewPanel.Height, true);
+				previewPanel.Resize += PreviewPanel_Resize;
+			});
 
 			// Connecto via websocket
-			previewPanel.Resize += PreviewPanel_Resize;
-
-			ConnectWebsocket();
+			Step(ok, "Conectando websocket", ConnectWebsocket);
 		}
 
 		public void ConnectWebsocket()
@@ -122,15 +129,25 @@ namespace Kenos.OpenBroadcasterSoftware
 
 			Task.Run(() =>
 			{
-				try
+				Step($"Conectando websocket ({url})", () =>
 				{
-					_obsWebsocket.ConnectAsync(url, "");
-				}
-				catch (Exception ex)
-				{
-					LogError($"No se pudo conectar al websocket ({url})", ex);
-				}
+					_obsWebsocket.ConnectAsync(url, Properties.Settings.Default.ObsPassword);
+				});
 			});
+
+			var wsStart = DateTime.Now;
+			double connectionTime = 0;
+			do
+			{
+				Thread.Sleep(100);
+				Application.DoEvents();
+
+				connectionTime = (DateTime.Now - wsStart).TotalSeconds;
+			}
+			while (!_wsConnected && connectionTime <= Properties.Settings.Default.ObsTimeoutWebsocket);
+
+			if (!_wsConnected)
+				LogError($"No se pudo establecer la conexion websocket a {url}");
 		}
 
 		private void Websocket_InputRemoved(object sender, OBSWebsocketDotNet.Types.Events.InputRemovedEventArgs e)
@@ -257,7 +274,7 @@ namespace Kenos.OpenBroadcasterSoftware
 				});
 		}
 
-		private void LogError(string message, Exception ex)
+		private void LogError(string message, Exception ex = null)
 		{
 			if (this.OnLog != null)
 				this.OnLog(this, new ObsLogEventArgs
@@ -327,18 +344,22 @@ namespace Kenos.OpenBroadcasterSoftware
 		{
 			State = ObsStates.Closing;
 
-			if (_obsProcess != null)
+			try
 			{
-				_obsProcess.Kill();
-			}
+				if (_obsProcess != null)
+				{
+					_obsProcess.Kill();
+				}
 
-			if (_wsConnected)
-			{
-				_keepAliveTokenSource.Cancel();
+				if (_wsConnected)
+				{
+					_keepAliveTokenSource.Cancel();
 
-				_obsWebsocket.Disconnect();
-				_wsConnected = false;
+					_obsWebsocket.Disconnect();
+					_wsConnected = false;
+				}
 			}
+			catch { }
 		}
 
 		public void Resume()
@@ -352,6 +373,33 @@ namespace Kenos.OpenBroadcasterSoftware
 		public List<string> GetRecordingModes()
 		{
 			return _obsWebsocket.GetSceneList().Scenes.Select(x => x.Name).ToList();
+		}
+
+
+		private bool Step(string actionName, Action action)
+		{
+			return Step(true, actionName, action);
+		}
+
+		private bool Step(bool condition, string actionName, Action action)
+		{
+			try
+			{
+
+				if (condition)
+				{
+					LogInfo(actionName);
+					action();
+				}
+
+				return condition;
+			}
+			catch (Exception ex)
+			{
+				LogError($"Error: {actionName}. {ex.Message}", ex);
+			}
+
+			return false;
 		}
 	}
 }

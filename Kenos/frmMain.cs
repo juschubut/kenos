@@ -89,13 +89,13 @@ namespace Kenos
 
         private void OnLog(object sender, ObsLogEventArgs args)
         {
-            if (args.IsError)
-            {
-                Logger.Log.Error(new ApplicationException(args.Message, args.Exception));
-                MostrarAlerta(true, args.Message);
-            }
+            if (this.InvokeRequired)
+                Invoke(new MethodInvoker(() =>
+                {
+                    ProcessLogEvent(args);
+                }));
             else
-                Logger.Log.Info(args.Message);
+                ProcessLogEvent(args);
         }
 
         #region Pruebas de grabación
@@ -138,6 +138,17 @@ namespace Kenos
             AgregarMarca(string.Format("Prueba de grabación {0}", e.CasoPrueba.Nombre));
         }
         #endregion
+
+        private void ProcessLogEvent(ObsLogEventArgs args)
+        {
+            if (args.IsError)
+            {
+                Logger.Log.Error(new ApplicationException(args.Message, args.Exception));
+                MostrarAlerta(true, args.Message);
+            }
+            else
+                Logger.Log.Info(args.Message);
+        }
 
         private void menuConnnectorItem_Click(object sender, EventArgs e)
         {
@@ -347,12 +358,13 @@ namespace Kenos
             lblStatus.Text = "Iniciando OBS...";
             Application.DoEvents();
 
-            _obs.Initialize(pnlObs);
 
             _obs.OnRecordingStarted += OnRecordingStarted;
             _obs.OnRecordingStatus += OnRecordingStatus;
             _obs.OnReady += OnReady;
             _obs.OnLog += OnLog;
+
+            _obs.Initialize(pnlObs);
 
             ConfigurarForm();
         }

@@ -229,5 +229,14 @@ namespace Kenos.Properties {
                 return ((int)(this["ConversionAutomaticaTiempoMinimoEspera"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int ObsTimeoutWebsocket {
+            get {
+                return ((int)(this["ObsTimeoutWebsocket"]));
+            }
+        }
     }
 }
