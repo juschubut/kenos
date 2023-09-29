@@ -212,7 +212,9 @@
     <None Include="Resources\icon_audio.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="README.txt" />
+    <Content Include="Kenos.exe.README.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
