@@ -156,8 +156,6 @@ namespace Kenos.Player
                             _tags.Clear();
 
                         _tags.Add(tag);
-
-
                     }
                 }
             }

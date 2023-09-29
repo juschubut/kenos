@@ -28,7 +28,6 @@ namespace Kenos
         private bool _closing = false;
         private PruebaGrabacion _pruebaGrabacion = null;
         private TimeSpan _marcaTiempoActual;    // Mantiene el tiempo actual de grabación
-        private TimeSpan _marcaTiempoInicial;   // Mantiene el tiempo total de la grabacion hasta la última pausa
         private DataTable _dtMarcaTiempo;
 
         private bool IsPaused
@@ -381,7 +380,6 @@ namespace Kenos
             try
             {
                 _marcaTiempoActual = new TimeSpan();
-                _marcaTiempoInicial = new TimeSpan();
 
                 if (!_obs.ValidateConfig())
                 {
@@ -580,10 +578,6 @@ namespace Kenos
             _estado = CaptureState.Paused;
 
             _obs.Pause();
-
-            _marcaTiempoInicial = _marcaTiempoActual;
-
-            //CrearNuevoArchivo();
 
             lnkPausar.Visible = false;
             lnkResume.Visible = true;
@@ -1033,16 +1027,16 @@ namespace Kenos
         #endregion
 
 
-
-        private void OnRecordingStatus(object sender, OpenBroadcasterSoftware.ObsRecordingStatusEventArgs args)
+        private void OnRecordingStatus(object sender, ObsRecordingStatusEventArgs args)
         {
+            _marcaTiempoActual = TimeSpan.FromMilliseconds(args.RecordingDuration);
+
             if (!_closing)
             {
                 Invoke(new MethodInvoker(() =>
                 {
                     if (!_closing)
                     {
-
                         if (args.IsRecordingPaused)
                             lblGrabando.Text = "Pausado...";
                         else if (args.IsRecording)
