@@ -1,9 +1,9 @@
 ﻿------------------------------
-Configuracion necesaria en OBS
+Configuración necesaria en OBS
 ------------------------------
 - Perfil de configuraciones
 - Creacion de escenas válidas
-- Habilitación de websocket -> Tools/Websocket Server Settings
+- Habilitación de websocket -> Tools/Websocket Server Settings: puerto 4444 y que no requiera autenticación
 - Output
 	- Configuracion de formato mkv
 	- Configuracion de Auto-remux -> Transformacion de mkv a mp4 de forma automática (File/Settings/Advanced/Recording)
@@ -17,7 +17,7 @@ Configuracion necesaria en Kenos
 --------------------------------
 - Perfil que se va a utilizar
 - Ruta donde se encuntra OBS
-- Archivo exe de OBS
+- Archivo .exe de OBS
 - Configuracion de puerto websocket OBS
 
 
