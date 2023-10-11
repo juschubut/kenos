@@ -79,6 +79,15 @@ namespace Kenos.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int ObsTimeoutWebsocket {
+            get {
+                return ((int)(this["ObsTimeoutWebsocket"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool RegistracionHabilitada {
             get {
@@ -223,19 +232,10 @@ namespace Kenos.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
         public int ConversionAutomaticaTiempoMinimoEspera {
             get {
                 return ((int)(this["ConversionAutomaticaTiempoMinimoEspera"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5")]
-        public int ObsTimeoutWebsocket {
-            get {
-                return ((int)(this["ObsTimeoutWebsocket"]));
             }
         }
     }

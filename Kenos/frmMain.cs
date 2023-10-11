@@ -1130,32 +1130,24 @@ namespace Kenos
 
                     var inicio = DateTime.Now;
 
-                    long tamanio = 0;
+                    var tiempoEspera = Properties.Settings.Default.ConversionAutomaticaTiempoMinimoEspera;
+
+                    Application.DoEvents();
+
+                    Thread.Sleep(tiempoEspera * 1000);
 
                     while (!finalizado)
                     {
                         Application.DoEvents();
 
-                        var tiempoTranscurrido = DateTime.Now - inicio;
                         FileInfo fi = new FileInfo(mp4FileName);
 
                         if (fi != null && fi.Exists)
                         {
-                            if (tamanio < fi.Length)    // Si esta crediendo el archivo, espero
-                                tamanio = fi.Length;
-                            else if (tamanio > 0
-                                    && tamanio == fi.Length
-                                    && tiempoTranscurrido.TotalSeconds > Properties.Settings.Default.ConversionAutomaticaTiempoMinimoEspera)
-                            {
-                                // si no crecio el archivo y paso el tiempo minimo finalizo
-                                finalizado = true;
-                                Application.DoEvents();
-                                Thread.Sleep(2000);
-                            }
-                            else
-                            {
+                            if (IsFileLocked(fi))
                                 Thread.Sleep(1000);
-                            }
+                            else
+                                finalizado = true;
                         }
                     }
 
@@ -1172,6 +1164,22 @@ namespace Kenos
             }
         }
 
+        private bool IsFileLocked(FileInfo file)
+        {
+            try
+            {
+                using (FileStream stream = file.Open(FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
+                {
+                    stream.Close();
+                }
+            }
+            catch (IOException)
+            {
+                return true;
+            }
+
+            return false;
+        }
         private void lnkNueva_MouseClick(object sender, MouseEventArgs e)
         {
             if (mnuNueva.Items.Count > 1)
