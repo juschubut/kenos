@@ -1144,11 +1144,11 @@ namespace Kenos
 
                         if (fi != null && fi.Exists)
                         {
-                            if (IsFileLocked(fi))
-                                Thread.Sleep(1000);
-                            else
+                            if (!IsFileLocked(fi))
                                 finalizado = true;
                         }
+
+                        Thread.Sleep(1000);
                     }
 
                     if (_metadata != null)
@@ -1169,6 +1169,11 @@ namespace Kenos
             try
             {
                 using (FileStream stream = file.Open(FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
+                {
+                    stream.Close();
+                }
+
+                using (FileStream stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
                     stream.Close();
                 }
