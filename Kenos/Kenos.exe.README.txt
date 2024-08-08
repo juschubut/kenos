@@ -1,23 +1,68 @@
-﻿------------------------------
-Configuración necesaria en OBS
-------------------------------
-- Perfil de configuraciones
-- Creacion de escenas válidas
-- Habilitación de websocket -> Tools/Websocket Server Settings: puerto 4444 y que no requiera autenticación
-- Output
-	- Configuracion de formato mkv
-	- Configuracion de Auto-remux -> Transformacion de mkv a mp4 de forma automática (File/Settings/Advanced/Recording)
-- Una vez finalizada la configuracón dejar OBS con:
-	- Preview lo mas grande posible
-	- Quitar todos los docks y dejar solo el Audio Mixer
+﻿
+--------------------------------------------------------------------------------------------------------------README--------------------------------------------------------------------------------------------------------------
+*Notas: 
+	- Esta configuración será facilitada a cada Delegación y formará parte del paquete completo del sistema Kenos-OBS, debiendo copiar la carpeta "obs-studio" en el directorio siguiente:
+		C:\Users\<nombre_usuario_audiencias>\AppData\Roaming
+	- Dicha configuración está basada en un ambiente de prueba ya testeado, podrá ser adaptado según las especificaciones de cada sala siguiendo las siguientes indicaciones:
 
 
---------------------------------
-Configuracion necesaria en Kenos 
---------------------------------
-- Perfil que se va a utilizar
-- Ruta donde se encuntra OBS
-- Archivo .exe de OBS
-- Configuracion de puerto websocket OBS
+------------------------------------------------------------PRELIMINARES------------------------------------------------------------
+1) Carpeta C:\kenos-obs\Temp: 
+	Allí se guarda el archivo "kenos-metadata.txt" que es donde se guarda el texto que se verá en el video de audiencia (Etiqueta y Descripción de la audiencia cuando se crea en Kenos)
 
+2) Carpeta C:\kenos-obs\Logs: 
+	Allí se guardan los logs de Kenos necesarios para ver el comportamiento del sistema
+
+3) Versión de OBS Studio a utilizar --> 30.1.2 
+
+
+-----------------------------------------------------CONFIGURACIÓN DE OBS-----------------------------------------------------
+4) Creación de escenas válidas:
+	En el menú "Escenas" crear aquellas que deberán ser visibles en Kenos. 
+	Si hay escenas que no deben aparecer en Kenos, anteponer al nombre un "_"
+		Ej:	- Escena 1: Video. Corresponde a audiencias locales, sin gente externa
+			- Escena 2: Videoconferencias. Corresponde a audiencias locales y con gente externa (vía Webex)
+			- Escena que no se debe visualizar: _<nombre_escena>
+
+5) A cada Escena sumar las Fuentes correspondientes: Cámaras Ip, cámaras usb, captura de pantalla y demás fuentes según corresponda.
+	Ej: Agregar cámara ip (a Cada Sala de Audiencia se le deberá agregar la cámara correspondiente):
+		a) Fuentes/+/Fuente multimedia
+		b) Destildar "Archivo Local"
+		b) Entrada: rtsp://<usuario_cámara>:<contraseña_de_acceso>@<ip_cámara>:554
+		c) Tildar "Utilizar el decodificador por hardware cuando esté disponible"hola
+
+6) Habilitación de websocket --> Herramientas/Ajustes del servidor WebSocket: 
+	- Puerto 4444
+	- Habilitar Autenticación = dejar Deshabilitado
+
+7) Configuración de Archivo de Salida --> Archivo/Ajustes/Salida
+	- Ajustes de Grabación
+		- Ruta de grabación: C:/Kenos-obs/Videos
+		- Formato de Grabación: MPEG-4 (.mp4)
+		- Codificador de video: x264
+	- Ajustes de Codificación
+		- Control de Frecuencia: VBR
+
+8) Configuración de Video --> Archivo/Ajustes/Video
+		- Resolución de la base (Lienzo): 1280 x 720
+		- Resolución de salida (Escalada): 1280 x 720
+
+9) Una vez finalizada la configuracón, dejar OBS de la siguiente manera:
+	- Lienzo (preview de la sala) lo mas grande posible
+	- Deshabilitar todas las vistas (desde el menú "Vista")
+	- Dejar solo habilitado el Mezclador de Audio (desde el menú "Paneles"):
+		- Solo dejar la entrada conrrespondiente a la consola, entonces...
+		- Ocultar cada entrada de audio extra (Ej: Audio del escritorio): 	- sobre la entrada de audio ir a los "3 puntitos" y desplegar el menú
+								- hacer clic en Ocultar
+
+
+-------------------------------------------------------------ADICIONALES------------------------------------------------------------
+*mp4 corrupto: 
+	se puede dar esta situación cuando el Kenos-obs se cierra mal (por corte de luz por ejemplo) y por eso no se puede reproducir el video resultante
+
+	Hay 2 opciones:
+		1) Recueprar el video directamente desde la tarjeta de memoria de la cámara IP utilizada en la sala
+		2) Reparar el mp4 corrupto: 
+			- usar este soft: https://github.com/anthwlock/untrunc/releases/tag/latest
+			- se debe elegir un mp4 que esté OK de referencia y luego agregar el que quedó corrupto, luego poner REPAIR y listo, la magia "revive" el video corrupto
 

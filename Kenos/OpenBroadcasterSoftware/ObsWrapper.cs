@@ -18,9 +18,18 @@ namespace Kenos.OpenBroadcasterSoftware
 		private bool _wsConnected = false;
 		private CancellationTokenSource _keepAliveTokenSource;
 		private readonly int _keepAliveInterval = 500;
+		private ObsStates _state = ObsStates.NotSet;
 
 		public string RecordingFileName { get; set; }
-		public ObsStates State { get; private set; } = ObsStates.NotSet;
+		public ObsStates State
+		{
+			get { return _state; }
+			private set
+			{
+				_state = value;
+				StateChanged();
+			}
+		}
 
 		public delegate void OnRecordingStartedDelegate(object sender, ObsRecordingStartedEventArgs args);
 		public event OnRecordingStartedDelegate OnRecordingStarted;
@@ -34,6 +43,8 @@ namespace Kenos.OpenBroadcasterSoftware
 		public delegate void OnReadyDelegate(object sender, EventArgs args);
 		public event OnReadyDelegate OnReady;
 
+		public delegate void OnStateChangeDelegate(object sender, ObsStateChangeEventArgs args);
+		public event OnStateChangeDelegate OnStateChange;
 
 		public void Stop()
 		{
@@ -57,7 +68,6 @@ namespace Kenos.OpenBroadcasterSoftware
 		public void Pause()
 		{
 			_obsWebsocket.PauseRecord();
-			State = ObsStates.Paused;
 		}
 
 		public bool Configure()
@@ -182,10 +192,19 @@ namespace Kenos.OpenBroadcasterSoftware
 					});
 				}
 			}
+			else if (e.OutputState.IsActive && e.OutputState.State == OBSWebsocketDotNet.Types.OutputState.OBS_WEBSOCKET_OUTPUT_RESUMED)
+			{
+				State = ObsStates.Recording;
+			}
+			else if (e.OutputState.State == OBSWebsocketDotNet.Types.OutputState.OBS_WEBSOCKET_OUTPUT_PAUSED)
+			{
+				State = ObsStates.Paused;
+			}
 			else if (!e.OutputState.IsActive)
 			{
 				State = ObsStates.Ready;
 			}
+
 
 		}
 
@@ -400,6 +419,12 @@ namespace Kenos.OpenBroadcasterSoftware
 			}
 
 			return false;
+		}
+
+		private void StateChanged()
+		{
+			if (OnStateChange != null)
+				OnStateChange(this, new ObsStateChangeEventArgs { State = State });
 		}
 	}
 }

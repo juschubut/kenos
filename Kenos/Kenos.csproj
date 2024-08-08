@@ -85,6 +85,7 @@
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="OpenBroadcasterSoftware\ObsLogEventArgs.cs" />
+    <Compile Include="OpenBroadcasterSoftware\ObsStateChangeEventArgs.cs" />
     <Compile Include="OpenBroadcasterSoftware\ObsRecordingStartedEventArgs.cs" />
     <Compile Include="OpenBroadcasterSoftware\ObsRecordingStatusEventArgs.cs" />
     <Compile Include="OpenBroadcasterSoftware\ObsStates.cs" />

@@ -1,4 +1,6 @@
-﻿using Kenos.OpenBroadcasterSoftware;
+﻿using Kenos.Common;
+using Kenos.OpenBroadcasterSoftware;
+using Kenos.Properties;
 using Kenos.Win.Test;
 using System;
 using System.Collections.Generic;
@@ -6,7 +8,6 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 
 /**
@@ -30,10 +31,9 @@ namespace Kenos
         private TimeSpan _marcaTiempoActual;    // Mantiene el tiempo actual de grabación
         private DataTable _dtMarcaTiempo;
 
-        private bool IsPaused
-        {
-            get { return lnkResume.Visible; }
-        }
+        private bool IsPaused => lnkResume.Visible;
+        private bool IsTesting => pnlProbando.Visible;
+
 
         public frmMain()
         {
@@ -53,23 +53,12 @@ namespace Kenos
             InicializarKenos();
         }
 
-        private void OnReady(object sender, EventArgs args)
-        {
-            Invoke(new MethodInvoker(() =>
-            {
-                lblStatus.Text = "Cargando modos de grabación...";
-                Application.DoEvents();
-                CargarModosGrabacion();
-
-                _estado = CaptureState.NotSet;
-
-                ConfigurarForm();
-            }));
-        }
-
         private void CargarModosGrabacion()
         {
             var modos = _obs.GetRecordingModes();
+
+            if (modos != null && modos.Any())
+                modos = modos.Where(x => !x.StartsWith("_")).ToList();
 
             cboModo.Items.Clear();
             cboModo.Items.AddRange(modos.ToArray<object>());
@@ -84,17 +73,6 @@ namespace Kenos
             {
                 cboModo.SelectedIndex = 0;
             }
-        }
-
-        private void OnLog(object sender, ObsLogEventArgs args)
-        {
-            if (this.InvokeRequired)
-                Invoke(new MethodInvoker(() =>
-                {
-                    ProcessLogEvent(args);
-                }));
-            else
-                ProcessLogEvent(args);
         }
 
         #region Pruebas de grabación
@@ -357,17 +335,16 @@ namespace Kenos
             lblStatus.Text = "Iniciando OBS...";
             Application.DoEvents();
 
-
-            _obs.OnRecordingStarted += OnRecordingStarted;
-            _obs.OnRecordingStatus += OnRecordingStatus;
-            _obs.OnReady += OnReady;
-            _obs.OnLog += OnLog;
+            _obs.OnRecordingStarted += ObsOnRecordingStarted;
+            _obs.OnRecordingStatus += ObsOnRecordingStatus;
+            _obs.OnReady += ObsOnReady;
+            _obs.OnLog += ObsOnLog;
+            _obs.OnStateChange += ObsOnStateChange;
 
             _obs.Initialize(pnlObs);
 
             ConfigurarForm();
         }
-
 
         private bool IniciarGrabacion()
         {
@@ -421,6 +398,7 @@ namespace Kenos
                 isOk = false;
 
                 Logger.Log.Error(ex);
+                MostrarAlerta(true, $"Error: {ex.Message}");
             }
             finally
             {
@@ -450,6 +428,9 @@ namespace Kenos
                     Logger.Log.IncreaseLogIndentation();
 
                     metadata = _connector.Nueva();
+
+                    if (!string.IsNullOrEmpty(Settings.Default.FilenameTextoGrabacion))
+                        CrearArchivoTextoGrabacion(metadata);
                 }
                 catch (Exception ex)
                 {
@@ -515,6 +496,35 @@ namespace Kenos
             }
         }
 
+        private void CrearArchivoTextoGrabacion(Metadata metadata)
+        {
+            try
+            {
+                var path = Path.Combine(Settings.Default.PathGrabacion, Settings.Default.FilenameTextoGrabacion);
+
+                var result = "";
+
+                if (metadata != null)
+                {
+                    if (!string.IsNullOrEmpty(metadata.Etiqueta))
+                        result = metadata.Etiqueta;
+
+                    if (!string.IsNullOrEmpty(metadata.Descripcion))
+                    {
+                        if (!string.IsNullOrEmpty(result))
+                            result += " - ";
+
+                        result += metadata.Descripcion;
+                    }
+                }
+                File.WriteAllText(path, result);
+            }
+            catch (Exception ex)
+            {
+                Log($"Error escribiendo archivo de informacion de grabación. Error: {ex.Message}");
+            }
+        }
+
         private void CancelarGrabacion()
         {
             Parar();
@@ -554,8 +564,6 @@ namespace Kenos
                     timerRecording.Stop();
 
                     Log(string.Format("Grabación parada [{0}]", lblDuracion.Text));
-
-                    EsperarConversionAutomatica();
 
                     ConfigurarForm();
                 }
@@ -664,10 +672,11 @@ namespace Kenos
                         if (!string.IsNullOrEmpty(Properties.Settings.Default.TextoEnFin))
                             AgregarMarca(string.Format(Properties.Settings.Default.TextoEnFin, DateTime.Now));
 
+                        GuardarMarcas();
+
                         _metadata.MarcasTiempo = GetMarcasTiempo();
 
-                        //Agrega metadata al archivo resultante.
-                        AgregarMarcas();
+                        EsperarLiberacionArchivo(_metadata.FullFileName);
 
                         Log("Generando hash...");
                         string hashSHA1 = WinHelper.GenerarHashSHA1(_metadata.FullFileName);
@@ -721,20 +730,50 @@ namespace Kenos
             ConfigurarForm();
         }
 
-        private List<Common.MarcaTiempo> GetMarcasTiempo()
+        private bool EsperarLiberacionArchivo(string file)
+        {
+            Application.DoEvents();
+            DateTime inicio = DateTime.Now;
+            int esperaMaxima = 30;
+
+            Logger.Log.Error("Esperando liberación del archivo");
+
+            do
+            {
+                try
+                {
+                    using (BinaryReader br = new BinaryReader(File.Open(file, FileMode.Open, FileAccess.Read)))
+                    {
+                        return true;
+                    }
+                }
+                catch { }
+
+                Application.DoEvents();
+
+                System.Threading.Thread.Sleep(1000);
+
+            } while ((DateTime.Now - inicio).TotalSeconds < esperaMaxima);
+
+            Logger.Log.Error("No se puede obtener acceso al archivo final");
+            MessageBox.Show(this, "No se puede obtener acceso al archivo", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            return false;
+        }
+
+        private List<MarcaTiempo> GetMarcasTiempo()
         {
             Log("Obteniendo marcas de tiempo");
 
-            List<Common.MarcaTiempo> marcas = new List<Common.MarcaTiempo>();
+            List<MarcaTiempo> marcas = new List<MarcaTiempo>();
 
             foreach (DataRow r in _dtMarcaTiempo.Rows)
             {
-                Common.MarcaTiempo marca = new Common.MarcaTiempo();
-
-                marca.Tiempo = new TimeSpan(0, 0, Convert.ToInt32(r["Posicion"]));
-                marca.Descripcion = r["Descripcion"].ToString();
-
-                marcas.Add(marca);
+                marcas.Add(new MarcaTiempo
+                {
+                    Tiempo = new TimeSpan(0, 0, Convert.ToInt32(r["Posicion"])),
+                    Descripcion = r["Descripcion"].ToString()
+                });
             }
 
             return marcas;
@@ -793,40 +832,6 @@ namespace Kenos
             Log("Datos de grabación inicializados");
         }
 
-        private void AgregarMarcas()
-        {
-            if (_metadata != null)
-            {
-                try
-                {
-                    Log("Agregando marcas de tiempo al archivo resultante");
-
-                    Kenos.TagsLib.KenosFile file = Kenos.TagsLib.KenosFile.Load(_metadata.FullFileName);
-
-                    file.Description = _metadata.Descripcion;
-                    file.Label = _metadata.Etiqueta;
-                    file.KenosVersion = WinHelper.Version;
-
-                    foreach (var r in _metadata.MarcasTiempo)
-                    {
-                        file.Tags.Add(new TagsLib.Tag()
-                        {
-                            Time = string.Format("{0:hh\\:mm\\:ss}", r.Tiempo),
-                            Description = r.Descripcion
-                        });
-                    }
-
-                    file.Save();
-
-                    Log("... marcas guardadas satisfactoriamente");
-                }
-                catch (Exception ex)
-                {
-                    Logger.Log.Error(ex);
-                }
-            }
-        }
-
         private void GuardarMarcas()
         {
 
@@ -834,9 +839,30 @@ namespace Kenos
             {
                 try
                 {
-                    using (StreamWriter sw = new StreamWriter(_metadata.FullFileName + ".xml", false))
+                    var fileName = Path.GetFileNameWithoutExtension(_metadata.FullFileName) + ".mt";
+                    var path = Path.GetDirectoryName(_metadata.FullFileName);
+                    fileName = Path.Combine(path, fileName);
+                    using (StreamWriter sw = new StreamWriter(fileName, false))
                     {
-                        _dtMarcaTiempo.DataSet.WriteXml(sw);
+                        for (int i = 0; i < _dtMarcaTiempo.Rows.Count; i++)
+                        {
+                            var row = _dtMarcaTiempo.Rows[i];
+
+                            sw.WriteLine((i + 1).ToString());
+
+                            var desde = Convert.ToInt64(row["Posicion"].ToString());
+                            var hasta = desde;
+
+                            if ((i + 1) < _dtMarcaTiempo.Rows.Count)
+                            {
+                                var proximo = _dtMarcaTiempo.Rows[i + 1];
+                                hasta = Convert.ToInt64(proximo["Posicion"].ToString());
+                            }
+
+                            sw.WriteLine($"{FormatToTime(desde)} --> {FormatToTime(hasta)}");
+                            sw.WriteLine(row["descripcion"]);
+                            sw.WriteLine("");
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -845,6 +871,8 @@ namespace Kenos
                 }
             }
         }
+
+        private string FormatToTime(long time) => TimeSpan.FromSeconds(time).ToString(@"hh\:mm\:ss\,fff");
 
         private void MostrarAlerta(bool value, string mensaje = null)
         {
@@ -876,7 +904,7 @@ namespace Kenos
 
         private void ConfigurarForm()
         {
-            if (_estado == CaptureState.Initializing)
+            if (_estado == CaptureState.Initializing || _estado == CaptureState.Disabled)
             {
                 pnlBotonera.Enabled = false;
                 lnkNueva.Enabled = false;
@@ -896,8 +924,8 @@ namespace Kenos
             pnlBotonera.Enabled = true;
             lnkNueva.Enabled = _estado == CaptureState.Initialized || _estado == CaptureState.NotSet;
             lnkGrabar.Enabled = _estado == CaptureState.Initialized && _pruebaGrabacion.Realizada;
-            lnkPausar.Enabled = _estado == CaptureState.Recording && _obs.State == ObsStates.Recording;
-            lnkParar.Enabled = _estado == CaptureState.Recording || _estado == CaptureState.Testing || _estado == CaptureState.PlayingTest;
+            lnkPausar.Enabled = !IsTesting && (_estado == CaptureState.Recording && _obs.State == ObsStates.Recording);
+            lnkParar.Enabled = !IsTesting && (_estado == CaptureState.Recording || _estado == CaptureState.Testing || _estado == CaptureState.PlayingTest);
             lnkPlay.Enabled = _estado == CaptureState.PlayingTest;
             lnkFinalizar.Enabled = _estado == CaptureState.Completed || _estado == CaptureState.PlayingTest;
             lnkCancelar.Enabled = (_estado != CaptureState.NotSet);
@@ -979,15 +1007,6 @@ namespace Kenos
             return string.Format("{0:00}:{1:00}:{2:00}", ts.Hours, ts.Minutes, ts.Seconds);
         }
 
-        private string PositionToTime(int position, out int hours, out int minutes, out int seconds)
-        {
-            seconds = position / 1000;
-            minutes = seconds / 60;
-            hours = minutes / 60;
-
-            return string.Format("{0:00}:{1:00}:{2:00}", hours, minutes % 60, seconds % 60);
-        }
-
         private void Log(string template, params object[] param)
         {
             Log(string.Format(template, param));
@@ -1026,34 +1045,61 @@ namespace Kenos
         }
         #endregion
 
+        private void ObsOnLog(object sender, ObsLogEventArgs args)
+        {
+            if (this.InvokeRequired)
+                Invoke(new MethodInvoker(() =>
+                {
+                    ProcessLogEvent(args);
+                }));
+            else
+                ProcessLogEvent(args);
+        }
 
-        private void OnRecordingStatus(object sender, ObsRecordingStatusEventArgs args)
+        private void ObsOnReady(object sender, EventArgs args)
+        {
+            Invoke(new MethodInvoker(() =>
+            {
+                lblStatus.Text = "Cargando modos de grabación...";
+                Application.DoEvents();
+                CargarModosGrabacion();
+
+                _estado = CaptureState.NotSet;
+
+                ConfigurarForm();
+            }));
+        }
+
+        private void ObsOnRecordingStatus(object sender, ObsRecordingStatusEventArgs args)
         {
             _marcaTiempoActual = TimeSpan.FromMilliseconds(args.RecordingDuration);
 
             if (!_closing)
             {
-                Invoke(new MethodInvoker(() =>
+                if (!this.IsDisposed)
                 {
-                    if (!_closing)
+                    Invoke(new MethodInvoker(() =>
                     {
-                        if (args.IsRecordingPaused)
-                            lblGrabando.Text = "Pausado...";
-                        else if (args.IsRecording)
-                            lblGrabando.Text = "Grabando...";
-                        else
-                            lblGrabando.Text = "-";
+                        if (!_closing && !this.IsDisposed)
+                        {
+                            if (args.IsRecordingPaused)
+                                lblGrabando.Text = "Pausado...";
+                            else if (args.IsRecording)
+                                lblGrabando.Text = "Grabando...";
+                            else
+                                lblGrabando.Text = "-";
 
-                        var ts = TimeSpan.FromMilliseconds(args.RecordingDuration);
+                            var ts = TimeSpan.FromMilliseconds(args.RecordingDuration);
 
-                        if (ts.TotalMilliseconds > 0)
-                            lblDuracion.Text = String.Format("{0:hh}:{0:mm}:{0:ss}", ts);
-                    }
-                }));
+                            if (ts.TotalMilliseconds > 0)
+                                lblDuracion.Text = String.Format("{0:hh}:{0:mm}:{0:ss}", ts);
+                        }
+                    }));
+                }
             }
         }
 
-        private void OnRecordingStarted(object sender, EventArgs args)
+        private void ObsOnRecordingStarted(object sender, EventArgs args)
         {
             Invoke(new MethodInvoker(() =>
             {
@@ -1061,6 +1107,8 @@ namespace Kenos
 
                 _output = new RecordingFile(_obs.RecordingFileName);
                 lblArchivo.Text = _obs.RecordingFileName;
+                if (_metadata != null)
+                    _metadata.FullFileName = _obs.RecordingFileName;
 
                 if (_estado != CaptureState.Testing)
                     _estado = CaptureState.Recording;
@@ -1075,6 +1123,16 @@ namespace Kenos
                 MostrarAlerta(false);
                 timerRecording.Start();
             }));
+        }
+
+        private void ObsOnStateChange(object sender, ObsStateChangeEventArgs args)
+        {
+            var state = args.State;
+
+            if (state == ObsStates.Paused)
+                _estado = CaptureState.Paused;
+            else if (state == ObsStates.Recording)
+                _estado = CaptureState.Recording;
         }
 
         private void gvMarcas_SelectionChanged(object sender, EventArgs e)
@@ -1114,77 +1172,6 @@ namespace Kenos
             return true;
         }
 
-        public void EsperarConversionAutomatica()
-        {
-            if (Properties.Settings.Default.ConversionAutomaticaMP4)
-            {
-                try
-                {
-                    var path = Path.GetDirectoryName(_obs.RecordingFileName);
-                    var mp4 = Path.GetFileNameWithoutExtension(_obs.RecordingFileName) + ".mp4";
-                    var mp4FileName = Path.Combine(path, mp4);
-                    var finalizado = false;
-
-                    pnlStatus.Visible = true;
-                    lblStatus.Text = "Convirtiendo archivo a MP4. Este proceso puede demoarar unos minutos";
-
-                    var inicio = DateTime.Now;
-
-                    var tiempoEspera = Properties.Settings.Default.ConversionAutomaticaTiempoMinimoEspera;
-
-                    Application.DoEvents();
-
-                    Thread.Sleep(tiempoEspera * 1000);
-
-                    while (!finalizado)
-                    {
-                        Application.DoEvents();
-
-                        FileInfo fi = new FileInfo(mp4FileName);
-
-                        if (fi != null && fi.Exists)
-                        {
-                            if (!IsFileLocked(fi))
-                                finalizado = true;
-                        }
-
-                        Thread.Sleep(1000);
-                    }
-
-                    if (_metadata != null)
-                        _metadata.FullFileName = mp4FileName;
-
-                    pnlStatus.Visible = false;
-                }
-                catch (Exception ex)
-                {
-                    lblStatus.Text = $"Error en conversion de archivo. {ex.Message}";
-                    Logger.Log.Error(new ApplicationException("Error en conversion de archivo", ex));
-                }
-            }
-        }
-
-        private bool IsFileLocked(FileInfo file)
-        {
-            try
-            {
-                using (FileStream stream = file.Open(FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
-                {
-                    stream.Close();
-                }
-
-                using (FileStream stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.Read))
-                {
-                    stream.Close();
-                }
-            }
-            catch (IOException)
-            {
-                return true;
-            }
-
-            return false;
-        }
         private void lnkNueva_MouseClick(object sender, MouseEventArgs e)
         {
             if (mnuNueva.Items.Count > 1)
